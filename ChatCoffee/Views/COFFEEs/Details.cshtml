@@ -1,0 +1,60 @@
+﻿@model ChatCoffee.Models.ModelsDefault.COFFEE
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/css/CHITIET.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="~/Content/styles/single_styles.css">
+<link rel="stylesheet" type="text/css" href="~/Content/styles/single_responsive.css">
+<script src="~/Content/JS/single_custom.js"></script>
+<h2>Chi Tiết Sản Phẩm </h2>
+
+
+
+
+
+    <div class="container">
+        <div class="content">
+            <div class="Content-left">
+                <div class="Content-left-img-big">
+                    <img src="~/img/menu-1.jpg" alt="Card image">
+                </div>
+            </div>
+            <div class="Content-right">
+                <div class="Content-right-name">
+                    <h1 style="font-weight: bold; font-size:20px;">@Model.TENCF</h1>
+                    <p>Thương hiệu: @Model.THUONGHIEU.TENTH</p>
+
+                    <p>Loại sản phẩm: @Model.LOAISANPHAM.TENLOAI</p>
+                </div>
+                <div class="Content-right-price">
+                    <p>@Model.GIA <sup>VNĐ</sup> </p>
+                </div>
+                <div class="quantity">
+                    <p> Số lượng: @Model.SOLUONG</p>
+                    <input type="number" min=1 value="1" />
+                </div>
+                <br />
+                <div class="Content-right-button">
+                    <button class="btn btn-danger"> Thêm giỏ hàng</button>
+                </div>
+                
+            </div>
+        </div>
+            <table class="table">
+    <tr>
+        <th>
+            <p>Chi Tiết </p>
+        </th>
+        <th>
+            <strong> Mo Tả </strong>
+        </th>
+        
+        <th></th>
+    </tr>
+            </table>
+        
+    </div>
+
+
