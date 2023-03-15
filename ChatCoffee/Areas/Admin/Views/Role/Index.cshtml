@@ -30,29 +30,38 @@
         </div>
         <div class="card-body">
             <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Tên</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if(Model != null && Model.Any())
-                    {
-                        var i = 1;
-                        foreach(var item in Model)
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Tên</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
                         {
-                             <tr>
-                                 <td>@i</td>
-                                 <td>@item.Name</td>
-                                 <td></td>
-                             </tr>
-                            i++;
+                            var i = 1;
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@i</td>
+                                    <td>@item.Name</td>
+                                    <td>
+                                        <a href="/admin/role/edit/@item.Id" class="btn btn-success">Chỉnh sửa</a>
+
+                                        <input type="submit" value="Delete" class="btn btn-danger" />
+                                        
+                                    </td>
+                                </tr>
+                                i++;
+                            }
                         }
-                    }
-                </tbody>
-            </table>
+                    </tbody>
+                }
+                </table>
         </div>
         <div class="card-footer">
 

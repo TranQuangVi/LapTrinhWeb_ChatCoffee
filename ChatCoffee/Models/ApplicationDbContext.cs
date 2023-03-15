@@ -10,6 +10,11 @@ namespace ChatCoffee.Models
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+
+        public ApplicationDbContext()
+            : base("ChatCoffeeDBContext", throwIfV1Schema: false)
+        {
+        }
         public virtual DbSet<ANH> ANHs { get; set; }
         public virtual DbSet<COFFEE> COFFEEs { get; set; }
         public virtual DbSet<CTDONHANG> CTDONHANGs { get; set; }
@@ -22,11 +27,7 @@ namespace ChatCoffee.Models
         public virtual DbSet<THUONGHIEU> THUONGHIEUs { get; set; }
         public virtual DbSet<VANCHUYEN> VANCHUYENs { get; set; }
         public virtual DbSet<DIACHI> DIACHIs { get; set; }
-        public ApplicationDbContext()
-            : base("ChatCoffeeDBContext", throwIfV1Schema: false)
-        {
 
-        }
 
         public static ApplicationDbContext Create()
         {
