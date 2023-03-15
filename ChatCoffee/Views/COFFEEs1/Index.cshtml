@@ -1,0 +1,88 @@
+﻿@model IEnumerable<ChatCoffee.Models.ModelsDefault.COFFEE>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LOAISANPHAM.TENLOAI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.THUONGHIEU.TENTH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TENCF)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GIA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SOLUONG)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KHOILUONG)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.XUATXU)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HSD)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DANGCF)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MOTA)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.LOAISANPHAM.TENLOAI)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.THUONGHIEU.TENTH)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TENCF)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GIA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SOLUONG)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KHOILUONG)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.XUATXU)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HSD)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DANGCF)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MOTA)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MACF }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MACF }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MACF })
+        </td>
+    </tr>
+}
+
+</table>
