@@ -3601,6 +3601,7 @@
     <Folder Include="Content\ckfinder\userfiles\" />
     <Folder Include="NewFolder1\" />
     <Folder Include="Views\Default\" />
+    <Folder Include="Views\GioHang\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -44,17 +44,42 @@
                     <a href="@Url.Action("Service", "Home")" class="nav-item nav-link">Service</a>
                     <a href="@Url.Action("Menu", "Home")" class="nav-item nav-link">Menu</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Account</a>
-                        <div class="dropdown-menu text-capitalize">
-                            <a href="@Url.Action("Login", "Account")" class="dropdown-item">Sign in</a>
-                            <a href="@Url.Action("Register","Account")" class="dropdown-item">Register</a>
-                        </div>
+
+                        @if (!Request.IsAuthenticated)
+                        {
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Account</a>
+                            <div class="dropdown-menu text-capitalize">
+                                <a href="@Url.Action("Login", "Account")" class="dropdown-item">Sign in</a>
+                                <a href="@Url.Action("Register","Account")" class="dropdown-item">Register</a>
+                            </div>
+                        }
+                        else
+                        {
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">@User.Identity.Name</a>
+                            <div class="dropdown-menu text-capitalize">
+                                <a href="/" class="dropdown-item">Profile</a>
+                                <a href="javascript:document.getElementById('logOffForm').submit()" class="dropdown-item">Log out</a>
+                            </div>
+                        }
+
                     </div>
                     <a href="@Url.Action("Contact", "Home")" class="nav-item nav-link">Contact</a>
                 </div>
             </div>
+
+            @if (Request.IsAuthenticated)
+            {
+                <div style="display:none">
+                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { @id = "logOffForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+                    }
+                </div>
+            }
         </nav>
     </div>
+
+
     <!-- Navbar End -->
     <!-- Carousel Start -->
     <div class="container-fluid p-0 mb-5">
