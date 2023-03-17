@@ -1,0 +1,48 @@
+﻿
+
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var listGH = ViewBag.listGH;
+
+}
+
+<h2>View</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Ten CF
+        </th>
+        <th>
+            So lượng
+        </th>
+        <th>
+            Giá
+        </th>
+        <th>
+            Thành tiền
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in listGH) {
+    <tr>
+        <td>
+            @item.COFFEE.TENCF
+        </td>
+        <td>
+            @item.SOLUONG
+        </td>
+        <td>
+            @item.GIA
+        </td>
+        <td>
+            @item.GIA
+        </td>
+        
+    </tr>
+}
+
+</table>

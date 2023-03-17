@@ -176,9 +176,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\COFFEEs1Controller.cs" />
     <Compile Include="Controllers\COFFEEsController.cs" />
-    <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ShoppingCardController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -204,10 +204,10 @@
     <Compile Include="Models\ModelsDefault\THANHTOAN.cs" />
     <Compile Include="Models\ModelsDefault\THUONGHIEU.cs" />
     <Compile Include="Models\ModelsDefault\VANCHUYEN.cs" />
-    <Compile Include="Models\ModelViews\DataClasses1.designer.cs">
+    <Compile Include="Models\ModelViews\MyData.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DataClasses1.dbml</DependentUpon>
+      <DependentUpon>MyData.dbml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -3274,14 +3274,6 @@
     <Content Include="mail\jqBootstrapValidation.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Models\ModelViews\DataClasses1.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>DataClasses1.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Models\ModelViews\DataClasses1.dbml.layout">
-      <DependentUpon>DataClasses1.dbml</DependentUpon>
-    </Content>
     <Content Include="lib\owlcarousel\LICENSE" />
     <Content Include="lib\waypoints\links.php" />
     <Content Include="mail\contact.php" />
@@ -3442,6 +3434,14 @@
     <Content Include="Content\ckeditor\samples\sample_posteddata.php" />
     <Content Include="Content\ckeditor\skins\moono\readme.md" />
     <Content Include="Content\ckfinder\plugins\fileeditor\codemirror\LICENSE" />
+    <Content Include="Models\ModelViews\MyData.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>MyData.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Models\ModelViews\MyData.dbml.layout">
+      <DependentUpon>MyData.dbml</DependentUpon>
+    </None>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -3595,12 +3595,14 @@
     <Content Include="Views\COFFEEs1\Details.cshtml" />
     <Content Include="Views\COFFEEs1\Edit.cshtml" />
     <Content Include="Views\COFFEEs1\Index.cshtml" />
+    <Content Include="Views\ShoppingCard\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Content\ckfinder\userfiles\" />
     <Folder Include="NewFolder1\" />
     <Folder Include="Views\Default\" />
+    <Folder Include="Views\New\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
