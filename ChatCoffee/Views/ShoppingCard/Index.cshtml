@@ -16,10 +16,13 @@
             Ten CF
         </th>
         <th>
-            So lượng
+            Ảnh
         </th>
         <th>
             Giá
+        </th>
+        <th>
+            Số lượng
         </th>
         <th>
             Thành tiền
@@ -27,22 +30,47 @@
         <th></th>
     </tr>
 
-@foreach (var item in listGH) {
-    <tr>
-        <td>
-            @item.COFFEE.TENCF
-        </td>
-        <td>
-            @item.SOLUONG
-        </td>
-        <td>
-            @item.GIA
-        </td>
-        <td>
-            @item.GIA
-        </td>
-        
-    </tr>
-}
+    @foreach (var item in listGH)
+    {
+        using (Html.BeginForm("UpdateGioHang", "ShoppingCard", new { @maGH = 1, @maCF = item.MACF }))
+        {
+            <tr>
+                <td> @item.COFFEE.TENCF</td>
+                <td>
+                    <a href="@Url.Action("Details", "Coffees", new {@id=item.MACF})">
+                        <img src="@*/@item.COFFEE.LINKANH*@" width="90" />
+                    </a>
+                </td>
+                <td>@String.Format("{0:0,0}", item.GIA) VNĐ</td>
+                <td><input type="number" min="1" name="txtSolg" value="@item.SOLUONG" /></td>
+                <td>  @item.TONGGIA </td>
+                <td>
+                    <div class="pull-right">
+                        <div class="DatMua">
+                            <a class="btn btn-success" href="@Url.Action("DeleteGioHang","ShoppingCard", new { @maGH=1 ,@maCF = item.MACF , @strURL = Request.Url.ToString()})">Xóa</a>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <input type="submit" value="Cập nhật" class="btn btn-success" />
+                </td>
 
+            </tr>
+        }
+    }
+    <tr style="font-weight:bold; text-align:left; color:red">
+        <td colspan="2"> Tổng sản phẩm:  @ViewBag.SumSP</td>
+        <td colspan="2"> Số lượng sản phẩm:  @ViewBag.SumQuantity</td>
+        <td colspan="4"> Tổng tiền:  @String.Format("{0:0,0}", @ViewBag.SumPrice) VNĐ</td>
+    </tr>
+    <tr style="font-weight:bold; color:blue; text-align:right">
+        <td colspan="5">
+            @Html.ActionLink("Xoá giỏ hảng", "DeleteAll")
+        </td>
+    </tr>
+    <tr style="font-weight:bold; color:yellow; text-align:right">
+        <td colspan="5">
+            @Html.ActionLink("Đặt hàng", "DatHang", "GioHang")
+        </td>
+    </tr>
 </table>

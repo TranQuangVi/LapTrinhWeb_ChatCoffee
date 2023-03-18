@@ -71,8 +71,7 @@ ul {
 
 p {
     font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    line-height: 1.7;
+    font-size: 18px;
     font-weight: 500;
     color: #989898;
     -webkit-font-smoothing: antialiased;
@@ -1340,14 +1339,16 @@ section {
 
 .product_image {
     width: 100%;
+    height: 300px;
 }
 
     .product_image img {
         width: 100%;
+        height: 300px;
     }
 
 .product_info {
-    text-align: center;
+    text-align: left;
     padding-left: 10px;
     padding-right: 10px;
 }

@@ -215,7 +215,7 @@ caption {
 
 th {
     text-align: inherit;
-    text-align: -webkit-match-parent;
+    text-align: match-parent;
 }
 
 label {
@@ -3685,7 +3685,8 @@ input[type="button"].btn-block {
     display: block;
     min-height: 1.5rem;
     padding-left: 1.5rem;
-    color-adjust: exact;
+/*    color-adjust: exact;*/
+    print-color-adjust: exact;
 }
 
 .custom-control-inline {

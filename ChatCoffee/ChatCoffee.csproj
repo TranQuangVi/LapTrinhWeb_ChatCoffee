@@ -174,7 +174,6 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\COFFEEs1Controller.cs" />
     <Compile Include="Controllers\COFFEEsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -3223,6 +3222,7 @@
     <Content Include="Content\styles\contact_responsive.css" />
     <Content Include="Content\styles\contact_styles.css" />
     <Content Include="Content\styles\main_styles.css" />
+    <Content Include="Content\styles\product.css" />
     <Content Include="Content\styles\responsive.css" />
     <Content Include="Content\styles\single_responsive.css" />
     <Content Include="Content\styles\single_styles.css" />
@@ -3590,19 +3590,11 @@
     <Content Include="Views\COFFEEs\Details.cshtml" />
     <Content Include="Views\COFFEEs\Edit.cshtml" />
     <Content Include="Views\COFFEEs\Index.cshtml" />
-    <Content Include="Views\COFFEEs1\Create.cshtml" />
-    <Content Include="Views\COFFEEs1\Delete.cshtml" />
-    <Content Include="Views\COFFEEs1\Details.cshtml" />
-    <Content Include="Views\COFFEEs1\Edit.cshtml" />
-    <Content Include="Views\COFFEEs1\Index.cshtml" />
     <Content Include="Views\ShoppingCard\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Content\ckfinder\userfiles\" />
-    <Folder Include="NewFolder1\" />
-    <Folder Include="Views\Default\" />
-    <Folder Include="Views\New\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

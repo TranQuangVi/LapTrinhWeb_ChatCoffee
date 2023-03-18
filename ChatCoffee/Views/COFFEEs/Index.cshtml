@@ -7,8 +7,9 @@
 
 <link rel="stylesheet" type="text/css" href="~/Content/styles/categories_styles.css">
 <link rel="stylesheet" type="text/css" href="~/Content/styles/categories_responsive.css">
+<link href="~/Content/styles/product.css" rel="stylesheet" />
 <script src="~/Content/JS/categories_custom.js"></script>
-<div class="container product_section_container">
+<div class="container-fluid" style="background-color: #FFFBF2">
     <div class="row">
         <div class="col product_section clearfix">
 
@@ -136,47 +137,56 @@
 
                             <!-- Product Grid -->
 
-                            <div class="product-grid">
+                            <div class="row" style="padding-top:10px">
+
 
                                 <!-- Product 1 -->
                                 @if (Model != null && Model.Any())
                                 {
                                     foreach (var item in Model)
                                     {
+                                        <div class="col-lg-3 pro-item">
+                                            <div class="pro  ">
+                                                    <img  src="~/img/menu-1.jpg" alt="@item.TENCF" class="pro_image" >
+                                                @* khuyến mãi
+                                                       @if (item.GIA > 0)
+                                                    {
+                                                        <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>
+                                                    }
+                                                    <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
+                                                *@
+                                                <div class="pro_info">
+                                                    <p style="margin: 0px; font-size:20px;">
+                                                        <a>@item.TENCF</a>
+                                                    </p>
+                                                    <p style="margin: 0px; font-size:20px;">
+                                                        @item.GIA
+                                                    </p>
 
-                                        <div class="product-item @item.LOAISANPHAM.TENLOAI">
-                                            <div class="product discount product_filter">
-                                                <div class="product_image">
-                                                    <img src="" />
-                                                    <img src="~/img/menu-1.jpg" alt="anh">
+                                                    @if (@item.SOLUONG > 0)
+                                                    {
+                                                        <div class="pull-right">
+                                                            <div class="DatMua">
+                                                                <a class="btn btn-success " style="float:right" href="@Url.Action("AddSP", "ShoppingCard",
+                                                                new {  @maSP = item.MACF,@maGH=1 , @strURL = Request.Url.ToString() })">Đặt mua</a>
+                                                                <span style="float:left"> Số lượng: @item.SOLUONG</span>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p style="margin: 0px; font-size: 18px; text-align:center"><a>Hết hàng </a></p>
+                                                    }
+
                                                 </div>
-                                                <div class="favorite favorite_left"></div>
-                                                @if (item.GIA > 0)
-                                                {
-                                                    <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>
-                                                }
-                                                <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
-                                                <div class="product_info">
-                                                    <p>@item.TENCF</p>
-
-                                                    @if (item.SOLUONG > 0)
-                                                    {<h6 class="product_name"><a href="/chi-tiet/@item.TENCF-p@(item.MACF)">  Số Lượng: @item.SOLUONG</a></h6>
-
-                                                    <div class="product_price_fontsize_25">@item.GIA <span>234</span></div>
-
-                                                }
-                                                else
-                                                {
-                                                    <div>
-                                                        <p> hết hàng </p>
-                                                    </div>
-                                                }
-
-
-                                                </div>
+                                                @* <div class="red_button add_to_cart_button">
+                                                        <a href="@Url.Action("AddSP", "ShoppingCard",
+                                                                    new {  @maSP = item.MACF,@maGH=1 , @strURL = Request.Url.ToString() })" class="btnAddToCart">add to cart</a>
+                                                    </div>*@
                                             </div>
-                                            @*<div class="red_button add_to_cart_button"><a href="#" class="btnAddToCart" data-id="@item.I">add to cart</a></div>*@
+
                                         </div>
+
                                     }
                                 }
 

@@ -30,6 +30,8 @@
                     KHOILUONG = c.Int(),
                     XUATXU = c.String(maxLength: 20),
                     HSD = c.Int(),
+                    ViewCount = c.Int(),
+                    SLDABAN =  c.Int(),
                     DANGCF = c.String(maxLength: 10),
                     MOTA = c.String(maxLength: 500),
                     MALOAI = c.Int(nullable: false),
@@ -74,23 +76,15 @@
                 .Index(t => t.MAVT)
                 .Index(t => t.MATT);
 
-             /*CreateTable(
-                 "dbo.AspNetUsers",
-                 c => new
-                 {
-                     Id = c.Int(nullable: false, identity: true),
-                     TENKH = c.String(maxLength: 50),
-                     GIOITINH = c.Boolean(),
-                     SDT = c.String(maxLength: 10),
-                     EMAIL = c.String(maxLength: 30),
-                     TENTK = c.String(maxLength: 30),
-                     MATKHAU = c.String(maxLength: 16),
-                     ANH = c.String(maxLength: 100),
-                     MADC = c.Int(nullable: false),
-                 })
-                 .PrimaryKey(t => t.Id)
-                 .ForeignKey("dbo.DIACHIs", t => t.MADC, cascadeDelete: true)
-                 .Index(t => t.MADC);*/
+            CreateTable(
+               "dbo.ThongKes",
+               c => new
+               {
+                   Id = c.Int(nullable: false, identity: true),
+                   ThoiGian = c.DateTime(nullable: false),
+                   SoTruyCap = c.Long(nullable: false),
+               })
+               .PrimaryKey(t => t.Id);
 
             CreateTable(
                 "dbo.DIACHIs",
