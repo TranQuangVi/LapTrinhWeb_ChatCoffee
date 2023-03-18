@@ -1,4 +1,4 @@
-﻿/*using ChatCoffee.Models.ModelsDefault;
+﻿using ChatCoffee.Models.ModelsDefault;
 using ChatCoffee.Models;
 using System;
 using System.Collections.Generic;
@@ -16,7 +16,7 @@ namespace ChatCoffee.Controllers
     {
         // GET: ShoppongCard
         //    ApplicationDbContext model = new ApplicationDbContext();
-        
+
         public MyDataDataContext model = new MyDataDataContext();
         // GET: Default
         public List<CTGIOHANG> GetListProductInCard(string IdKH)
@@ -40,7 +40,7 @@ namespace ChatCoffee.Controllers
 
             // lấy danh sách sản phẩm có trong giỏ hàng của khách hàng
             List<CTGIOHANG> list = GetListProductInCard(IdKH);
-            
+
             ViewBag.SumQuantity = SumQuantity(1);
             ViewBag.SumPrice = SumPrice(1);
             ViewBag.SumSP = SumSP(1);
@@ -55,13 +55,13 @@ namespace ChatCoffee.Controllers
             CTGIOHANG sp = list.Find(b => b.MACF.Equals(maSP));
             if (sp == null)
             {
-                sp = new CTGIOHANG() ;
+                sp = new CTGIOHANG();
                 sp.MACF = maSP;
                 sp.MAGH = maGH;
                 COFFEE cf = model.COFFEEs.Single(n => n.MACF == maSP);
                 GIOHANG gh = model.GIOHANGs.Single(n => n.MAGH == maGH);
                 sp.SOLUONG = 1;
-                sp.GIA=  cf.GIA;
+                sp.GIA = cf.GIA;
                 sp.TONGGIA = (sp.GIA * sp.SOLUONG);
                 list.Add(sp);
                 model.CTGIOHANGs.InsertOnSubmit(sp);
@@ -143,8 +143,8 @@ namespace ChatCoffee.Controllers
                 gh.TONGGIA = gh.SOLUONG * gh.GIA;
                 model.SubmitChanges();
             }
-                
-            return RedirectToAction("Index","ShoppingCard");
+
+            return RedirectToAction("Index", "ShoppingCard");
         }
 
         public ActionResult DeleteAll()
@@ -159,4 +159,3 @@ namespace ChatCoffee.Controllers
     }
 }
 
-*/
