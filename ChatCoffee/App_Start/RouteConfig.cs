@@ -25,6 +25,7 @@ namespace ChatCoffee
      defaults: new { controller = "COFFEEs", action = "Detail", alias = UrlParameter.Optional },
      namespaces: new[] { "ChatCoffee.Controllers" }
  );
+            
             routes.MapRoute(
       name: "CategoryProduct",
       url: "danh-muc-san-pham/{alias}-{id}",
