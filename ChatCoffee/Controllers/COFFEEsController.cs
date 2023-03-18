@@ -15,7 +15,7 @@ namespace ChatCoffee.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: COFFEEs
+       // GET: COFFEEs
         public ActionResult Index()
         {
             var cOFFEEs = db.COFFEEs.Include(c => c.LOAISANPHAM).Include(c => c.THUONGHIEU);
@@ -23,7 +23,7 @@ namespace ChatCoffee.Controllers
         }
 
         // GET: COFFEEs/Details/5
-        public ActionResult Details(int?  id)
+        public ActionResult Details(int? id)
         {
             GIOHANG gIOHANG = new GIOHANG();
             if (id == null)
@@ -31,6 +31,13 @@ namespace ChatCoffee.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             COFFEE cOFFEE = db.COFFEEs.Find(id);
+            if (cOFFEE != null)
+            {
+                db.COFFEEs.Attach(cOFFEE);
+                cOFFEE.ViewCount = cOFFEE.ViewCount + 1;
+                db.Entry(cOFFEE).Property(x => x.ViewCount).IsModified = true;
+                db.SaveChanges();
+            }
             if (cOFFEE == null)
             {
                 return HttpNotFound();

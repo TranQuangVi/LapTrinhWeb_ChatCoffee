@@ -15,6 +15,7 @@ namespace ChatCoffee.Models
             : base("ChatCoffeeDBContext", throwIfV1Schema: false)
         {
         }
+        public virtual DbSet<ThongKe> THONGKEs { get; set; }
         public virtual DbSet<ANH> ANHs { get; set; }
         public virtual DbSet<COFFEE> COFFEEs { get; set; }
         public virtual DbSet<CTDONHANG> CTDONHANGs { get; set; }

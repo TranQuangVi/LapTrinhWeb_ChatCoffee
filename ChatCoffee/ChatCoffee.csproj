@@ -46,6 +46,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.2.0.123\lib\net461\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -185,6 +188,14 @@
     <Compile Include="Migrations\202303111616339_gidaychoi.designer.cs">
       <DependentUpon>202303111616339_gidaychoi.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202303171434531_CreateThongKe.cs" />
+    <Compile Include="Migrations\202303171434531_CreateThongKe.designer.cs">
+      <DependentUpon>202303171434531_CreateThongKe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202303171512456_Viewcount.cs" />
+    <Compile Include="Migrations\202303171512456_Viewcount.designer.cs">
+      <DependentUpon>202303171512456_Viewcount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Backup.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -201,6 +212,7 @@
     <Compile Include="Models\ModelsDefault\KHACHHANG.cs" />
     <Compile Include="Models\ModelsDefault\LOAISANPHAM.cs" />
     <Compile Include="Models\ModelsDefault\THANHTOAN.cs" />
+    <Compile Include="Models\ModelsDefault\ThongKe.cs" />
     <Compile Include="Models\ModelsDefault\THUONGHIEU.cs" />
     <Compile Include="Models\ModelsDefault\VANCHUYEN.cs" />
     <Compile Include="Models\ModelViews\MyData.designer.cs">
@@ -208,6 +220,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MyData.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\ThongKeTruyCap.cs" />
+    <Compile Include="Models\ThongKeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -3591,6 +3605,7 @@
     <Content Include="Views\COFFEEs\Edit.cshtml" />
     <Content Include="Views\COFFEEs\Index.cshtml" />
     <Content Include="Views\ShoppingCard\Index.cshtml" />
+    <Content Include="Views\Home\Refresh.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
@@ -3612,6 +3627,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202303111616339_gidaychoi.resx">
       <DependentUpon>202303111616339_gidaychoi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202303171434531_CreateThongKe.resx">
+      <DependentUpon>202303171434531_CreateThongKe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202303171512456_Viewcount.resx">
+      <DependentUpon>202303171512456_Viewcount.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

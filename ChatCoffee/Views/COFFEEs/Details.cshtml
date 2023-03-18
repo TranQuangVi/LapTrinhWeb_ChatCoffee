@@ -14,47 +14,50 @@
 
 
 
-    <div class="container">
-        <div class="content">
-            <div class="Content-left">
-                <div class="Content-left-img-big">
-                    <img src="~/img/menu-1.jpg" alt="Card image">
-                </div>
-            </div>
-            <div class="Content-right">
-                <div class="Content-right-name">
-                    <h1 style="font-weight: bold; font-size:20px;">@Model.TENCF</h1>
-                    <p>Thương hiệu: @Model.THUONGHIEU.TENTH</p>
-
-                    <p>Loại sản phẩm: @Model.LOAISANPHAM.TENLOAI</p>
-                </div>
-                <div class="Content-right-price">
-                    <p>@Model.GIA <sup>VNĐ</sup> </p>
-                </div>
-                <div class="quantity">
-                    <p> Số lượng: @Model.SOLUONG</p>
-                    <input type="number" min=1 value="1" />
-                </div>
-                <br />
-                <div class="Content-right-button">
-                    <button class="btn btn-danger"> Thêm giỏ hàng</button>
-                </div>
-                
+<div class="container">
+    <div class="content">
+        <div class="Content-left">
+            <div class="Content-left-img-big">
+                <img src="~/img/menu-1.jpg" alt="Card image">
             </div>
         </div>
-            <table class="table">
-    <tr>
-        <th>
-            <p>Chi Tiết </p>
-        </th>
-        <th>
-            <strong> Mo Tả </strong>
-        </th>
-        
-        <th></th>
-    </tr>
-            </table>
-        
-    </div>
+        <div class="Content-right">
+            <div class="Content-right-name">
+                <h1 style="font-weight: bold; font-size:20px;">@Model.TENCF</h1>
+                <p>Thương hiệu: @Model.THUONGHIEU.TENTH</p>
 
+                <p>Loại sản phẩm: @Model.LOAISANPHAM.TENLOAI</p>
+                <p>Lượt xem: <b>@Model.ViewCount</b></p>
+            </div>
+            <div class="Content-right-price">
+                <p>@Model.GIA <sup>VNĐ</sup> </p>
+            </div>
+            <div class="quantity">
+                <p> Số lượng: @Model.SOLUONG</p>
+                <input type="number" min="1" value="1" />
+            </div>
+            <br />
+            <div class="Content-right-button">
+                <button class="btn btn-danger" style="border-radius: 10px;  "> Thêm giỏ hàng</button>
+            </div>
+            <div class="Content-right-button Content-right-button-buy">
+                <button class="btn btn-dark" style="width: 200px; border-radius: 10px; margin-bottom: 120px;"> Mua ngay</button>
+            </div>
+
+        </div>
+    </div>
+    <table class="table">
+        <tr>
+            <th>
+                <p>Chi Tiết </p>
+            </th>
+            <th>
+                <strong> Mo Tả </strong>
+            </th>
+
+            <th></th>
+        </tr>
+    </table>
+
+</div>
 
