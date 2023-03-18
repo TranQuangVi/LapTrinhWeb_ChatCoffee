@@ -188,14 +188,6 @@
     <Compile Include="Migrations\202303111616339_gidaychoi.designer.cs">
       <DependentUpon>202303111616339_gidaychoi.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202303171434531_CreateThongKe.cs" />
-    <Compile Include="Migrations\202303171434531_CreateThongKe.designer.cs">
-      <DependentUpon>202303171434531_CreateThongKe.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202303171512456_Viewcount.cs" />
-    <Compile Include="Migrations\202303171512456_Viewcount.designer.cs">
-      <DependentUpon>202303171512456_Viewcount.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Backup.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -215,11 +207,6 @@
     <Compile Include="Models\ModelsDefault\ThongKe.cs" />
     <Compile Include="Models\ModelsDefault\THUONGHIEU.cs" />
     <Compile Include="Models\ModelsDefault\VANCHUYEN.cs" />
-    <Compile Include="Models\ModelViews\MyData.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MyData.dbml</DependentUpon>
-    </Compile>
     <Compile Include="Models\ThongKeTruyCap.cs" />
     <Compile Include="Models\ThongKeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -3448,14 +3435,6 @@
     <Content Include="Content\ckeditor\samples\sample_posteddata.php" />
     <Content Include="Content\ckeditor\skins\moono\readme.md" />
     <Content Include="Content\ckfinder\plugins\fileeditor\codemirror\LICENSE" />
-    <Content Include="Models\ModelViews\MyData.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>MyData.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </Content>
-    <None Include="Models\ModelViews\MyData.dbml.layout">
-      <DependentUpon>MyData.dbml</DependentUpon>
-    </None>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -3610,6 +3589,7 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Content\ckfinder\userfiles\" />
+    <Folder Include="Models\ModelViews\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -3627,12 +3607,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202303111616339_gidaychoi.resx">
       <DependentUpon>202303111616339_gidaychoi.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202303171434531_CreateThongKe.resx">
-      <DependentUpon>202303171434531_CreateThongKe.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202303171512456_Viewcount.resx">
-      <DependentUpon>202303171512456_Viewcount.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

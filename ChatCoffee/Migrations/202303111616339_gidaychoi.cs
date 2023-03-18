@@ -288,6 +288,7 @@
             DropTable("dbo.CTDONHANG");
             DropTable("dbo.COFFEE");
             DropTable("dbo.ANH");
+            DropTable("dbo.ThongKes");
         }
     }
 }
