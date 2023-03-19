@@ -81,15 +81,13 @@ namespace ChatCoffee.Models.ModelViews
     partial void InsertTHUONGHIEU(THUONGHIEU instance);
     partial void UpdateTHUONGHIEU(THUONGHIEU instance);
     partial void DeleteTHUONGHIEU(THUONGHIEU instance);
-    #endregion
-		
-		public MyDataDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["ChatCoffeeDBContext"].ConnectionString, mappingSource)
-		{
-			OnCreated();
-		}
-		
-		public MyDataDataContext(string connection) : 
+        #endregion
+        public MyDataDataContext() :
+                base(global::System.Configuration.ConfigurationManager.ConnectionStrings["ChatCoffeeDBContext"].ConnectionString, mappingSource)
+        {
+            OnCreated();
+        }
+        public MyDataDataContext(string connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();

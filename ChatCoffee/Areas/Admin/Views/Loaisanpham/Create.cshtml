@@ -1,0 +1,44 @@
+﻿﻿@model ChatCoffee.Models.ModelsDefault.LOAISANPHAM
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="content">
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"> Thêm mới loại sản phẩm  </h3>
+
+
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm(@*"Create", "Loaisanpham,", FormMethod.Post*@))
+{
+@Html.ValidationSummary(false)
+@Html.AntiForgeryToken()
+
+
+<div class="form-group">
+    <label>Tên loại:</label>
+    @Html.TextBoxFor(x => x.TENLOAI, new { @class = "form-control" })
+</div>
+
+
+<div class="form-group">
+    <button type="submit" class="btn btn-success">Thêm mới</button>
+</div>
+}
+
+        </div>
+        <div class="card-footer">
+
+
+        </div>
+
+    </div>
+
+
+</section>
