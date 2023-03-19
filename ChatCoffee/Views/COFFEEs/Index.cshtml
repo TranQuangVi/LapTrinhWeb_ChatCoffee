@@ -147,13 +147,13 @@
                                     {
                                         <div class="col-lg-3 pro-item">
                                             <div class="pro  ">
-                                                    <img  src="~/img/menu-1.jpg" alt="@item.TENCF" class="pro_image" >
+                                                <img src="@item.ANHs.Where(c=>c.MACF==item.MACF).FirstOrDefault().LINKANH" alt="@item.TENCF" class="pro_image">
                                                 @* khuyến mãi
-                                                       @if (item.GIA > 0)
-                                                    {
-                                                        <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>
-                                                    }
-                                                    <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
+           @if (item.GIA > 0)
+        {
+            <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>
+        }
+        <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
                                                 *@
                                                 <div class="pro_info">
                                                     <p style="margin: 0px; font-size:20px;">
@@ -180,9 +180,9 @@
 
                                                 </div>
                                                 @* <div class="red_button add_to_cart_button">
-                                                        <a href="@Url.Action("AddSP", "ShoppingCard",
-                                                                    new {  @maSP = item.MACF,@maGH=1 , @strURL = Request.Url.ToString() })" class="btnAddToCart">add to cart</a>
-                                                    </div>*@
+            <a href="@Url.Action("AddSP", "ShoppingCard",
+                        new {  @maSP = item.MACF,@maGH=1 , @strURL = Request.Url.ToString() })" class="btnAddToCart">add to cart</a>
+        </div>*@
                                             </div>
 
                                         </div>

@@ -21,12 +21,11 @@ namespace ChatCoffee.Controllers
         // GET: Default
         public List<CTGIOHANG> GetListProductInCard(string IdKH)
         {
-            List<CTGIOHANG> list = Session["GioHang"] as List<CTGIOHANG>;
+            List<CTGIOHANG> list = new List<CTGIOHANG>();
             list = model.CTGIOHANGs.Where(x => x.GIOHANG.Id.Equals(IdKH)).ToList();
             if (list == null)
             {
-                list = new List<CTGIOHANG>();
-                Session["GioHang"] = list;
+                list = new List<CTGIOHANG>();Session["GioHang"] = list;
             }
             return list;
         }

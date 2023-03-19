@@ -176,6 +176,7 @@
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoaisanphamController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManageCoffeesController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\COFFEEsController.cs" />
@@ -3451,6 +3452,11 @@
     <Content Include="Areas\Admin\Views\Loaisanpham\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Loaisanpham\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Loaisanpham\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageCoffees\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageCoffees\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageCoffees\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageCoffees\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageCoffees\Index.cshtml" />
     <None Include="Models\ModelViews\MyData.dbml.layout">
       <DependentUpon>MyData.dbml</DependentUpon>
     </None>
