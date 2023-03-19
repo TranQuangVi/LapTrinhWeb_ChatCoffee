@@ -29,6 +29,7 @@ namespace ChatCoffee.Models.ModelsDefault
         public int? SOLUONG { get; set; }
 
         public int ViewCount { get; set; }
+        public int SLDABAN { get; set; }
         public int? KHOILUONG { get; set; }
 
         [StringLength(20)]
