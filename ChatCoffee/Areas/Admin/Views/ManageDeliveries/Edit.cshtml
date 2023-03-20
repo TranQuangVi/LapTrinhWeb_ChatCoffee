@@ -1,0 +1,60 @@
+﻿@model ChatCoffee.Models.ModelsDefault.VANCHUYEN
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="content">
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"> Chỉnh sửa Hình Thức Vận Chuyển  </h3>
+
+
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("Edit", "ManageDeliveries", FormMethod.Post))
+            {
+                @Html.ValidationSummary(false)
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+         
+
+
+                <div class="form-group">
+                    <label>Vận Chuyển</label>
+                    @Html.EditorFor(model => model.TENVT, new
+                    {
+                        htmlAttributes = new { @class = "form-control" }
+})
+                    @Html.ValidationMessageFor(model => model.TENVT, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label> Mã Vận chuyển </label>
+                    @Html.EditorFor(model => model.MAVT, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MAVT, "", new { @class = "text-danger" })
+
+                </div> 
+                <div class="form-group">
+                    <label> Giá </label>
+                    @Html.EditorFor(model => model.GIA, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.GIA, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success"> Save </button>
+                </div>
+            }
+
+        </div>
+        <div class="card-footer">
+
+
+        </div>
+
+    </div>
+
+
+</section>
