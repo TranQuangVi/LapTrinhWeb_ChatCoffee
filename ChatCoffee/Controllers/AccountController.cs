@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ChatCoffee.Models;
+using System.Collections.Generic;
+using ChatCoffee.Models.ModelViews;
 
 namespace ChatCoffee.Controllers
 {
@@ -18,11 +20,12 @@ namespace ChatCoffee.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private ApplicationDbContext db = new ApplicationDbContext();
+        public MyDataDataContext model = new MyDataDataContext();
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -34,9 +37,9 @@ namespace ChatCoffee.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -76,9 +79,11 @@ namespace ChatCoffee.Controllers
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
+            
             switch (result)
             {
                 case SignInStatus.Success:
+                    GetIdUserByName(model.UserName);
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -89,6 +94,16 @@ namespace ChatCoffee.Controllers
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
             }
+        }
+
+        public void GetIdUserByName(string name)
+        {
+            AspNetUser user = model.AspNetUsers.Single(u => u.UserName.Equals(name));
+            // MaKH = user.Id;
+            int MaGH = (int)model.GIOHANGs.Where(x => x.Id.Equals(user.Id)).FirstOrDefault().MAGH;
+
+            // lưu id giỏ hàng vào Session
+            Session["MaGH"] = MaGH;
         }
 
         //
@@ -120,7 +135,7 @@ namespace ChatCoffee.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -139,7 +154,7 @@ namespace ChatCoffee.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            
+
             return View();
         }
 
@@ -152,7 +167,8 @@ namespace ChatCoffee.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser {
+                var user = new ApplicationUser
+                {
                     UserName = model.UserName,
                     Email = model.Email,
                     FullName = model.FullName,
@@ -169,16 +185,49 @@ namespace ChatCoffee.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    GIOHANG gh = new GIOHANG();
 
+                    gh.Id = user.Id;
+                    gh.TONGSP = 0;
+                    gh.TONGSL = 0;
+                    gh.TONGTIEN = 0;
+                    Create(gh);
+                    
                     return RedirectToAction("Login", "Account");
                 }
                 AddErrors(result);
             }
-            
+
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+        //tạo giỏ hàng
+        public void Create([Bind(Include = "MAGH, Id,TONGSP,TONGSL ,TONGTIEN")] GIOHANG gh)
+        {
+            //    List<GIOHANG> list = new List<GIOHANG>();
+            if (ModelState.IsValid)
+            {
+                model.GIOHANGs.InsertOnSubmit(gh);
+                model.GIOHANGs.InsertOnSubmit(gh);
+                model.SubmitChanges();
 
+            }
+
+        }
+        //public void Create([Bind(Include = "MACF,TENCF,GIA,SOLUONG,ViewCount,SLDABAN,KHOILUONG,XUATXU,HSD,DANGCF,MOTA,MALOAI,MATH")] COFFEE cOFFEE)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        cOFFEE.ViewCount = 0;
+        //        cOFFEE.SLDABAN = 0;
+        //        db.COFFEEs.Add(cOFFEE);
+        //        db.SaveChanges();
+        //    }
+
+        //    ViewBag.MALOAI = new SelectList(db.LOAISANPHAMs, "MALOAI", "TENLOAI", cOFFEE.MALOAI);
+        //    ViewBag.MATH = new SelectList(db.THUONGHIEUs, "MATH", "TENTH", cOFFEE.MATH);
+
+        //}
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]

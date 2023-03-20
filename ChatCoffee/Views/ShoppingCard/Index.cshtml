@@ -32,7 +32,7 @@
 
     @foreach (var item in listGH)
     {
-        using (Html.BeginForm("UpdateGioHang", "ShoppingCard", new { @maGH = 1, @maCF = item.MACF }))
+        using (Html.BeginForm("UpdateGioHang", "ShoppingCard", new { @maCF = item.MACF }))
         {
             <tr>
                 <td> @item.COFFEE.TENCF</td>
@@ -47,7 +47,7 @@
                 <td>
                     <div class="pull-right">
                         <div class="DatMua">
-                            <a class="btn btn-success" href="@Url.Action("DeleteGioHang","ShoppingCard", new { @maGH=1 ,@maCF = item.MACF , @strURL = Request.Url.ToString()})">Xóa</a>
+                            <a class="btn btn-success" href="@Url.Action("DeleteGioHang","ShoppingCard", new { @maCF = item.MACF , @strURL = Request.Url.ToString()})">Xóa</a>
                         </div>
                     </div>
                 </td>

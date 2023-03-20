@@ -14,51 +14,66 @@ namespace ChatCoffee.Controllers
 {
     public class ShoppingCardController : Controller
     {
-        // GET: ShoppongCard
-        //    ApplicationDbContext model = new ApplicationDbContext();
+        // lấy id khách hàng theo user name
+/*        public void GetIdUserByName(string name)
+        {
+            AspNetUser user = model.AspNetUsers.Single(u => u.UserName.Equals(name));
+            // MaKH = user.Id;
+            int MaGH = (int)model.GIOHANGs.Where(x => x.Id.Equals(user.Id)).FirstOrDefault().MAGH;
+
+            // lưu id giỏ hàng vào Session
+            Session["MaGH"] = MaGH;
+        }*/
 
         public MyDataDataContext model = new MyDataDataContext();
         // GET: Default
-        public List<CTGIOHANG> GetListProductInCard(string IdKH)
+        public List<CTGIOHANG> GetListProductInCard(int MaGH)
         {
             List<CTGIOHANG> list = new List<CTGIOHANG>();
-            list = model.CTGIOHANGs.Where(x => x.GIOHANG.Id.Equals(IdKH)).ToList();
+            list = model.CTGIOHANGs.Where(x => x.GIOHANG.MAGH.Equals(MaGH)).ToList();
             if (list == null)
-            {
-                list = new List<CTGIOHANG>();Session["GioHang"] = list;
-            }
+                list = new List<CTGIOHANG>();
             return list;
         }
 
-
-        public ActionResult Index(string IdKH)
+/*        //tạo giỏ hàng
+        public void  Create(string MaKH)
         {
-            // bắt đăng nhập trước khi vào giỏ hàng,
-            // lấy ID của tài khoản đang đăng nhập đưa vào IdKH
-            IdKH = "fe86a5f4-27a3-4204-8a7c-98d04fc56892";
+            List<GIOHANG> list =  model.GIOHANGs.Where(x => x.Id.Equals(MaKH)).ToList(); ;
+            if (list == null)
+                list.Add(new GIOHANG {  Id =MaKH }) ;
+        }*/
 
-            // lấy danh sách sản phẩm có trong giỏ hàng của khách hàng
-            List<CTGIOHANG> list = GetListProductInCard(IdKH);
-
-            ViewBag.SumQuantity = SumQuantity(1);
-            ViewBag.SumPrice = SumPrice(1);
-            ViewBag.SumSP = SumSP(1);
+        public ActionResult Index()
+        {
+            //     int magh = (int)Session["MaGH"] ;
+            // query id user nếu session null
+/*            if (Session["MaGH"] == null)
+                GetIdUserByName(MaKH);*/
+            List<CTGIOHANG> list = GetListProductInCard((int)Session["MaGH"]);
+            ViewBag.SumQuantity = SumQuantity();
+            ViewBag.SumPrice = SumPrice();
+            ViewBag.SumSP = SumSP();
             ViewBag.listGH = list;
             return View();
+            // lấy danh sách sản phẩm có trong giỏ hàng của khách hàng
         }
         //Thêm sp vào giỏ hàng
-        public ActionResult AddSP(int maSP, int maGH, string strURL)
+        public ActionResult AddSP(int maSP, string strURL)
         {
-            string maKH = "fe86a5f4-27a3-4204-8a7c-98d04fc56892";
-            List<CTGIOHANG> list = GetListProductInCard(maKH);
+
+/*            if (Session["MaGH"] == null)
+                GetIdUserByName(MaKH);*/
+            List<CTGIOHANG> list = GetListProductInCard((int)Session["MaGH"]);
             CTGIOHANG sp = list.Find(b => b.MACF.Equals(maSP));
+
             if (sp == null)
             {
                 sp = new CTGIOHANG();
                 sp.MACF = maSP;
-                sp.MAGH = maGH;
+                sp.MAGH = (int)Session["MaGH"];
                 COFFEE cf = model.COFFEEs.Single(n => n.MACF == maSP);
-                GIOHANG gh = model.GIOHANGs.Single(n => n.MAGH == maGH);
+                GIOHANG gh = model.GIOHANGs.Single(n => n.MAGH == (int)Session["MaGH"]);
                 sp.SOLUONG = 1;
                 sp.GIA = cf.GIA;
                 sp.TONGGIA = (sp.GIA * sp.SOLUONG);
@@ -77,20 +92,18 @@ namespace ChatCoffee.Controllers
         }
 
         // tính tổng số lượng
-        public int SumQuantity(int maGH)
+        public int SumQuantity()
         {
-            string maKH = "fe86a5f4-27a3-4204-8a7c-98d04fc56892";
-            List<CTGIOHANG> list = GetListProductInCard(maKH);
+            List<CTGIOHANG> list = GetListProductInCard((int)Session["MaGH"]);
             int sum = 0;
             if (list != null)
                 sum = (int)list.Sum(b => b.SOLUONG);
             return sum;
         }
         //tính tổng sp
-        public int SumSP(int maGH)
+        public int SumSP()
         {
-            string maKH = "fe86a5f4-27a3-4204-8a7c-98d04fc56892";
-            List<CTGIOHANG> list = GetListProductInCard(maKH);
+            List<CTGIOHANG> list = GetListProductInCard((int)Session["MaGH"]);
             int sum = 0;
             if (list != null)
             {
@@ -100,11 +113,10 @@ namespace ChatCoffee.Controllers
         }
 
         //tính tổng tiền
-        public double SumPrice(int maGH)
+        public double SumPrice()
         {
             double sum = 0;
-            string maKH = "fe86a5f4-27a3-4204-8a7c-98d04fc56892";
-            List<CTGIOHANG> list = GetListProductInCard(maKH);
+            List<CTGIOHANG> list = GetListProductInCard((int)Session["MaGH"]);
             if (list != null)
             {
                 sum = (double)list.Sum(b => b.TONGGIA);
@@ -112,13 +124,12 @@ namespace ChatCoffee.Controllers
             return sum;
         }
 
-        public ActionResult DeleteGioHang(string maKH, int maCF)
+        public ActionResult DeleteGioHang( int maCF)
         {
-            maKH = "fe86a5f4-27a3-4204-8a7c-98d04fc56892";
 
             CTGIOHANG cartDetail =
                model.CTGIOHANGs
-               .Where(x => x.GIOHANG.Id.Equals(maKH))
+               .Where(x => x.GIOHANG.MAGH == (int)Session["MaGH"])
                .Where(c => c.MACF == maCF)
                .FirstOrDefault();
 
@@ -131,10 +142,9 @@ namespace ChatCoffee.Controllers
             return RedirectToAction("Index", "ShoppingCard");
         }
 
-        public ActionResult UpdateGioHang(string maKH, int maCF, FormCollection collection)
+        public ActionResult UpdateGioHang( int maCF, FormCollection collection)
         {
-            maKH = "fe86a5f4-27a3-4204-8a7c-98d04fc56892";
-            List<CTGIOHANG> list = GetListProductInCard(maKH);
+            List<CTGIOHANG> list = GetListProductInCard((int)Session["MaGH"]);
             CTGIOHANG gh = list.SingleOrDefault(b => b.MACF.Equals(maCF));
             if (gh != null)
             {
