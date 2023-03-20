@@ -177,6 +177,8 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoaisanphamController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManageCoffeesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManageDeliveriesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManagePaymentController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\COFFEEsController.cs" />
@@ -3457,6 +3459,16 @@
     <Content Include="Areas\Admin\Views\ManageCoffees\Details.cshtml" />
     <Content Include="Areas\Admin\Views\ManageCoffees\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\ManageCoffees\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageDeliveries\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageDeliveries\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageDeliveries\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageDeliveries\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageDeliveries\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagePayment\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagePayment\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagePayment\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagePayment\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagePayment\Index.cshtml" />
     <None Include="Models\ModelViews\MyData.dbml.layout">
       <DependentUpon>MyData.dbml</DependentUpon>
     </None>

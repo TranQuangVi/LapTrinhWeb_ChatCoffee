@@ -1,0 +1,52 @@
+﻿@model ChatCoffee.Models.ModelsDefault.THANHTOAN
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="content">
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"> Chỉnh sửa Hình Thức Thanh Toán   </h3>
+
+
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("Edit", "ManagePayment", FormMethod.Post))
+            {
+                @Html.ValidationSummary(false)
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <label>Phương thức vận chuyển </label>
+                    @Html.EditorFor(model => model.PHUONGTHUC, new
+                    {
+                        htmlAttributes = new { @class = "form-control" }
+})
+                    @Html.ValidationMessageFor(model => model.PHUONGTHUC, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label> Mã Thanh Toán </label>
+                    @Html.EditorFor(model => model.MATT, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MATT, "", new { @class = "text-danger" })
+
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success"> Save </button>
+                </div>
+            }
+
+        </div>
+        <div class="card-footer">
+
+
+        </div>
+
+    </div>
+
+
+</section>

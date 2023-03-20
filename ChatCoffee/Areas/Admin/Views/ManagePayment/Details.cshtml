@@ -1,0 +1,27 @@
+﻿@model ChatCoffee.Models.ModelsDefault.THANHTOAN
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>THANHTOAN</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PHUONGTHUC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PHUONGTHUC)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MATT }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

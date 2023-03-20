@@ -1,0 +1,53 @@
+﻿@model ChatCoffee.Models.ModelsDefault.VANCHUYEN
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<section class="content">
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"> Xóa Hình Thức Vận Chuyển   </h3>
+
+
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("Delete", "ManageDeliveries", FormMethod.Post))
+            {
+
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(x => x.TENVT)
+                @Html.HiddenFor(x => x.MAVT)
+                @Html.HiddenFor(x => x.GIA)
+
+
+                <div class="form-group">
+                    <label>Mã Vận Chuyển </label>
+                    @Html.TextBoxFor(x => x.TENVT, new { @class = "form-control" })
+                    <label>Vận Chuyển</label>
+                    @Html.TextBoxFor(x => x.MAVT, new { @class = "form-control" })
+                    <label>Giá:</label>
+                    @Html.TextBoxFor(x => x.GIA, new { @class = "form-control" })
+
+
+                </div>
+
+                <div class="form-group">
+                    @*<button type="submit" class="btn btn-success">Delete</button>*@
+                    <input type="submit" value="Delete" class="btn btn-default" />
+                </div>
+            }
+
+        </div>
+        <div class="card-footer">
+
+
+        </div>
+
+    </div>
+</section>
+
