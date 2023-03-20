@@ -176,6 +176,7 @@
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoaisanphamController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManagerBrandsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManageCoffeesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManageDeliveriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManagePaymentController.cs" />
@@ -219,6 +220,7 @@
     <Compile Include="Models\ThongKeTruyCap.cs" />
     <Compile Include="Models\ThongKeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\SearchByOption.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -3469,6 +3471,10 @@
       <LastGenOutput>MyData.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Areas\Admin\Views\ManagerBrands\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerBrands\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerBrands\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerBrands\Delete.cshtml" />
     <None Include="Models\ModelViews\MyData.dbml.layout">
       <DependentUpon>MyData.dbml</DependentUpon>
     </None>
@@ -3625,6 +3631,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\ManageBrands\" />
     <Folder Include="Content\ckfinder\userfiles\" />
   </ItemGroup>
   <ItemGroup>

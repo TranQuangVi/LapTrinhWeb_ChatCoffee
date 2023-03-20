@@ -8,19 +8,54 @@ using System.Web;
 using System.Web.Mvc;
 using ChatCoffee.Models;
 using ChatCoffee.Models.ModelsDefault;
+using ChatCoffee.Repository;
 
 namespace ChatCoffee.Controllers
 {
     public class COFFEEsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        public Repository.SearchByOption repository = new Repository.SearchByOption();
 
-       // GET: COFFEEs
-        public ActionResult Index()
+        //lấy vidu từ repository
+        public void layvidu(int a)
         {
-            var cOFFEEs = db.COFFEEs.Include(c => c.LOAISANPHAM).Include(c => c.THUONGHIEU).Include(c=>c.ANHs);
-            return View(cOFFEEs.ToList());
+            repository.vidu(a);
         }
+
+
+
+
+        // GET: COFFEEs
+        // tham số truyền vào phải phân biết đưuọc đâu là loại sp, đâu là thương hiệu
+        public ActionResult Index(int? search)
+        {
+            if(search == null)
+            {
+                var cOFFEEs = db.COFFEEs.Include(c => c.LOAISANPHAM).Include(c => c.THUONGHIEU).Include(c=>c.ANHs);
+            // đây là model view
+                return View(cOFFEEs.ToList());
+
+            }
+            else
+            {
+                // câu truy vấn
+                // trả về list sp loại a
+                return View(search);
+            }
+            
+        }
+
+
+
+        // lấy tất cả sản phẩm theo mã loại
+/*        public LOAISANPHAM listloai(int mal)
+        {
+            //câu truy vấn lấy list
+
+            // trả về list
+            return List;
+        }*/
 
         // GET: COFFEEs/Details/5
         public ActionResult Details(int? id)

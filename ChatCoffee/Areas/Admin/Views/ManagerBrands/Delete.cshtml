@@ -1,0 +1,52 @@
+﻿@model ChatCoffee.Models.ModelsDefault.THUONGHIEU
+
+@{
+    ViewBag.Title = "Danh sách Quyền";
+}
+
+
+<section class="content">
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"> Xóa thương hiệu </h3>
+
+
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("Delete", "ManagerBrands", FormMethod.Post))
+            {
+
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(x => x.TENTH)
+                @Html.HiddenFor(x => x.MATH)
+
+
+
+                <div class="form-group">
+                    <label>Mã Thanh Toán</label>
+                    @Html.TextBoxFor(x => x.MATH, new { @class = "form-control" })
+                    <label>Hình Thức Thanh Toán  </label>
+                    @Html.TextBoxFor(x => x.TENTH, new { @class = "form-control" })
+
+
+
+
+                </div>
+
+                <div class="form-group">
+                    @*<button type="submit" class="btn btn-success">Delete</button>*@
+                    <input type="submit" value="Delete" class="btn btn-default" />
+                </div>
+            }
+
+        </div>
+        <div class="card-footer">
+
+
+        </div>
+
+    </div>
+
+
+</section>
