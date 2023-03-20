@@ -4,10 +4,10 @@
     ViewBag.Title = "Danh Sách Sản Phẩm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<link href="~/Content/styles/product.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="~/Content/styles/categories_styles.css">
 <link rel="stylesheet" type="text/css" href="~/Content/styles/categories_responsive.css">
-<link href="~/Content/styles/product.css" rel="stylesheet" />
+
 <script src="~/Content/JS/categories_custom.js"></script>
 <div class="container-fluid" style="background-color: #FFFBF2">
     <div class="row">
@@ -146,43 +146,60 @@
                                     foreach (var item in Model)
                                     {
                                         <div class="col-lg-3 pro-item">
-                                            <div class="pro  ">
-                                                    <img  src="~/img/menu-1.jpg" alt="@item.TENCF" class="pro_image" >
-                                                @* khuyến mãi
-                                                       @if (item.GIA > 0)
-                                                    {
-                                                        <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>
-                                                    }
-                                                    <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
-                                                *@
-                                                <div class="pro_info">
-                                                    <p style="margin: 0px; font-size:20px;">
-                                                        <a>@item.TENCF</a>
-                                                    </p>
-                                                    <p style="margin: 0px; font-size:20px;">
-                                                        @item.GIA
-                                                    </p>
-
-                                                    @if (@item.SOLUONG > 0)
-                                                    {
-                                                        <div class="pull-right">
-                                                            <div class="DatMua">
-                                                                <a class="btn btn-success " style="float:right" href="@Url.Action("AddSP", "ShoppingCard",
-                                                                new {  @maSP = item.MACF,@maGH=1 , @strURL = Request.Url.ToString() })">Đặt mua</a>
-                                                                <span style="float:left"> Số lượng: @item.SOLUONG</span>
-                                                            </div>
-                                                        </div>
-                                                    }
-                                                    else
-                                                    {
-                                                        <p style="margin: 0px; font-size: 18px; text-align:center"><a>Hết hàng </a></p>
-                                                    }
+                                            <div class="pro">
+                                                <div class="pro_image">
+                                                    <img src="https://trungnguyenlegendcafe.net/wp-content/uploads/2021/08/5.jpg" alt="@item.TENCF">
 
                                                 </div>
-                                                @* <div class="red_button add_to_cart_button">
+
+                                                @* khuyến mãi
+           @if (item.GIA > 0)
+        {
+            <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>
+        }
+        <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
+                                                *@
+                                                <div class="pro_info">
+                                                    <h6 style="margin-top: 25px;">
+                                                        <a>@item.TENCF</a>
+                                                    </h6>
+                                                    <div class="pro_info_price">
+                                                        <h6 style="margin: 0px; font-size:20px;">
+                                                            <b> @item.GIA đ</b>
+                                                        </h6>
+                                                    </div>
+
+                                                </div>
+                                                @*@if (@item.SOLUONG > 0)
+                                                {
+                                                    <div class="pull-right">
+
+                                                        <div class="red_button_buy add_to_cart_button">
+                                                            <a href="@Url.Action("AddSP", "ShoppingCard",
+                                                                new {  @maSP = item.MACF,@maGH=1 , @strURL = Request.Url.ToString() })" class="btnAddToCart">Đặt mua</a>
+                                                        </div>
+                                                    </div>
+                                                }*@
+                                                @if (@item.SOLUONG > 0)
+                                                {
+                                                    <div class="pull-right">
+                                                        <div class="DatMua">
+                                                            <a class="btn btn-success " style="float:right" href="@Url.Action("AddSP", "ShoppingCard",
+                                                                new {  @maSP = item.MACF,@maGH=1 , @strURL = Request.Url.ToString() })">Đặt mua</a>
+                                                            @*<span style="float:left"> Số lượng: @item.SOLUONG</span>*@
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <p style="margin: 0px; font-size: 18px; text-align:center"><a>Hết hàng </a></p>
+                                                }
+
+
+                                                 @*<div class="red_button add_to_cart_button">
                                                         <a href="@Url.Action("AddSP", "ShoppingCard",
-                                                                    new {  @maSP = item.MACF,@maGH=1 , @strURL = Request.Url.ToString() })" class="btnAddToCart">add to cart</a>
-                                                    </div>*@
+                                                            new {  @maSP = item.MACF,@maGH=1 , @strURL = Request.Url.ToString() })" class="btnAddToCart">add to cart</a>
+                                                </div>*@
                                             </div>
 
                                         </div>
