@@ -145,16 +145,17 @@
                                 {
                                     foreach (var item in Model)
                                     {
+                                        var strImge = "";
+                                        var img = item.ANHs.Where(c => c.MACF == item.MACF).FirstOrDefault();
+                                        if (img != null)
+                                        {
+
+                                            strImge = img.LINKANH;
+                                        }
                                         <div class="col-lg-3 pro-item">
                                             <div class="pro  ">
-                                                <img src="@item.ANHs.Where(c=>c.MACF==item.MACF).FirstOrDefault().LINKANH" alt="@item.TENCF" class="pro_image">
-                                                @* khuyến mãi
-           @if (item.GIA > 0)
-        {
-            <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>
-        }
-        <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
-                                                *@
+                                                <img src="@strImge" alt="@item.TENCF" class="pro_image">
+
                                                 <div class="pro_info">
                                                     <h6 style="margin-top: 25px;">
                                                         <a>@item.TENCF</a>
@@ -167,15 +168,15 @@
 
                                                 </div>
                                                 @*@if (@item.SOLUONG > 0)
-                                                {
-                                                    <div class="pull-right">
+                        {
+                            <div class="pull-right">
 
-                                                        <div class="red_button_buy add_to_cart_button">
-                                                            <a href="@Url.Action("AddSP", "ShoppingCard",
-                                                                new {  @maSP = item.MACF,@maGH=1 , @strURL = Request.Url.ToString() })" class="btnAddToCart">Đặt mua</a>
-                                                        </div>
-                                                    </div>
-                                                }*@
+                                <div class="red_button_buy add_to_cart_button">
+                                    <a href="@Url.Action("AddSP", "ShoppingCard",
+                                        new {  @maSP = item.MACF,@maGH=1 , @strURL = Request.Url.ToString() })" class="btnAddToCart">Đặt mua</a>
+                                </div>
+                            </div>
+                        }*@
                                                 @if (@item.SOLUONG > 0)
                                                 {
                                                     <div class="pull-right">
@@ -191,19 +192,10 @@
                                                     <p style="margin: 0px; font-size: 18px; text-align:center"><a>Hết hàng </a></p>
                                                 }
 
-                                                </div>
-                                                @* <div class="red_button add_to_cart_button">
-            <a href="@Url.Action("AddSP", "ShoppingCard",
-                        new {  @maSP = item.MACF,@maGH=1 , @strURL = Request.Url.ToString() })" class="btnAddToCart">add to cart</a>
-        </div>*@
                                             </div>
-
                                         </div>
-
                                     }
                                 }
-
-
                             </div>
 
                             <!-- Product Sorting -->
