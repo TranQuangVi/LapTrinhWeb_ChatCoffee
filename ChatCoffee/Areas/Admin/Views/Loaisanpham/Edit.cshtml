@@ -1,0 +1,54 @@
+﻿﻿@model ChatCoffee.Models.ModelsDefault.LOAISANPHAM
+  
+  @{
+      ViewBag.Title = "Edit";
+      Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+      }
+  
+
+  <section class="content">
+      
+          <div class="card">
+                  <div class="card-header">
+                          <h3 class="card-title"> Chỉnh sửa loại sản phẩm  </h3>
+              
+              
+        </div>
+                  <div class="card-body">
+                          @using (Html.BeginForm("Edit", "Loaisanpham", FormMethod.Post))
+                              {
+                  @Html.ValidationSummary(false)
+                   @Html.AntiForgeryToken()
+                   @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                  @*@Html.HiddenFor(x => x.MALOAI)
+                                      @Html.HiddenFor(x => x.TENLOAI)*@
+                  
+                  
+                  
+                                  <div class="form-group">
+                      <label>Tên Loại sản phẩm</label>
+                      @Html.EditorFor(model => model.TENLOAI, new { htmlAttributes = new { @class = "form-control" }
+})
+  @Html.ValidationMessageFor(model => model.TENLOAI, "", new { @class = "text-danger" })
+                  </div >
+                  <div class= "form-group" >
+                      <label > Mã Loại sản phẩm</label>
+                      @Html.EditorFor(model => model.MALOAI, new { htmlAttributes = new { @class = "form-control" } })
+  @Html.ValidationMessageFor(model => model.MALOAI, "", new { @class = "text-danger" })
+  
+                  </div >
+                  <div class= "form-group" >
+                      <button type = "submit" class= "btn btn-success" > Save </button>
+                  </div >
+              }
+  
+        </div>
+                  <div class="card-footer">
+              
+              
+        </div>
+          
+    </div>
+      
+      
+</section>

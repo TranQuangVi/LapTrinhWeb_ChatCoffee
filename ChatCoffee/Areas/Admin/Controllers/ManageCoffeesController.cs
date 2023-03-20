@@ -9,53 +9,20 @@ using System.Web.Mvc;
 using ChatCoffee.Models;
 using ChatCoffee.Models.ModelsDefault;
 
-namespace ChatCoffee.Controllers
+namespace ChatCoffee.Areas.Admin.Controllers
 {
-    public class COFFEEsController : Controller
+    public class ManageCoffeesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-       // GET: COFFEEs
+        // GET: Admin/ManageCoffees
         public ActionResult Index()
         {
             var cOFFEEs = db.COFFEEs.Include(c => c.LOAISANPHAM).Include(c => c.THUONGHIEU).Include(c=>c.ANHs);
             return View(cOFFEEs.ToList());
         }
 
-        // GET: COFFEEs/Details/5
-        public ActionResult Details(int? id)
-        {
-            GIOHANG gIOHANG = new GIOHANG();
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            COFFEE cOFFEE = db.COFFEEs.Find(id);
-            if (cOFFEE != null)
-            {
-                db.COFFEEs.Attach(cOFFEE);
-                cOFFEE.ViewCount = cOFFEE.ViewCount + 1;
-                db.Entry(cOFFEE).Property(x => x.ViewCount).IsModified = true;
-                db.SaveChanges();
-            }
-            if (cOFFEE == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cOFFEE);
-            /*            var item = db.COFFEEs.Find(id);
-                        if (item != null)
-                        {
-                            db.COFFEEs.Attach(item);
-                            item.TENCF = item.TENCF + 1;
-                            db.Entry(item).Property(x => x.TENCF).IsModified = true;
-                            db.SaveChanges();
-                        }
-
-                        return View(item);*/
-        }
-
-        // GET: COFFEEs/Create
+        // GET: Admin/ManageCoffees/Create
         public ActionResult Create()
         {
             ViewBag.MALOAI = new SelectList(db.LOAISANPHAMs, "MALOAI", "TENLOAI");
@@ -63,15 +30,17 @@ namespace ChatCoffee.Controllers
             return View();
         }
 
-        // POST: COFFEEs/Create
+        // POST: Admin/ManageCoffees/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MACF,TENCF,GIA,SOLUONG,KHOILUONG,XUATXU,HSD,DANGCF,MOTA,MALOAI,MATH")] COFFEE cOFFEE)
+        public ActionResult Create([Bind(Include = "MACF,TENCF,GIA,SOLUONG,ViewCount,SLDABAN,KHOILUONG,XUATXU,HSD,DANGCF,MOTA,MALOAI,MATH")] COFFEE cOFFEE)
         {
             if (ModelState.IsValid)
             {
+                cOFFEE.ViewCount = 0;
+                cOFFEE.SLDABAN = 0;
                 db.COFFEEs.Add(cOFFEE);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -82,7 +51,7 @@ namespace ChatCoffee.Controllers
             return View(cOFFEE);
         }
 
-        // GET: COFFEEs/Edit/5
+        // GET: Admin/ManageCoffees/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -99,7 +68,7 @@ namespace ChatCoffee.Controllers
             return View(cOFFEE);
         }
 
-        // POST: COFFEEs/Edit/5
+        // POST: Admin/ManageCoffees/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -109,6 +78,7 @@ namespace ChatCoffee.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(cOFFEE).State = EntityState.Modified;
+                UpdateModel(cOFFEE);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -117,7 +87,7 @@ namespace ChatCoffee.Controllers
             return View(cOFFEE);
         }
 
-        // GET: COFFEEs/Delete/5
+        // GET: Admin/ManageCoffees/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -132,7 +102,7 @@ namespace ChatCoffee.Controllers
             return View(cOFFEE);
         }
 
-        // POST: COFFEEs/Delete/5
+        // POST: Admin/ManageCoffees/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

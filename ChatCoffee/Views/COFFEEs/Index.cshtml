@@ -146,12 +146,8 @@
                                     foreach (var item in Model)
                                     {
                                         <div class="col-lg-3 pro-item">
-                                            <div class="pro">
-                                                <div class="pro_image">
-                                                    <img src="https://trungnguyenlegendcafe.net/wp-content/uploads/2021/08/5.jpg" alt="@item.TENCF">
-
-                                                </div>
-
+                                            <div class="pro  ">
+                                                <img src="@item.ANHs.Where(c=>c.MACF==item.MACF).FirstOrDefault().LINKANH" alt="@item.TENCF" class="pro_image">
                                                 @* khuyến mãi
            @if (item.GIA > 0)
         {
@@ -195,11 +191,11 @@
                                                     <p style="margin: 0px; font-size: 18px; text-align:center"><a>Hết hàng </a></p>
                                                 }
 
-
-                                                 @*<div class="red_button add_to_cart_button">
-                                                        <a href="@Url.Action("AddSP", "ShoppingCard",
-                                                            new {  @maSP = item.MACF,@maGH=1 , @strURL = Request.Url.ToString() })" class="btnAddToCart">add to cart</a>
-                                                </div>*@
+                                                </div>
+                                                @* <div class="red_button add_to_cart_button">
+            <a href="@Url.Action("AddSP", "ShoppingCard",
+                        new {  @maSP = item.MACF,@maGH=1 , @strURL = Request.Url.ToString() })" class="btnAddToCart">add to cart</a>
+        </div>*@
                                             </div>
 
                                         </div>
