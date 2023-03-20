@@ -15,7 +15,7 @@ namespace ChatCoffee.Controllers
     public class ShoppingCardController : Controller
     {
         // lấy id khách hàng theo user name
-/*        public void GetIdUserByName(string name)
+        public void GetIdUserByName(string name)
         {
             AspNetUser user = model.AspNetUsers.Single(u => u.UserName.Equals(name));
             // MaKH = user.Id;
@@ -23,7 +23,7 @@ namespace ChatCoffee.Controllers
 
             // lưu id giỏ hàng vào Session
             Session["MaGH"] = MaGH;
-        }*/
+        }
 
         public MyDataDataContext model = new MyDataDataContext();
         // GET: Default
@@ -48,8 +48,8 @@ namespace ChatCoffee.Controllers
         {
             //     int magh = (int)Session["MaGH"] ;
             // query id user nếu session null
-/*            if (Session["MaGH"] == null)
-                GetIdUserByName(MaKH);*/
+            if (Session["MaGH"] == null)
+                GetIdUserByName(User.Identity.Name);
             List<CTGIOHANG> list = GetListProductInCard((int)Session["MaGH"]);
             ViewBag.SumQuantity = SumQuantity();
             ViewBag.SumPrice = SumPrice();
