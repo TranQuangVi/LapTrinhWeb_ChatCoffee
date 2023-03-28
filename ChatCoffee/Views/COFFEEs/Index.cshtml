@@ -6,11 +6,13 @@
 
 
 }
+<link href="~/css/menu.css" rel="stylesheet" />
 <link href="~/Content/styles/product.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="~/Content/styles/categories_styles.css">
 <link rel="stylesheet" type="text/css" href="~/Content/styles/categories_responsive.css">
-<link href="~/css/style.min.css" rel="stylesheet" />
 <link href="~/css/style.css" rel="stylesheet" />
+<link href="~/css/style.min.css" rel="stylesheet" />
+
 <style>
     input[type=text] {
         width: 200px;
@@ -33,9 +35,9 @@
 </style>
 <script src="~/Content/JS/categories_custom.js"></script>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+@*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>*@
 
 <div class="container-fluid" style="background-color: #FFFBF2">
     <div class="row">
@@ -189,12 +191,11 @@
                                         }
                                         <div class="col-lg-3 pro-item">
                                             <div class="pro  ">
-                                                <img src="@strImge" alt="@item.TENCF" class="pro_image" 
-                                                     >
+                                                <img src="@strImge" alt="@item.TENCF" class="pro_image">
 
                                                 <div class="pro_info">
                                                     <h6 style="margin-top: 25px;">
-                                                        <a href="@Url.Action("details","coffees",new { @id = item.MACF })" >@item.TENCF</a>
+                                                        <a href="@Url.Action("details","coffees",new { @id = item.MACF })">@item.TENCF</a>
                                                     </h6>
                                                     <div class="pro_info_price">
                                                         <h6 style="margin: 0px; font-size:20px;">
@@ -203,32 +204,33 @@
                                                     </div>
 
                                                 </div>
- 
-                                                
+
+
                                                 @if (@item.SOLUONG > 0)
                                                 {
                                                     <div class="pull-right">
                                                         <div class="DatMua">
-                                                            <a class="btn btn-success btn_Buy " style="display: block; margin-top: 55px; padding-top: 7px; background-color: #271010; " href="@Url.Action("AddSP", "ShoppingCard",
-                                                                new {  @maSP = item.MACF,@maGH=1 , @strURL = Request.Url.ToString() })">Thêm vào giỏ hàng</a>
+                                                            @*<a class="btn btn-success btn_Buy " style="display: block; margin-top: 55px; padding-top: 7px; background-color: #271010; " href="@Url.Action("AddSP", "ShoppingCard",
+                                                                new {  @maSP = item.MACF,@maGH=1 , @strURL = Request.Url.ToString() })">Thêm vào giỏ hàng</a>*@
                                                             @if (Session["MaGH"] == null)
                                                             {
                                                                 <div class="product-action" id="addToCard" onclick="alert('Xin lỗi quý khách, quý khách chưa đăng nhập')">
-                                                                    <button class="btn btn-success">
-                                                                            <span>Thêm giỏ hàng</span>
-                                                                    </button>
+                                                                    <a class="btn btn-success"
+                                                                                style="display: block; margin-top: 55px; padding-top: 7px;">
+                                                                        <span>Thêm giỏ hàng</span>
+                                                                    </a>
                                                                 </div>
                                                             }
                                                             else
                                                             {
                                                                 <div onclick="alert('Đã thêm sản phẩm vòa giỏ hàng')">
                                                                     <a href="@Url.Action("AddSP", "ShoppingCard", new {  @maSP = item.MACF,@strURL = Request.Url.ToString() })">
-                                                                        <button class="btn btn-success"
-                                                                                >
+                                                                        <a class="btn btn-success" 
+                                                                                style="display: block; margin-top: 55px; padding-top: 7px; ">
                                                                             <span>Thêm giỏ hàng</span>
-                                                                        </button>
+                                                                        </a>
                                                                     </a>
-                                                                    
+
                                                                 </div>
                                                             }
 
