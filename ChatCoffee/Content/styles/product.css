@@ -10,7 +10,15 @@
     padding-top: 4px;
     
 }
-
+.navbar {
+    position: fixed;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    background: #271010;
+}
 .pro_image {
     width: 80%;
     margin-left: 27px;
@@ -65,76 +73,19 @@
         content: '';
         border: solid 2px rgba(235,235,235,0);
         border-radius: 3px;
-        -webkit-transition: all 0.3s ease;
-        -moz-transition: all 0.3s ease;
-        -ms-transition: all 0.3s ease;
-        -o-transition: all 0.3s ease;
-        transition: all 0.3s ease;
+        -webkit-transition: all 0.1s ease;
+        -moz-transition: all 0.1s ease;
+        -ms-transition: all 0.1s ease;
+        -o-transition: all 0.1s ease;
+        transition: all 0.1s ease;
     }
 
     .pro-item:hover::after {
-        box-shadow: 0 25px 29px rgba(63, 78, 100, 0.15);
+        box-shadow: 0 0px 0px rgba(63, 78, 100, 0.15);
         border: solid 2px rgba(235,235,235,1);
         width: 275px;
         margin-left: 16px;
         margin-top: 15px;
         
     }
-
-
-.add_to_cart_button {
-    width: 100%;
-    visibility: hidden;
-    opacity: 0;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -ms-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-}
-
-    .add_to_cart_button a {
-        font-size: 12px;
-        font-weight: 600;
-    }
-
-.red_button_buy {
-    display: -webkit-inline-box;
-    display: -moz-inline-box;
-    display: -ms-inline-flexbox;
-    display: -webkit-inline-flex;
-    display: inline-flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: auto;
-    height: 40px;
-    background: #fe4c50;
-    border-radius: 3px;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -ms-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-}
-
-.red_button_buy:hover {
-    background: #FE7C7F !important;
-}
-
-    .red_button_buy a {
-        display: block;
-        color: #FFFFFF;
-        text-transform: uppercase;
-        font-size: 14px;
-        font-weight: 500;
-        text-align: center;
-        line-height: 40px;
-        width: 100%;
-    }
-
-.product-item:hover .add_to_cart_button {
-    visibility: visible;
-    opacity: 1;
-}
 

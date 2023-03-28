@@ -14,7 +14,7 @@ using ChatCoffee.Models.ModelViews;
 
 namespace ChatCoffee.Controllers
 {
-    [Authorize]
+    
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -177,7 +177,8 @@ namespace ChatCoffee.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    UserManager.FindByName(model.Role = "user");
+                    //UserManager.FindByName(model.Role = "user");
+                    UserManager.AddToRole(user.Id, model.Role = "user") ;
                     //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
@@ -193,7 +194,7 @@ namespace ChatCoffee.Controllers
                     gh.TONGTIEN = 0;
                     Create(gh);
                     
-                    return RedirectToAction("Login", "Account");
+                    return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }

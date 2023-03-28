@@ -24,13 +24,18 @@
     <link href="~/css/style.css" rel="stylesheet" />
 
 
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.green.min.css" integrity="sha512-C8Movfk6DU/H5PzarG0+Dv9MA9IZzvmQpO/3cIlGIflmtY3vIud07myMu4M/NTPJl8jmZtt/4mC9bAioMZBBdA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 
 <body>
     <!-- Navbar Start -->
 
-    <div class="container-fluid p-0 nav-bar " style="background-color:#271010">
-        <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3 ">
+    <div class="container-fluid p-0 nav-bar " style="background-color:#271010;  font-size: 17px">
+        <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3 " style="height: 120px;">
             <a href="@Url.Action("Index", "Home")" class="navbar-brand px-lg-4 m-0">
                 <h1 class="m-0 display-4 text-uppercase text-white">chat coffee</h1>
             </a>
@@ -39,31 +44,32 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav ml-auto p-4">
-                    <a href="@Url.Action("Index", "Home")" class="nav-item nav-link active">Home</a>
-                    <a href="@Url.Action("About", "Home")" class="nav-item nav-link">About</a>
-                    <a href="@Url.Action("Service", "Home")" class="nav-item nav-link">Service</a>
-                    <a href="@Url.Action("Index", "Coffees")" class="nav-item nav-link">Menu</a>
+                    <a href="@Url.Action("Index", "Home")" class="nav-item nav-link active">Trang chủ</a>
+                    <a href="@Url.Action("About", "Home")" class="nav-item nav-link">Giới thiệu</a>
+                    @*<a href="@Url.Action("Service", "Home")" class="nav-item nav-link">Service</a>*@
+                    <a href="@Url.Action("Index", "Coffees")" class="nav-item nav-link">Sản phẩm</a>
                     <div class="nav-item dropdown">
 
                         @if (!Request.IsAuthenticated)
                         {
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Account</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tài khoản</a>
                             <div class="dropdown-menu text-capitalize">
-                                <a href="@Url.Action("Login", "Account")" class="dropdown-item">Sign in</a>
-                                <a href="@Url.Action("Register","Account")" class="dropdown-item">Register</a>
+                                <a href="@Url.Action("Login", "Account")" class="dropdown-item">Đăng nhập</a>
+                                <a href="@Url.Action("Register","Account")" class="dropdown-item">Đăng kí</a>
                             </div>
                         }
                         else
                         {
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">@User.Identity.Name </a>
                             <div class="dropdown-menu text-capitalize">
-                                <a href="/User" class="dropdown-item">Profile</a>
-                                <a href="javascript:document.getElementById('logOffForm').submit()" class="dropdown-item">Log out</a>
+                                @*<a href="@Url.Action("Index","User", new { id =  } )" class="dropdown-item">Profile</a>*@
+                                <a href="/User/Index/" class="dropdown-item">Thông tin</a>
+                                <a href="javascript:document.getElementById('logOffForm').submit()" class="dropdown-item">Đăng xuất</a>
                             </div>
                         }
 
                     </div>
-                    <a href="@Url.Action("Contact", "Home")" class="nav-item nav-link">Contact</a>
+                    @*<a href="@Url.Action("Contact", "Home")" class="nav-item nav-link">Contact</a>*@
                     <a href="@Url.Action("Index", "ShoppingCard")" class="nav-item nav-link">Giỏ hàng</a>
                 </div>
             </div>
@@ -82,57 +88,62 @@
 
 
     <!-- Navbar End -->
+
+
+
     <div style="padding-top:120px">
+
         @RenderBody()
-    </div>
 
 
 
-    <!-- Footer Start -->
-    <div class="container-fluid footer text-white mt-5 pt-5 px-0 position-relative overlay-top">
-        <div class="row mx-0 pt-5 px-sm-3 px-lg-5 mt-4">
-            <div class="col-lg-3 col-md-6 mb-5">
-                @Html.Action("Refresh", "Home")
-                @*<h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Get In Touch</h4>
-                <p><i class="fa fa-map-marker-alt mr-2"></i>123 Street, New York, USA</p>
-                <p><i class="fa fa-phone-alt mr-2"></i>+012 345 67890</p>
-                <p class="m-0"><i class="fa fa-envelope mr-2"></i>info@example.com</p>*@
-            </div>
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Follow Us</h4>
-                <p>Amet elitr vero magna sed ipsum sit kasd sea elitr lorem rebum</p>
-                <div class="d-flex justify-content-start">
-                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-lg btn-outline-light btn-lg-square" href="#"><i class="fab fa-instagram"></i></a>
+        <!-- Footer Start -->
+        <div class="container-fluid footer text-white mt-5 pt-5 px-0 position-relative overlay-top">
+            <div class="row mx-0 pt-5 px-sm-3 px-lg-5 mt-4">
+                <div class="col-lg-3 col-md-6 mb-5">
+                    <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Thống kê truy cập</h4>
+                    @Html.Action("Refresh", "Home")
+                    @*<h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Get In Touch</h4>
+                        <p><i class="fa fa-map-marker-alt mr-2"></i>123 Street, New York, USA</p>
+                        <p><i class="fa fa-phone-alt mr-2"></i>+012 345 67890</p>
+                        <p class="m-0"><i class="fa fa-envelope mr-2"></i>info@example.com</p>*@
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Open Hours</h4>
-                <div>
-                    <h6 class="text-white text-uppercase">Monday - Friday</h6>
-                    <p>8.00 AM - 8.00 PM</p>
-                    <h6 class="text-white text-uppercase">Saturday - Sunday</h6>
-                    <p>2.00 PM - 8.00 PM</p>
+                <div class="col-lg-3 col-md-6 mb-5">
+                    <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Kênh truyền thông</h4>
+                    @*<p>Amet elitr vero magna sed ipsum sit kasd sea elitr lorem rebum</p>*@
+                    <div class="d-flex justify-content-start">
+                        <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="https://www.facebook.com/highlandscoffeevietnam"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-lg btn-outline-light btn-lg-square" href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Newsletter</h4>
-                <p>Amet elitr vero magna sed ipsum sit kasd sea elitr lorem rebum</p>
-                <div class="w-100">
-                    <div class="input-group">
-                        <input type="text" class="form-control border-light" style="padding: 25px;" placeholder="Your Email">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary font-weight-bold px-3">Sign Up</button>
+                <div class="col-lg-3 col-md-6 mb-5">
+                    <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Thời gian mở Shop</h4>
+                    <div>
+                        <h6 class="text-white text-uppercase">Thứ 2 - Thứ 6</h6>
+                        <p>8.00H - 20.00H </p>
+                        <h6 class="text-white text-uppercase">Thứ 7 - Chủ nhật</h6>
+                        <p>14.00H - 20.00H</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-5">
+                    <h5 class="text-white text-uppercase mb-4">Đăng ký nhận tin khuyến mãi</h5>
+                    @*<h6 class="text-white text-uppercase mb-4">Đăng kí nhận tin khuyến mãi</h6>*@
+                    <div class="w-100">
+                        <div class="input-group">
+                            <input type="text" class="form-control border-light" style="padding: 25px;" placeholder="Nhập địa chỉ Email">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary font-weight-bold px-3">Đăng ký</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="container-fluid text-center text-white border-top mt-4 py-4 px-sm-3 px-md-5" style="border-color: rgba(256, 256, 256, .1) !important;">
-            <p class="mb-2 text-white">Copyright &copy; <a class="font-weight-bold" href="#">Domain</a>. All Rights Reserved.</p>
-            <p class="m-0 text-white">Designed by <a class="font-weight-bold" href="https://htmlcodex.com">HTML Codex</a></p>
+            @*<div class="container-fluid text-center text-white border-top mt-4 py-4 px-sm-3 px-md-5" style="border-color: rgba(256, 256, 256, .1) !important;">
+                    <p class="mb-2 text-white">Copyright &copy; <a class="font-weight-bold" href="#">Domain</a>. All Rights Reserved.</p>
+                    <p class="m-0 text-white">Designed by <a class="font-weight-bold" href="https://htmlcodex.com">HTML Codex</a></p>
+                </div>*@
         </div>
     </div>
     <!-- Footer End -->
@@ -158,7 +169,25 @@
     <!-- Template Javascript -->
     <script src="~/js/main.js"></script>
 
+    <script>
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            margin: 40,
+            nav: true,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 3
+                },
+                1000: {
+                    items: 5
+                }
+            }
+        })
+    </script>
 
-
+   
 </body>
 </html>

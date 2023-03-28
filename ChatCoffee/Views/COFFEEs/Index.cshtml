@@ -7,7 +7,8 @@
 <link href="~/Content/styles/product.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="~/Content/styles/categories_styles.css">
 <link rel="stylesheet" type="text/css" href="~/Content/styles/categories_responsive.css">
-
+<link href="~/css/style.min.css" rel="stylesheet" />
+<link href="~/css/style.css" rel="stylesheet" />
 <script src="~/Content/JS/categories_custom.js"></script>
 <div class="container-fluid" style="background-color: #FFFBF2">
     <div class="row">
@@ -110,7 +111,7 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <span class="type_sorting_text">thương hiêuj</span>
+                                        <span class="type_sorting_text">thương hiệu</span>
                                         <i class="fa fa-angle-down"></i>
                                         <ul class="sorting_type">
                                             <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "original-order" }'><span>thuong hieeujj 1</span></li>
@@ -175,22 +176,13 @@
                                                     </div>
 
                                                 </div>
-                                                @*@if (@item.SOLUONG > 0)
-                        {
-                            <div class="pull-right">
-
-                                <div class="red_button_buy add_to_cart_button">
-                                    <a href="@Url.Action("AddSP", "ShoppingCard",
-                                        new {  @maSP = item.MACF,@maGH=1 , @strURL = Request.Url.ToString() })" class="btnAddToCart">Đặt mua</a>
-                                </div>
-                            </div>
-                        }*@
+ 
                                                 @if (@item.SOLUONG > 0)
                                                 {
                                                     <div class="pull-right">
                                                         <div class="DatMua">
-                                                            <a class="btn btn-success " style="float:right" href="@Url.Action("AddSP", "ShoppingCard",
-                                                                new {  @maSP = item.MACF,@maGH=1 , @strURL = Request.Url.ToString() })">Đặt mua</a>
+                                                            <a class="btn btn-success btn_Buy " style="display: block; margin-top: 55px; padding-top: 7px; background-color: #271010; " href="@Url.Action("AddSP", "ShoppingCard",
+                                                                new {  @maSP = item.MACF,@maGH=1 , @strURL = Request.Url.ToString() })">Thêm vào giỏ hàng</a>
                                                             @*<span style="float:left"> Số lượng: @item.SOLUONG</span>*@
                                                         </div>
                                                     </div>

@@ -36,6 +36,7 @@
                         <tr>
                             <th>#</th>
                             <th>Tài khoản</th>
+                            <th>Role</th>
                             <th>Họ tên</th>
                             <th>Email</th>
                             <th></th>
@@ -50,10 +51,12 @@
                                 <tr>
                                     <td>@i</td>
                                     <td>@item.UserName</td>
+                                    @*<td>@Html.DisplayFor(modelItem => item.Roles.Where(c => c.UserId == item.Id).FirstOrDefault().RoleId)</td>*@
+                                    <td>@Html.DisplayFor(modelItem => item.Roles.Where(c => c.UserId == item.Id).FirstOrDefault().RoleId)</td>
                                     <td>@item.FullName</td>
                                     <td>@item.Email</td>
                                     <td>
-                                        <a href="/admin/account/edit/@item.UserName" class="btn btn-sm btn-primary">Chỉnh sửa</a>
+                                        <a href="/admin/account/edit/@item.Id" class="btn btn-sm btn-primary">Chỉnh sửa</a>
                                         @*<a href="#" data-user="@item.UserName" class="btn btn-sm btn-danger btnDelete">Xóa</a>*@
                                         <input type="submit" value="Delete" class="btn btn-danger" />
                                     </td>

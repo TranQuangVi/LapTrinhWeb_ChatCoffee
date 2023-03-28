@@ -1,10 +1,13 @@
 ﻿using ChatCoffee.Models;
+using ChatCoffee.Models.ModelsDefault;
+using ChatCoffee.Models.ModelViews;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -13,12 +16,14 @@ using System.Web.Mvc;
 
 namespace ChatCoffee.Areas.Admin.Controllers
 {
+    
     public class AccountController : Controller
     {
 
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private ApplicationDbContext db = new ApplicationDbContext();
+        MyDataDataContext data = new MyDataDataContext();
         public AccountController()
         {
         }
@@ -56,8 +61,19 @@ namespace ChatCoffee.Areas.Admin.Controllers
         // GET: Admin/Account
         public ActionResult Index()
         {
-            var items = db.Users.ToList();
-            return View(items);
+            var items = db.Users.Include(c => c.Roles);
+            //if (items.FirstOrDefault().Role)
+            //{
+
+
+                return View(items.ToList());
+            //}
+            //else
+            //{
+            //    var item = db.KHACHHANGs.ToList();
+            //    return View(item);
+            //}
+
         }
 
         // GET: /Account/Login
@@ -153,24 +169,45 @@ namespace ChatCoffee.Areas.Admin.Controllers
         }
 
 
-        //public ActionResult Delete(string id)
-        //{
-        //    var item = db.Users.Find(id);
-        //    return View(item);
-        //}
+        public ActionResult Delete(string id)
+        {
+            //    if (id == null)
+            //    {
+            //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //    }
+            //    AspNetUser user = data.AspNetUsers.First(x => x.Id == id);
+            //    if (user == null)
+            //    {
+            //        return HttpNotFound();
+            //    }
+            //    return View(user);
+            //}
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Delete()
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-                
-                
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(model);
-        //}
+            //// POST: Admin/ManageCoffees/Delete/5
+            //[HttpPost, ActionName("Delete")]
+            //[ValidateAntiForgeryToken]
+            //public ActionResult DeleteConfirmed(string id)
+            //{
+            //    AspNetUser user = data.AspNetUsers.First(x => x.Id == id);
+            //    data.AspNetUsers.DeleteOnSubmit(user);
+            //    data.SubmitChanges();
+            //    return RedirectToAction("Index");
+            //}
+            var item = db.Users.Find(id);
+            return View(item);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Deletee(string id)
+        {
+
+                AspNetUser user = data.AspNetUsers.First(x => x.Id == id);
+                data.AspNetUsers.DeleteOnSubmit(user);
+                data.SubmitChanges();
+                 return RedirectToAction("Index");
+
+        }
 
 
         private IAuthenticationManager AuthenticationManager

@@ -1,13 +1,13 @@
-﻿@using ChatCoffee.Models
+﻿    @using ChatCoffee.Models
 @model LoginViewModel
 @{
     ViewBag.Title = "Đăng nhập";
 }
 
-<h2>@ViewBag.Title</h2>
+<h2 style="margin-left: 347px; margin-top: 24px;">@ViewBag.Title</h2>
 <div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
+    <div class="col-md-5" style="margin-left: 250px">
+        <section id="loginForm" style="margin-left: 50px;">
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
@@ -41,7 +41,7 @@
                         <input type="submit" value="Đăng nhập" class="btn btn-primary" />
                     </div>
                 </div>
-                <p>
+                <p style="margin-left: 15px;">
                     @Html.ActionLink("Đăng kí", "Register")
                 </p>
                 @* Enable this once you have account confirmation enabled for password reset functionality
@@ -53,7 +53,7 @@
     </div>
     <div class="col-md-4">
         <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+            <img src="https://khoinguonsangtao.vn/wp-content/uploads/2022/11/hinh-anh-cafe-1.jpg" alt="Alternate Text" style="width: 800px; object-fit: contain; margin-top: -50px" />
         </section>
     </div>
 </div>

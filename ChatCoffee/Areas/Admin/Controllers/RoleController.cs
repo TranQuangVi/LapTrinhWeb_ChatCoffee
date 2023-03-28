@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace ChatCoffee.Areas.Admin.Controllers
 {
+    
     public class RoleController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

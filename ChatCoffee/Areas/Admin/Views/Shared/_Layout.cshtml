@@ -224,10 +224,10 @@
     <!-- AdminLTE App -->
     <script src="~/Content/clients/dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="~/Content/clients/dist/js/demo.js"></script>
+    @*<script src="~/Content/clients/dist/js/demo.js"></script>*@
     <!-- Page specific script -->
     <script>
-    $(function () {
+        $(function () {
             //Initialize Select2 Elements
             $('.select2').select2()
 
@@ -358,9 +358,10 @@
         document.querySelector("#actions .cancel").onclick = function () {
             myDropzone.removeAllFiles(true)
         }
-      // DropzoneJS Demo Code End</script>
+          // DropzoneJS Demo Code End</script>
 
     @RenderSection("scripts", required: false)
+  
 </body>
 </html>
 

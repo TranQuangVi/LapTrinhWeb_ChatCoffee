@@ -549,13 +549,23 @@ section {
 }
 
 .navbar {
+    position: fixed;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    background: #271010;
+    width: 100%;
+    height: 120px;
+}
+/*.navbar {
     width: auto;
     height: 100px;
     float: right;
     padding-left: 0px;
     padding-right: 0px;
-}
-
+}*/
 .navbar_menu li {
     display: inline-block;
 }

@@ -1,54 +1,63 @@
 ﻿@model ChatCoffee.Models.RegisterViewModel
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "ĐĂNG KÝ";
 }
 
-<h2>@ViewBag.Title.</h2>
+<h2 style="margin-left: 347px; margin-top: 24px;">@ViewBag.Title</h2>
+<div class="row">
+    <div class="col-md-5" style="margin-left: 250px">
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @*<h4>Create a new account.</h4>*@
+            <hr />
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            <div class="form-group">
+                <h6 style="margin-left: 13px;">Tên đăng nhập:</h6>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <h6 style="margin-left: 13px;">Họ tên:</h6>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <h6 style="margin-left: 13px;">Email:</h6>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <h6 style="margin-left: 13px;">Mật khẩu:</h6>
+                <div class="col-md-10">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <h6 style="margin-left: 13px;">Xác nhận mật khẩu:</h6>
+                <div class="col-md-10">
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                </div>
+            </div>
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        <h6 style="margin-left: 13px;">Tên đăng nhập:</h6>
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
-        </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-primary" value="Đăng kí" />
+                </div>
+            </div>
+        }
     </div>
-    <div class="form-group">
-        <h6 style="margin-left: 13px;">Họ tên:</h6>
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
-        </div>
+    <div class="col-md-4">
+        <section id="socialLoginForm">
+            <img src="https://khoinguonsangtao.vn/wp-content/uploads/2022/11/hinh-anh-cafe-1.jpg" alt="Alternate Text" style="width: 800px; object-fit: contain; margin-top: -50px" />
+        </section>
     </div>
-    <div class="form-group">
-        <h6 style="margin-left: 13px;">Email:</h6>
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <h6 style="margin-left: 13px;">Mật khẩu:</h6>
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <h6 style="margin-left: 13px;">Xác nhận mật khẩu:</h6>
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
+</div>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-primary" value="Đăng kí" />
-        </div>
-    </div>
-}
 
-@*@section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }*@
+    @*@section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }*@

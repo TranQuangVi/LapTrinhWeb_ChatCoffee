@@ -1,4 +1,21 @@
 ﻿<!-- Carousel Start -->
+@model IEnumerable<ChatCoffee.Models.ModelsDefault.LOAISANPHAM>
+
+
+@*<link href="~/Content/assets/styles/bootstrap4/bootstrap.min.css" rel="stylesheet" />*@
+@*<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">*@
+@*<link href="~/Content/plugins/OwlCarousel2-2.2.1/animate.css" rel="stylesheet" />
+    <link href="~/Content/plugins/OwlCarousel2-2.2.1/owl.carousel.css" rel="stylesheet" />
+    <link href="~/Content/plugins/OwlCarousel2-2.2.1/owl.theme.default.css" rel="stylesheet" />*@
+@*<link href="~/Content/assets/styles/main_styles.css" rel="stylesheet" />
+<link href="~/Content/assets/styles/responsive.css" rel="stylesheet" />*@
+<link href="~/css/menu.css" rel="stylesheet" />
+@*<link href="~/Content/styles/product.css" rel="stylesheet" />*@
+<link rel="stylesheet" type="text/css" href="~/Content/styles/categories_styles.css">
+<link rel="stylesheet" type="text/css" href="~/Content/styles/categories_responsive.css">
+<link href="~/css/style.min.css" rel="stylesheet" />
+<link href="~/css/style.css" rel="stylesheet" />
+<script src="~/Content/JS/categories_custom.js"></script>
 <div class="container-fluid p-0 mb-5">
     <div id="blog-carousel" class="carousel slide overlay-bottom" data-ride="carousel">
         <div class="carousel-inner">
@@ -6,7 +23,7 @@
                 <img class="w-100" src="~/img/carousel-1.jpg" alt="Image">
                 <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                     <h2 class="text-primary font-weight-medium m-0">We Have Been Serving</h2>
-                    <h1 class="display-1 text-white m-0">COFFEE</h1>
+                    <h1 class="display-1 text-white m-0">CHAT COFFEE</h1>
                     <h2 class="text-white m-0">* SINCE 1950 *</h2>
                 </div>
             </div>
@@ -14,7 +31,7 @@
                 <img class="w-100" src="~/img/carousel-2.jpg" alt="Image">
                 <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                     <h2 class="text-primary font-weight-medium m-0">We Have Been Serving</h2>
-                    <h1 class="display-1 text-white m-0">COFFEE</h1>
+                    <h1 class="display-1 text-white m-0">CHAT COFFEE</h1>
                     <h2 class="text-white m-0">* SINCE 1950 *</h2>
                 </div>
             </div>
@@ -31,78 +48,127 @@
 <!-- Menu Start -->
 <div class="container-fluid pt-5">
     <div class="container">
-        <div class="section-title">
+        @Html.Action("MenuCategory", "Menu")
+        <!--<div>-->
+            @*Phần hiện danh mục menu*@
+            <!--<div class="row">
+                <div class="col-lg-3">
+                    <a href="#">
+                        <figure>
+                            <span>
+                                <img src="~/Images/icon_ao_01.png" style="width:131px;height:117px " />
+                            </span>
+                        </figure>
+
+                        <h3>Áo</h3>--><!-- End .cat-block-title -->
+                    <!--</a>
+                </div>
+                <div class="col-lg-3">
+                    <a href="~/COFFEEs">
+                        <figure>
+                            <span>
+                                <img src="~/Images/icon_quan_01.png" style="width:131px;height:117px " />
+                            </span>
+                        </figure>
+
+                        <h3>Quần</h3>--><!-- End .cat-block-title -->
+                    <!--</a>
+                </div>
+                <div class="col-lg-3">
+                    <a href="#">
+                        <figure>
+                            <span>
+                                <img src="~/Images/icon_ao_01.png" style="width:131px;height:117px " />
+                            </span>
+                        </figure>
+
+                        <h3>Giày</h3>--><!-- End .cat-block-title -->
+                    <!--</a>
+                </div>
+                <div class="col-lg-3">
+                    <a href="#">
+                        <figure>
+                            <span>
+                                <img src="~/Images/icon_ao_01.png" style="width:131px;height:117px " />
+                            </span>
+                        </figure>
+
+                        <h3>Nón</h3>--><!-- End .cat-block-title -->
+                    <!--</a>
+                </div>
+            </div>
+        </div>-->
+        
+
+
+
+
+
+
+        @*<div class="section-title">
             <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Menu & Pricing</h4>
             <h1 class="display-4">Competitive Pricing</h1>
         </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <h1 class="mb-5">Hot Coffee</h1>
-                <div class="row align-items-center mb-5">
-                    <div class="col-4 col-sm-3">
-                        <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/menu-1.jpg" alt="">
-                        <h5 class="menu-price">$5</h5>
-                    </div>
-                    <div class="col-8 col-sm-9">
-                        <h4>Black Coffee</h4>
-                        <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                    </div>
-                </div>
-                <div class="row align-items-center mb-5">
-                    <div class="col-4 col-sm-3">
-                        <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/menu-2.jpg" alt="">
-                        <h5 class="menu-price">$7</h5>
-                    </div>
-                    <div class="col-8 col-sm-9">
-                        <h4>Chocolete Coffee</h4>
-                        <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                    </div>
-                </div>
-                <div class="row align-items-center mb-5">
-                    <div class="col-4 col-sm-3">
-                        <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/menu-3.jpg" alt="">
-                        <h5 class="menu-price">$9</h5>
-                    </div>
-                    <div class="col-8 col-sm-9">
-                        <h4>Coffee With Milk</h4>
-                        <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <h1 class="mb-5">Cold Coffee</h1>
-                <div class="row align-items-center mb-5">
-                    <div class="col-4 col-sm-3">
-                        <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/menu-1.jpg" alt="">
-                        <h5 class="menu-price">$5</h5>
-                    </div>
-                    <div class="col-8 col-sm-9">
-                        <h4>Black Coffee</h4>
-                        <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                    </div>
-                </div>
-                <div class="row align-items-center mb-5">
-                    <div class="col-4 col-sm-3">
-                        <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/menu-2.jpg" alt="">
-                        <h5 class="menu-price">$7</h5>
-                    </div>
-                    <div class="col-8 col-sm-9">
-                        <h4>Chocolete Coffee</h4>
-                        <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                    </div>
-                </div>
-                <div class="row align-items-center mb-5">
-                    <div class="col-4 col-sm-3">
-                        <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/menu-3.jpg" alt="">
-                        <h5 class="menu-price">$9</h5>
-                    </div>
-                    <div class="col-8 col-sm-9">
-                        <h4>Coffee With Milk</h4>
-                        <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                    </div>
+        <div class="row align-items-center">
+            <div class="col text-center">
+                <div class="new_arrivals_sorting">
+                    <ul class="arrivals_grid_sorting clearfix button-group filters-button-group">
+                        <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked" data-filter="*">Tất cả</li>
+                        <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".men">Cà phê hạt</li>
+                        <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".women">Cà phê bột</li>
+                        <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".men">Cà phê chồn</li>
+                    </ul>
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
+            <div class="row lao" style="padding-top:10px">
+
+                        <div class="product-item men">
+                            <div class="product discount product_filter">
+                                <div class="product_image">
+                                    <img src="images/product_1.png" alt="">
+                                </div>
+                                <div class="favorite favorite_left"></div>
+                                <div class="product_info">
+                                    <h6 class="product_name"><a href="single.html">Fujifilm X100T 16 MP Digital Camera (Silver)</a></h6>
+                                    <div class="product_price">$520.00<span>$590.00</span></div>
+                                </div>
+                            </div>
+                            <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
+                        </div>
+
+                        <div class="row lao" style="padding-top:10px">
+
+                            <div class="product-item women">
+                                <div class="product discount product_filter">
+                                    <div class="product_image">
+                                        <img src="images/product_1.png" alt="">
+                                    </div>
+                                    <div class="favorite favorite_left"></div>
+                                    <div class="product_info">
+                                        <h6 class="product_name"><a href="single.html">Fujifilm X100T 16 MP Digital Camera (Silver)</a></h6>
+                                        <div class="product_price">$520.00<span>$590.00</span></div>
+                                    </div>
+                                </div>
+                                <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>*@
     </div>
 </div>
 <!-- Menu End -->
+<script src="~/Content/assets/js/jquery-3.2.1.min.js"></script>
+<script src="~/Content/assets/styles/bootstrap4/popper.js"></script>
+<script src="~/Content/assets/styles/bootstrap4/bootstrap.min.js"></script>
+<script src="~/Content/assets/plugins/Isotope/isotope.pkgd.min.js"></script>
+<script src="~/Content/assets/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="~/Content/assets/plugins/easing/easing.js"></script>
+<script src="~/Content/assets/js/custom.js"></script>

@@ -1,0 +1,72 @@
+﻿body {
+}
+
+.pro_group{
+    margin-left: 100px;
+}
+.pro_group dd{
+    /*margin-left: 0,5px;*/
+}
+.card-title {
+    font-size: 30px;
+    text-align: center;
+    
+}
+#avatar {
+    margin-left: -320px;
+    border-radius: 50%;
+    border: 2px solid #a1a1a1;
+    height: 300px;
+    padding: 10px;
+    width: 300px;
+    z-index: 0;
+}
+
+#btn_avatar {
+    border-radius: 50%;
+    border: 2px solid #a1a1a1;
+    height: 300px;
+    margin: 20px;
+    padding: 10px;
+    width: 300px;
+    cursor: pointer;
+    opacity: 0;
+    z-index: 1;
+}
+.modal-dialog img {
+    width: 830px;
+    height: 580px;
+    object-fit: contain;
+}
+/*.content {
+    width: 830px;
+    height: 580px;
+}*/
+#modal_content img {
+    width: auto;
+    height: 600px;
+    margin-left: 0;
+    
+    object-fit: contain;
+}
+#modal_content {
+    width: 610px;
+    height: 600px;
+    margin-left: 45%;
+    margin-top: 60px;
+
+}
+#modal_body {
+    margin-top: 80px;
+    width: 0;
+    height: 0;
+    margin-left: 40%;
+}
+.modal-body {
+    width: 750px;
+    height: auto;
+}
+.modal-body img {
+    height: 600px;
+}
+

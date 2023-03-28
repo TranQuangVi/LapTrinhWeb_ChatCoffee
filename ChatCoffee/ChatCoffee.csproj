@@ -185,6 +185,7 @@
     <Compile Include="Controllers\COFFEEsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\ShoppingCardController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -3240,6 +3241,8 @@
     <Content Include="Content\styles\single_responsive.css" />
     <Content Include="Content\styles\single_styles.css" />
     <Content Include="css\CHITIET.css" />
+    <Content Include="css\menu.css" />
+    <Content Include="css\profile.css" />
     <Content Include="css\style.css" />
     <Content Include="css\style.min.css" />
     <Content Include="favicon.ico" />
@@ -3467,15 +3470,15 @@
     <Content Include="Areas\Admin\Views\ManagePayment\Details.cshtml" />
     <Content Include="Areas\Admin\Views\ManagePayment\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\ManagePayment\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerBrands\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerBrands\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerBrands\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerBrands\Delete.cshtml" />
     <Content Include="Models\ModelViews\MyData.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>MyData.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Areas\Admin\Views\ManagerBrands\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\ManagerBrands\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\ManagerBrands\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\ManagerBrands\Delete.cshtml" />
     <None Include="Models\ModelViews\MyData.dbml.layout">
       <DependentUpon>MyData.dbml</DependentUpon>
     </None>
@@ -3631,6 +3634,8 @@
     <Content Include="Views\Home\Refresh.cshtml" />
     <Content Include="Views\Shared\LayoutUser.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\COFFEEs\Partial_ItemsByCateId.cshtml" />
+    <Content Include="Views\Menu\_MenuCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />

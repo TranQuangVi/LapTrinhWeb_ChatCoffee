@@ -190,20 +190,20 @@
 
                 <!-- SidebarSearch Form -->
                 <!--<div class="form-inline">
-            <div class="input-group" data-widget="sidebar-search">
-                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-                <div class="input-group-append">
-                    <button class="btn btn-sidebar">
-                        <i class="fas fa-search fa-fw"></i>
-                    </button>
-                </div>
-            </div>
-        </div>-->
+                    <div class="input-group" data-widget="sidebar-search">
+                        <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                        <div class="input-group-append">
+                            <button class="btn btn-sidebar">
+                                <i class="fas fa-search fa-fw"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>-->
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
-                with font-awesome or any other icon font library -->
+                        with font-awesome or any other icon font library -->
                         <li class="nav-item">
                             <a href="/User" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -213,25 +213,25 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="~/Content/clients/index.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Địa chỉ </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="~/Content/clients/index2.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Chỉnh Sửa  </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="~/Content/clients/index3.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Thêm </p>
-                                </a>
-                            </li>
-                        </ul>
+                                <li class="nav-item">
+                                    <a href="~/Content/clients/index.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Địa chỉ </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="~/Content/clients/index2.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Chỉnh Sửa  </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="~/Content/clients/index3.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Thêm </p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
@@ -241,8 +241,8 @@
                                 </p>
                             </a>
                         </li>
-                      
-                  
+
+
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -264,10 +264,10 @@
                                         <p>Bla Bla</p>
                                     </a>
                                 </li>
-                               
+
                             </ul>
                         </li>
-                
+
                         <li class="nav-item">
                             <a href="/admin/account" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
@@ -352,7 +352,7 @@
     <script src="~/Content/clients/dist/js/demo.js"></script>
     <!-- Page specific script -->
     <script>
-    $(function () {
+        $(function () {
             //Initialize Select2 Elements
             $('.select2').select2()
 
@@ -483,9 +483,10 @@
         document.querySelector("#actions .cancel").onclick = function () {
             myDropzone.removeAllFiles(true)
         }
-      // DropzoneJS Demo Code End</script>
+          // DropzoneJS Demo Code End</script>
 
     @RenderSection("scripts", required: false)
+    @RenderSection("upload", required: false)
 </body>
 </html>
 

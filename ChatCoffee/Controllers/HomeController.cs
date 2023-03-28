@@ -1,4 +1,5 @@
 ﻿using ChatCoffee.Models;
+using ChatCoffee.Models.ModelViews;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +8,10 @@ using System.Web.Mvc;
 
 namespace ChatCoffee.Controllers
 {
+    
     public class HomeController : Controller
     {
+        private ApplicationDbContext data = new ApplicationDbContext();
         public ActionResult Index()
         {
             return View();
@@ -43,5 +46,8 @@ namespace ChatCoffee.Controllers
             item.TatCa = HttpContext.Application["TatCa"].ToString();
             return PartialView(item);
         }
+
+        
+       
     }
 }

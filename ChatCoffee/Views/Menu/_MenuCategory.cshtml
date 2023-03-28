@@ -1,0 +1,48 @@
+﻿﻿@model IEnumerable<ChatCoffee.Models.ModelsDefault.LOAISANPHAM>
+@if (Model != null && Model.Any())
+{
+    <div class="section-title">
+        <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Thương hiệu Việt Nam</h4>
+        <h1 class="display-4">Chat Coffees</h1>
+    </div>
+    <div class="row align-items-center">
+        @*<div class="col text-center">
+            <div class="row" style="padding-top:10px">
+                <div class="new_arrivals_sorting">
+                    <ul class="arrivals_grid_sorting clearfix button-group filters-button-group">*@
+        @*<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked" data-filter="*">Tất cả</li>*@
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-3" >
+                <a href="~/COFFEEs">
+                    <figure>
+                        <span>
+                            <img src="https://th.bing.com/th/id/OIP.Ay7BK6NBJfSo4D9e-fcsaQHaHa?pid=ImgDet&rs=1" style="width:131px;height:117px; border-radius: 6px; " />
+                        </span>
+                    </figure>
+                    <h3>@item.TENLOAI</h3><!-- End .cat-block-title -->
+                </a>
+            </div>
+        }
+        @*</ul>
+                </div>
+                </div>
+            </div>*@
+    </div>
+
+    <div class="panel panel-default">
+        @*Hiện best seller*@
+        <div class="panel-heading">
+            Sản phảm bán chạy
+        </div>
+        <div class="panel-body">
+            <div class="owl-carousel owl-theme" >
+                @Html.Action("Partial_ItemsByCateId", "COFFEEs")
+            </div>
+
+
+        </div>
+
+    </div>
+
+}

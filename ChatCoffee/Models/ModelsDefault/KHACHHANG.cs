@@ -7,6 +7,7 @@ using System.Web;
 
 namespace ChatCoffee.Models.ModelsDefault
 {
+
     [Table("KHACHHANG")]
     public partial class KHACHHANG
     {

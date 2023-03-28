@@ -186,5 +186,11 @@ namespace ChatCoffee.Controllers
             }
             base.Dispose(disposing);
         }
+        public ActionResult Partial_ItemsByCateId()
+        {
+            var item = db.COFFEEs.ToList();
+            return PartialView(item);
+
+        }
     }
 }

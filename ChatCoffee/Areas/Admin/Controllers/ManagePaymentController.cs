@@ -11,6 +11,7 @@ using ChatCoffee.Models.ModelsDefault;
 
 namespace ChatCoffee.Areas.Admin.Controllers
 {
+    
     public class ManagePaymentController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
