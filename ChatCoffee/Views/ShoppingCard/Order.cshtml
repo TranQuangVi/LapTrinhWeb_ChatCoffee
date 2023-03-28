@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewBag.Title = "Order";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var listGH = ViewBag.listGH;
+    var khach = ViewBag.user;
+
+}
+
+<div class="container">
+
+    <table class="table">
+        <tr>
+            <th>
+                Tên sản phẩm
+            </th>
+            <th>
+                Ảnh
+            </th>
+            <th>
+                Giá
+            </th>
+            <th>
+                Số lượng
+            </th>
+            <th>
+                Thành tiền
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in listGH)
+        {
+            <tr>
+                <td> @item.COFFEE.TENCF</td>
+                <td>
+                    <a href="@Url.Action("Details", "Coffees", new {@id=item.MACF})">
+                        <img src="@*/@item.COFFEE.LINKANH*@" width="90" />
+                    </a>
+                </td>
+                <td>@String.Format("{0:0,0}", item.GIA) VNĐ</td>
+                <td><input type="number" min="1" name="txtSolg" value="@item.SOLUONG" /></td>
+                <td>  @item.TONGGIA </td>
+            </tr>
+
+        }
+        <tr style="font-weight:bold; text-align:left; color:red">
+            <td colspan="2"> Tổng sản phẩm:  @ViewBag.SumSP</td>
+            <td colspan="2"> Số lượng sản phẩm:  @ViewBag.SumQuantity</td>
+            <td colspan="4"> Tổng tiền:  @String.Format("{0:0,0}", @ViewBag.SumPrice) VNĐ</td>
+        </tr>
+    </table>
+
+    <h2 style="text-align:center"> Thông tin đặt hàng </h2>
+    @{
+        @*  ChatCoffee.Models.ModelViews.AspNetUser user = ViewBag.user;
+
+            @model IEnumerable<ChatCoffee.Models.ModelsDefault.HOADON>*@
+        @model ChatCoffee.Models.ModelViews.HOADON
+    }
+    <table align="center">
+        @using (Html.BeginForm("Order", "ShoppingCard", FormMethod.Post))
+        {
+            @Html.ValidationSummary(false)
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            <tr style="height:40px">
+                <td> Họ tên khách hàng: </td>
+                <td style="font-weight:bold"> @khach.FullName </td>
+            </tr>
+            <tr style="height:40px">
+                <td> Email:</td>
+                <td style="font-weight:bold">@khach.Email </td>
+
+            </tr>
+            <tr style="height:40px">
+                <td> Địa  chỉ:</td>
+                <td style="font-weight:bold">khach.diachi </td>
+
+            </tr>
+
+            <tr style="height:40px">
+                <td> Điện thoại:</td>
+                <td style="font-weight:bold">@khach.Phone </td>
+            </tr>
+
+            <tr class="form-group">
+
+                <td>Phương thức vận chuyển</td>
+                <td>
+
+                    @Html.DropDownList("MAVT", null, htmlAttributes: new { @class = "form-control" })
+                </td>
+            </tr>
+            <tr class="form-group">
+
+                <td>Phương thức thanh toán</td>
+                <td>
+
+                    @Html.DropDownList("MATT", null, htmlAttributes: new { @class = "form-control" })
+                </td>
+            </tr>
+            <tr style="height:40px">
+                <td> Ngày đặt:</td>
+                <td style="font-weight:bold">@DateTime.Now.ToShortDateString() </td>
+
+            </tr>
+
+            <tr style="height:40px">
+                <td> Ngày giao:</td>
+                <td style="font-weight:bold">
+                    <input type="date" name="NgayGiao" />
+                </td>
+
+            </tr>
+
+
+            <tr style="height:40px">
+                <td></td>
+                <td style="font-weight:bold">
+                    <input type="submit" value="Xác nhận " class="btn-btn-success" />
+                </td>
+
+            </tr>
+        }
+    </table>
+</div>

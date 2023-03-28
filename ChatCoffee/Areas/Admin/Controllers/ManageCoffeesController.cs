@@ -73,7 +73,7 @@ namespace ChatCoffee.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MACF,TENCF,GIA,SOLUONG,KHOILUONG,XUATXU,HSD,DANGCF,MOTA,MALOAI,MATH")] COFFEE cOFFEE)
+        public ActionResult Edit([Bind(Include = "MACF,TENCF,GIA,SOLUONG,ViewCount,SLDABAN,KHOILUONG,XUATXU,HSD,DANGCF,MOTA,MALOAI,MATH")] COFFEE cOFFEE)
         {
             if (ModelState.IsValid)
             {

@@ -7,8 +7,6 @@ using System.Web;
 
 namespace ChatCoffee.Repository
 {
-
-
     public class SearchByOption
     {
         // tạo đối tượng theo modeldefault

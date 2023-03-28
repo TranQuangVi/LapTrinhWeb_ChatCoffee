@@ -1,19 +1,15 @@
 ﻿
-
 @{
     ViewBag.Title = "View";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var listGH = ViewBag.listGH;
-
 }
-
-<h2>View</h2>
 
 
 <table class="table">
     <tr>
         <th>
-            Ten CF
+            Tên sản phẩm
         </th>
         <th>
             Ảnh
@@ -32,35 +28,85 @@
 
     @foreach (var item in listGH)
     {
-        using (Html.BeginForm("UpdateGioHang", "ShoppingCard", new { @maCF = item.MACF }))
+        @*Khi sản phẩm đáp ứng đủ sl mua *@
+        if (item.COFFEE.SOLUONG >= item.SOLUONG)
         {
-            <tr>
-                <td> @item.COFFEE.TENCF</td>
-                <td>
-                    <a href="@Url.Action("Details", "Coffees", new {@id=item.MACF})">
-                        <img src="@*/@item.COFFEE.LINKANH*@" width="90" />
-                    </a>
-                </td>
-                <td>@String.Format("{0:0,0}", item.GIA) VNĐ</td>
-                <td><input type="number" min="1" name="txtSolg" value="@item.SOLUONG" /></td>
-                <td>  @item.TONGGIA </td>
-                <td>
-                    <div class="pull-right">
-                        <div class="DatMua">
-                            <a class="btn btn-success" href="@Url.Action("DeleteGioHang","ShoppingCard", new { @maCF = item.MACF , @strURL = Request.Url.ToString()})">Xóa</a>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <input type="submit" value="Cập nhật" class="btn btn-success" />
-                </td>
+            using (Html.BeginForm("UpdateGioHang", "ShoppingCard", new { @maCF = item.MACF }))
+            {
+                <tr>
+                    <td> @item.COFFEE.TENCF</td>
+                    <td>
+                        <a href="@Url.Action("Details", "Coffees", new { @id = item.MACF })">
+                            <img src="@*/@item.COFFEE.LINKANH*@" width="90" />
+                        </a>
+                    </td>
+                    <td>@String.Format("{0:0,0}", item.GIA) VNĐ</td>
+                    <td>
 
-            </tr>
+                        <input type="number" min="1" max="@String.Format("{0:0,0}", item.COFFEE.SOLUONG)" name="txtSolg" value="@item.SOLUONG" /><sub>còn: @item.COFFEE.SOLUONG </sub>
+                    </td>
+                    <td>  @String.Format("{0:0,0}", item.TONGGIA) VNĐ </td>
+                    <td>
+                        <div class="pull-right">
+                            <div class="DatMua">
+                                <a class="btn btn-success" href="@Url.Action("DeleteGioHang", "ShoppingCard", new { @maCF = item.MACF, @strURL = Request.Url.ToString() })">Xóa</a>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <input type="submit" value="Cập nhật" class="btn btn-success" />
+                    </td>
+                </tr>
+            }
+
+        }
+        else
+        {
+            using (Html.BeginForm("UpdateGioHang", "ShoppingCard", new { @maCF = item.MACF }))
+            {
+                <tr>
+                    <td><strike> @item.COFFEE.TENCF</strike></td>
+                    <td>
+                        <a href="@Url.Action("Details", "Coffees", new {@id=item.MACF})">
+                            <img src="@*/@item.COFFEE.LINKANH*@" width="90" />
+                        </a>
+                    </td>
+                    <td>  <strike>   @String.Format("{0:0,0}", item.GIA) VNĐ</strike></td>
+
+                    <td>
+
+                        <input type="number" min="1" max=" @String.Format("{0:0,0}", item.COFFEE.SOLUONG)" name="txtSolg" value="@item.SOLUONG" /><sub>còn: @item.COFFEE.SOLUONG </sub>
+                    </td>
+                    <td>
+
+                        <strike>  @String.Format("{0:0,0}", item.TONGGIA) VNĐ</strike>
+                    </td>
+                    <td>
+                        <div class="pull-right">
+                            <div class="DatMua">
+                                <a class="btn btn-success" href="@Url.Action("DeleteGioHang","ShoppingCard", new { @maCF = item.MACF , @strURL = Request.Url.ToString()})">Xóa</a>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        @if (item.COFFEE.SOLUONG == 0)
+                        {
+                            <p>Sản phẩm đã hết hàng</p>
+                        }
+                        else
+                        {
+                            <input type="submit" value="Cập nhật" class="btn btn-success" />
+                            <p>Số lượng sản phẩm không đáp ứng</p>
+                        }
+                    </td>
+
+                </tr>
+            }
         }
     }
     <tr style="font-weight:bold; text-align:left; color:red">
         <td colspan="2"> Tổng sản phẩm:  @ViewBag.SumSP</td>
-        <td colspan="2"> Số lượng sản phẩm:  @ViewBag.SumQuantity</td>
+        <td colspan="2"> Số lượng sản phẩm:  @String.Format("{0:0,0}", @ViewBag.SumQuantity)</td>
         <td colspan="4"> Tổng tiền:  @String.Format("{0:0,0}", @ViewBag.SumPrice) VNĐ</td>
     </tr>
     <tr style="font-weight:bold; color:blue; text-align:right">
@@ -70,7 +116,9 @@
     </tr>
     <tr style="font-weight:bold; color:yellow; text-align:right">
         <td colspan="5">
-            @Html.ActionLink("Đặt hàng", "DatHang", "GioHang")
+            @Html.ActionLink("Đặt hàng", "Order", "ShoppingCard")
         </td>
     </tr>
+
+
 </table>

@@ -22,7 +22,7 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link href="~/css/style.min.css" rel="stylesheet" />
     <link href="~/css/style.css" rel="stylesheet" />
-
+    
 
 </head>
 
@@ -43,6 +43,7 @@
                     <a href="@Url.Action("About", "Home")" class="nav-item nav-link">About</a>
                     <a href="@Url.Action("Service", "Home")" class="nav-item nav-link">Service</a>
                     <a href="@Url.Action("Index", "Coffees")" class="nav-item nav-link">Menu</a>
+
                     <div class="nav-item dropdown">
 
                         @if (!Request.IsAuthenticated)
@@ -64,7 +65,8 @@
 
                     </div>
                     <a href="@Url.Action("Contact", "Home")" class="nav-item nav-link">Contact</a>
-                    <a href="@Url.Action("Index", "ShoppingCard")" class="nav-item nav-link">Giỏ hàng</a>
+                    <a href="@Url.Action("Index", "ShoppingCard")" class="nav-item nav-link" >Giỏ hàng</a>
+
                 </div>
             </div>
 
