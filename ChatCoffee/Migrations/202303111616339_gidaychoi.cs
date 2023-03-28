@@ -50,7 +50,7 @@
                     MACF = c.Int(nullable: false),
                     MAHD = c.Int(nullable: false),
                     SOLUONG = c.Int(),
-                    GIA = c.Int(),
+                    GIA = c.Double(),
                 })
                 .PrimaryKey(t => new { t.MACF, t.MAHD })
                 .ForeignKey("dbo.COFFEE", t => t.MACF, cascadeDelete: true)
@@ -63,10 +63,12 @@
                 c => new
                 {
                     MAHD = c.Int(nullable: false, identity: true),
-                    TONGDONGIA = c.Int(),
+                    TONGDONGIA = c.Double(),
                     Id = c.String(nullable: false, maxLength: 128),
                     MAVT = c.Int(nullable: false),
                     MATT = c.Int(nullable: false),
+                    NGAYDAT = c.DateTime(nullable: false),
+                    NGAYGIAO = c.DateTime(nullable: false)
                 })
                 .PrimaryKey(t => t.MAHD)
                 .ForeignKey("dbo.AspNetUsers", t => t.Id, cascadeDelete: true)
@@ -141,6 +143,7 @@
                     MAVT = c.Int(nullable: false, identity: true),
                     TENVT = c.String(maxLength: 20),
                     GIA = c.Int(),
+
                 })
                 .PrimaryKey(t => t.MAVT);
 

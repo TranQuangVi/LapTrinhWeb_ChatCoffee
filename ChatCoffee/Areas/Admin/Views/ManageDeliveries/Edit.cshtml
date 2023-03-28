@@ -20,23 +20,21 @@
                 @Html.ValidationSummary(false)
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-         
 
-
+                <div class="form-group">
+                        <label> Mã Vận chuyển </label>
+                        @Html.EditorFor(model => model.MAVT, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.MAVT, "", new { @class = "text-danger" })
+                    
+                </div>
                 <div class="form-group">
                     <label>Vận Chuyển</label>
                     @Html.EditorFor(model => model.TENVT, new
                     {
                         htmlAttributes = new { @class = "form-control" }
-})
+               })
                     @Html.ValidationMessageFor(model => model.TENVT, "", new { @class = "text-danger" })
                 </div>
-                <div class="form-group">
-                    <label> Mã Vận chuyển </label>
-                    @Html.EditorFor(model => model.MAVT, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.MAVT, "", new { @class = "text-danger" })
-
-                </div> 
                 <div class="form-group">
                     <label> Giá </label>
                     @Html.EditorFor(model => model.GIA, new { htmlAttributes = new { @class = "form-control" } })

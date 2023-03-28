@@ -19,7 +19,7 @@ namespace ChatCoffee
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
                 namespaces: new[] { "ChatCoffee.Controllers" }
             );
-            routes.MapRoute(
+            /*routes.MapRoute(
      name: "ChiTietSanPham",
      url: "chi-tiet/{alias}-p{id}",
      defaults: new { controller = "COFFEEs", action = "Detail", alias = UrlParameter.Optional },
@@ -31,7 +31,7 @@ namespace ChatCoffee
       url: "danh-muc-san-pham/{alias}-{id}",
       defaults: new { controller = "COFFEEs", action = "Home", id = UrlParameter.Optional },
       namespaces: new[] { "ChatCoffee.Controllers" }
-  );
+  );*/
         }
     }
 }

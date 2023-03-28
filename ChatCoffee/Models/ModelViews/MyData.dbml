@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ChatCoffeeDBContext" Class="MyDataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-6VS9H80\SQLEXPRESS;Initial Catalog=ChatCoffeeDBContext;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="ChatCoffeeDBContext" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=LAPTOP-SJE0D3O4\SQLEXPRESS;Initial Catalog=ChatCoffeeDBContext;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="ChatCoffeeDBContext" Provider="System.Data.SqlClient" />
   <Table Name="dbo.ANH" Member="ANHs">
     <Type Name="ANH">
       <Column Name="MAANH" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -99,7 +99,7 @@
       <Column Name="MACF" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="MAHD" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="SOLUONG" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="GIA" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GIA" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Association Name="COFFEE_CTDONHANG" Member="COFFEE" ThisKey="MACF" OtherKey="MACF" Type="COFFEE" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="HOADON_CTDONHANG" Member="HOADON" ThisKey="MAHD" OtherKey="MAHD" Type="HOADON" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
@@ -135,10 +135,12 @@
   <Table Name="dbo.HOADON" Member="HOADONs">
     <Type Name="HOADON">
       <Column Name="MAHD" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="TONGDONGIA" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TONGDONGIA" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="Id" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
       <Column Name="MAVT" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="MATT" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NGAYDAT" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="NGAYGIAO" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Association Name="HOADON_CTDONHANG" Member="CTDONHANGs" ThisKey="MAHD" OtherKey="MAHD" Type="CTDONHANG" />
       <Association Name="AspNetUser_HOADON" Member="AspNetUser" ThisKey="Id" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="VANCHUYEN_HOADON" Member="VANCHUYEN" ThisKey="MAVT" OtherKey="MAVT" Type="VANCHUYEN" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
