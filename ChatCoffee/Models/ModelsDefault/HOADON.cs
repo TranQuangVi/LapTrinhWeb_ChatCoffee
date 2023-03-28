@@ -27,6 +27,13 @@ namespace ChatCoffee.Models.ModelsDefault
 
         public int MATT { get; set; }
 
+        //thêm mới
+        public DateTime NGAYDAT { get; set; }
+        public DateTime NGAYNHAN { get; set; }
+/*        public bool XACNHAN { get; set; }
+        public bool STATUS { get; set; }*/
+
+        //////
         public virtual ICollection<CTDONHANG> CTDONHANGs { get; set; }
 
         public virtual KHACHHANG KHACHHANG { get; set; }

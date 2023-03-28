@@ -7,8 +7,8 @@
 
 <link rel="stylesheet" type="text/css" href="~/Content/styles/categories_styles.css">
 <link rel="stylesheet" type="text/css" href="~/Content/styles/categories_responsive.css">
-<link href="~/css/style.min.css" rel="stylesheet" />
 <link href="~/css/style.css" rel="stylesheet" />
+<link href="~/css/style.min.css" rel="stylesheet" />
 <script src="~/Content/JS/categories_custom.js"></script>
 <div class="container-fluid p-0 mb-5">
     <div id="blog-carousel" class="carousel slide overlay-bottom" data-ride="carousel">
@@ -44,100 +44,81 @@
     <div class="container">
         @Html.Action("MenuCategory", "Menu")
         <!--<div>-->
-            @*Phần hiện danh mục menu*@
-            <!--<div class="row">
-                <div class="col-lg-3">
-                    <a href="#">
-                        <figure>
-                            <span>
-                                <img src="~/Images/icon_ao_01.png" style="width:131px;height:117px " />
-                            </span>
-                        </figure>
+        @*Phần hiện danh mục menu*@
+        <!--<div class="row">
+            <div class="col-lg-3">
+                <a href="#">
+                    <figure>
+                        <span>
+                            <img src="~/Images/icon_ao_01.png" style="width:131px;height:117px " />
+                        </span>
+                    </figure>
 
-                        <h3>Áo</h3>--><!-- End .cat-block-title -->
-                    <!--</a>
-                </div>
-                <div class="col-lg-3">
-                    <a href="~/COFFEEs">
-                        <figure>
-                            <span>
-                                <img src="~/Images/icon_quan_01.png" style="width:131px;height:117px " />
-                            </span>
-                        </figure>
+                    <h3>Áo</h3>-->
+        <!-- End .cat-block-title -->
+        <!--</a>
+        </div>
+        <div class="col-lg-3">
+            <a href="~/COFFEEs">
+                <figure>
+                    <span>
+                        <img src="~/Images/icon_quan_01.png" style="width:131px;height:117px " />
+                    </span>
+                </figure>
 
-                        <h3>Quần</h3>--><!-- End .cat-block-title -->
-                    <!--</a>
-                </div>
-                <div class="col-lg-3">
-                    <a href="#">
-                        <figure>
-                            <span>
-                                <img src="~/Images/icon_ao_01.png" style="width:131px;height:117px " />
-                            </span>
-                        </figure>
+                <h3>Quần</h3>-->
+        <!-- End .cat-block-title -->
+        <!--</a>
+        </div>
+        <div class="col-lg-3">
+            <a href="#">
+                <figure>
+                    <span>
+                        <img src="~/Images/icon_ao_01.png" style="width:131px;height:117px " />
+                    </span>
+                </figure>
 
-                        <h3>Giày</h3>--><!-- End .cat-block-title -->
-                    <!--</a>
-                </div>
-                <div class="col-lg-3">
-                    <a href="#">
-                        <figure>
-                            <span>
-                                <img src="~/Images/icon_ao_01.png" style="width:131px;height:117px " />
-                            </span>
-                        </figure>
+                <h3>Giày</h3>-->
+        <!-- End .cat-block-title -->
+        <!--</a>
+        </div>
+        <div class="col-lg-3">
+            <a href="#">
+                <figure>
+                    <span>
+                        <img src="~/Images/icon_ao_01.png" style="width:131px;height:117px " />
+                    </span>
+                </figure>
 
-                        <h3>Nón</h3>--><!-- End .cat-block-title -->
-                    <!--</a>
+                <h3>Nón</h3>-->
+        <!-- End .cat-block-title -->
+        <!--</a>
                 </div>
             </div>
         </div>-->
-        
-
-
-
-
-
-
         @*<div class="section-title">
-            <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Menu & Pricing</h4>
-            <h1 class="display-4">Competitive Pricing</h1>
-        </div>
-        <div class="row align-items-center">
-            <div class="col text-center">
-                <div class="new_arrivals_sorting">
-                    <ul class="arrivals_grid_sorting clearfix button-group filters-button-group">
-                        <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked" data-filter="*">Tất cả</li>
-                        <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".men">Cà phê hạt</li>
-                        <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".women">Cà phê bột</li>
-                        <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".men">Cà phê chồn</li>
-                    </ul>
+                <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Menu & Pricing</h4>
+                <h1 class="display-4">Competitive Pricing</h1>
+            </div>
+            <div class="row align-items-center">
+                <div class="col text-center">
+                    <div class="new_arrivals_sorting">
+                        <ul class="arrivals_grid_sorting clearfix button-group filters-button-group">
+                            <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked" data-filter="*">Tất cả</li>
+                            <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".men">Cà phê hạt</li>
+                            <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".women">Cà phê bột</li>
+                            <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".men">Cà phê chồn</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col">
-                <div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
-            <div class="row lao" style="padding-top:10px">
+            <div class="row">
+                <div class="col">
+                    <div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
+                <div class="row lao" style="padding-top:10px">
 
-                        <div class="product-item men">
-                            <div class="product discount product_filter">
-                                <div class="product_image">
-                                    <img src="images/product_1.png" alt="">
-                                </div>
-                                <div class="favorite favorite_left"></div>
-                                <div class="product_info">
-                                    <h6 class="product_name"><a href="single.html">Fujifilm X100T 16 MP Digital Camera (Silver)</a></h6>
-                                    <div class="product_price">$520.00<span>$590.00</span></div>
-                                </div>
-                            </div>
-                            <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
-                        </div>
-
-                        <div class="row lao" style="padding-top:10px">
-
-                            <div class="product-item women">
+                            <div class="product-item men">
                                 <div class="product discount product_filter">
                                     <div class="product_image">
                                         <img src="images/product_1.png" alt="">
@@ -150,12 +131,28 @@
                                 </div>
                                 <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
                             </div>
+
+                            <div class="row lao" style="padding-top:10px">
+
+                                <div class="product-item women">
+                                    <div class="product discount product_filter">
+                                        <div class="product_image">
+                                            <img src="images/product_1.png" alt="">
+                                        </div>
+                                        <div class="favorite favorite_left"></div>
+                                        <div class="product_info">
+                                            <h6 class="product_name"><a href="single.html">Fujifilm X100T 16 MP Digital Camera (Silver)</a></h6>
+                                            <div class="product_price">$520.00<span>$590.00</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-            </div>
-        </div>*@
+                </div>
+            </div>*@
     </div>
 </div>
 <!-- Menu End -->

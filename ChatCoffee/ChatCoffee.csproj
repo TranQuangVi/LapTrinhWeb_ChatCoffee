@@ -3243,6 +3243,7 @@
     <Content Include="css\CHITIET.css" />
     <Content Include="css\menu.css" />
     <Content Include="css\profile.css" />
+    <Content Include="css\giohang_styles.css" />
     <Content Include="css\style.css" />
     <Content Include="css\style.min.css" />
     <Content Include="favicon.ico" />
@@ -3625,10 +3626,7 @@
     <Content Include="scss\bootstrap\scss\_variables.scss" />
     <Content Include="scss\style.scss" />
     <Content Include="Views\Shared\_Navbar.cshtml" />
-    <Content Include="Views\COFFEEs\Create.cshtml" />
-    <Content Include="Views\COFFEEs\Delete.cshtml" />
     <Content Include="Views\COFFEEs\Details.cshtml" />
-    <Content Include="Views\COFFEEs\Edit.cshtml" />
     <Content Include="Views\COFFEEs\Index.cshtml" />
     <Content Include="Views\ShoppingCard\Index.cshtml" />
     <Content Include="Views\Home\Refresh.cshtml" />
@@ -3636,10 +3634,11 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\COFFEEs\Partial_ItemsByCateId.cshtml" />
     <Content Include="Views\Menu\_MenuCategory.cshtml" />
+    <Content Include="Views\ShoppingCard\Order.cshtml" />
+    <Content Include="Views\ShoppingCard\XacnhanDonhang.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\ManageBrands\" />
     <Folder Include="Content\ckfinder\userfiles\" />
   </ItemGroup>
   <ItemGroup>
@@ -3684,8 +3683,7 @@
           <IISUrl>https://localhost:44354/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
+          <CustomServerUrl>https://chatcoffee/</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

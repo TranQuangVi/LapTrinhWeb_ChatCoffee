@@ -8,56 +8,130 @@
 <link rel="stylesheet" type="text/css" href="~/Content/styles/single_styles.css">
 <link rel="stylesheet" type="text/css" href="~/Content/styles/single_responsive.css">
 <script src="~/Content/JS/single_custom.js"></script>
+
+
 <h2>Chi Tiết Sản Phẩm </h2>
-
-
-
-
-
 <div class="container">
     <div class="content">
         <div class="Content-left">
             <div class="Content-left-img-big">
-                <img src="~/img/menu-1.jpg" alt="Card image">
+                <img src="~/img/menu-1.jpg" alt="Card image" style="height:400px; width:400px">
             </div>
         </div>
         <div class="Content-right">
-            <div class="Content-right-name">
-                <h1 style="font-weight: bold; font-size:20px;">@Model.TENCF</h1>
-                <p>Thương hiệu: @Model.THUONGHIEU.TENTH</p>
+            @using (Html.BeginForm("AddSP", "ShoppingCard",
+                new { @maSP = Model.MACF, @strURL = Request.Url.ToString() }))
+            {
+                <div class="Content-right-name">
+                    <br />
+                    <h1 style="font-weight: bold; font-size:20px;">@Model.TENCF</h1>
+                    <p>Thương hiệu: @Model.THUONGHIEU.TENTH</p>
+                    <p>Loại sản phẩm: @Model.LOAISANPHAM.TENLOAI</p>
+                    <p>Lượt xem: <b>@Model.ViewCount</b></p>
+                </div>
+                <div class="Content-right-price">
+                    <p style="font-size:30px">@Model.GIA <sup>VNĐ</sup> </p>
+                </div>
 
-                <p>Loại sản phẩm: @Model.LOAISANPHAM.TENLOAI</p>
-                <p>Lượt xem: <b>@Model.ViewCount</b></p>
-            </div>
-            <div class="Content-right-price">
-                <p>@Model.GIA <sup>VNĐ</sup> </p>
-            </div>
-            <div class="quantity">
-                <p> Số lượng: @Model.SOLUONG</p>
-                <input type="number" min="1" value="1" />
-            </div>
-            <br />
-            <div class="Content-right-button">
-                <button class="btn btn-danger" style="border-radius: 10px;  "> Thêm giỏ hàng</button>
-            </div>
-            <div class="Content-right-button Content-right-button-buy">
-                <button class="btn btn-dark" style="width: 200px; border-radius: 10px; margin-bottom: 120px;"> Mua ngay</button>
-            </div>
-
+                if (Model.SOLUONG > 0)
+                {
+                    <div class="quantity">
+                        <p>
+                            Số lượng: <input type="number" min="1" max=" @Model.SOLUONG" name="txtSoLgMua" value="1" />
+                        </p>
+                        <p>
+                            Số lượng còn: @Model.SOLUONG
+                        </p>
+                    </div>
+                    <br><br />
+                    <input type="submit" value="Thêm vào giỏ hàng" class="btn btn-success" />
+                }
+                else
+                {
+                    <h4 style="text-align:center; font-family:Tahoma">Hết hàng</h4>
+                }
+            }
         </div>
     </div>
-    <table class="table">
-        <tr>
-            <th>
-                <p>Chi Tiết </p>
-            </th>
-            <th>
-                <strong> Mo Tả </strong>
-            </th>
+    <br />
+    <div class="product-details-tab ">
 
-            <th></th>
-        </tr>
-    </table>
+        <ul class="row nav nav-pills  " style="font-size:24px; background-color:aliceblue" role="tablist">
+            <li class="nav-item col-lg-6 ">
+                <a class="nav-link active " style="text-align: center; font-family:  sans-serif;" id="product-desc-link" data-toggle="tab" href="#product-desc-tab" role="tab" aria-controls="product-desc-tab" aria-selected="true"><strong>Chi tiết</strong></a>
+            </li>
+            <li class="nav-item col-lg-6">
+                <a class="nav-link" style="text-align: center; font-family:  sans-serif;" id="product-info-link" data-toggle="tab" href="#product-info-tab" role="tab" aria-controls="product-info-tab" aria-selected="false"><strong>Mô tả</strong></a>
+            </li>
+
+        </ul>
+        <br />
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel" aria-labelledby="product-desc-link">
+                <table class="table table-striped">
+                    <h4>Product Information</h4>
+                    <tbody>
+                        <tr>
+                            <td> Tên</td>
+                            <td>@Model.TENCF</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td> Loại</td>
+                            <td>@Model.LOAISANPHAM.TENLOAI</td>
+                            <td></td>
+
+                        </tr>
+                        <tr>
+                            <td>Thương hiệu</td>
+
+                            <td>@Model.THUONGHIEU.TENTH</td>
+                            <td></td>
+
+                        </tr>
+                        <tr>
+                            <td>Xuất xứ</td>
+                            <td>@Model.XUATXU</td>
+                            <td></td>
+
+                        </tr>
+                        <tr>
+                            <td>Khối lượng</td>
+                            <td>@Model.KHOILUONG g</td>
+                            <td></td>
+
+                        </tr>
+                        <tr>
+                            <td>Dạng</td>
+                            <td>@Model.DANGCF</td>
+                            <td></td>
+
+                        </tr>
+                        <tr>
+                            <td>Hạn sử dụng</td>
+                            <td>@Model.HSD tháng</td>
+                            <td></td>
+
+                        </tr>
+                        <tr>
+                            <td>Số lượng còn</td>
+                            <td>@Model.SOLUONG  </td>
+                            <td></td>
+
+                        </tr>
+                    </tbody>
+                </table><!-- End .product-desc-content -->
+            </div><!-- .End .tab-pane -->
+            <div class="tab-pane fade" id="product-info-tab" role="tabpanel" aria-labelledby="product-info-link">
+                <div class="product-desc-content">
+                    <p>@Model.MOTA</p>
+
+
+                </div><!-- End .product-desc-content -->
+            </div><!-- .End .tab-pane -->
+
+        </div><!-- End .tab-content -->
+    </div><!-- End .product-details-tab -->
 
 </div>
 

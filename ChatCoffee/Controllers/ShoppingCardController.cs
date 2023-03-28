@@ -9,18 +9,28 @@ using ChatCoffee.Models.ModelViews;
 using CTGIOHANG = ChatCoffee.Models.ModelViews.CTGIOHANG;
 using COFFEE = ChatCoffee.Models.ModelViews.COFFEE;
 using GIOHANG = ChatCoffee.Models.ModelViews.GIOHANG;
+using HOADON = ChatCoffee.Models.ModelViews.HOADON;
+using CTDONHANG = ChatCoffee.Models.ModelViews.CTDONHANG;
+using VANCHUYEN = ChatCoffee.Models.ModelViews.VANCHUYEN;
+using System.Net.Http;
+using System.Web.UI;
+using Microsoft.Ajax.Utilities;
 
 namespace ChatCoffee.Controllers
 {
     public class ShoppingCardController : Controller
     {
         // lấy id khách hàng theo user name
-        public void GetIdUserByName(string name)
+        public void GetIdUserByName(AspNetUser user, string name)
         {
-            AspNetUser user = model.AspNetUsers.Single(u => u.UserName.Equals(name));
-            // MaKH = user.Id;
-            int MaGH = (int)model.GIOHANGs.Where(x => x.Id.Equals(user.Id)).FirstOrDefault().MAGH;
+            user = model.AspNetUsers.Single(u => u.UserName.Equals(name));
 
+        }
+        public void GetSessionGH(string name)
+        {
+            AspNetUser user = new AspNetUser();
+            GetIdUserByName(user, name);
+            int MaGH = (int)model.GIOHANGs.Where(x => x.Id.Equals(user.Id)).FirstOrDefault().MAGH;
             // lưu id giỏ hàng vào Session
             Session["MaGH"] = MaGH;
         }
@@ -36,45 +46,50 @@ namespace ChatCoffee.Controllers
             return list;
         }
 
-/*        //tạo giỏ hàng
-        public void  Create(string MaKH)
-        {
-            List<GIOHANG> list =  model.GIOHANGs.Where(x => x.Id.Equals(MaKH)).ToList(); ;
-            if (list == null)
-                list.Add(new GIOHANG {  Id =MaKH }) ;
-        }*/
-
         public ActionResult Index()
         {
-            //     int magh = (int)Session["MaGH"] ;
-            // query id user nếu session null
             if (Session["MaGH"] == null)
-                GetIdUserByName(User.Identity.Name);
+                return RedirectToAction("Login", "Account");
             List<CTGIOHANG> list = GetListProductInCard((int)Session["MaGH"]);
-            ViewBag.SumQuantity = SumQuantity();
-            ViewBag.SumPrice = SumPrice();
-            ViewBag.SumSP = SumSP();
+            GIOHANG gh = model.GIOHANGs.Single(n => n.MAGH == (int)Session["MaGH"]);
+
+            // lấy session[soluongcon] 
+            // check session[soluongcon] != 0
+            // if(session[soluongcon] ==0)
+
+            ViewBag.SumQuantity = SumQuantity(gh);
+            ViewBag.SumPrice = SumPrice(gh);
+            ViewBag.SumSP = SumSP(gh);
             ViewBag.listGH = list;
+            ViewBag.result = "";
             return View();
             // lấy danh sách sản phẩm có trong giỏ hàng của khách hàng
         }
-        //Thêm sp vào giỏ hàng
-        public ActionResult AddSP(int maSP, string strURL)
-        {
 
-/*            if (Session["MaGH"] == null)
-                GetIdUserByName(MaKH);*/
+
+        //Thêm sp vào giỏ hàng
+        public ActionResult AddSP(int maSP, string strURL, FormCollection collection)
+        {
+            int sl = 1;
+            if (collection["txtSoLgMua"] != null)
+                sl = int.Parse(collection["txtSoLgMua"].ToString());
+            if (Session["MaGH"] == null)
+            {
+                Session["success"] = "false";
+                return View();
+            }
+
+            Session["success"] = "success";
             List<CTGIOHANG> list = GetListProductInCard((int)Session["MaGH"]);
             CTGIOHANG sp = list.Find(b => b.MACF.Equals(maSP));
-
+            GIOHANG giohang = model.GIOHANGs.Single(g => g.MAGH.Equals((int)Session["MaGH"]));
             if (sp == null)
             {
                 sp = new CTGIOHANG();
                 sp.MACF = maSP;
                 sp.MAGH = (int)Session["MaGH"];
                 COFFEE cf = model.COFFEEs.Single(n => n.MACF == maSP);
-                GIOHANG gh = model.GIOHANGs.Single(n => n.MAGH == (int)Session["MaGH"]);
-                sp.SOLUONG = 1;
+                sp.SOLUONG = sl;
                 sp.GIA = cf.GIA;
                 sp.TONGGIA = (sp.GIA * sp.SOLUONG);
                 list.Add(sp);
@@ -84,47 +99,71 @@ namespace ChatCoffee.Controllers
             }
             else
             {
-                sp.SOLUONG++;
+                sp.SOLUONG += sl;
+
                 sp.TONGGIA = (sp.GIA * sp.SOLUONG);
                 model.SubmitChanges();
+                // return RedirectToAction("View", "coffees");
                 return Redirect(strURL);
+
             }
         }
 
         // tính tổng số lượng
-        public int SumQuantity()
-        {
-            List<CTGIOHANG> list = GetListProductInCard((int)Session["MaGH"]);
-            int sum = 0;
-            if (list != null)
-                sum = (int)list.Sum(b => b.SOLUONG);
-            return sum;
-        }
-        //tính tổng sp
-        public int SumSP()
+        public int SumQuantity(GIOHANG gh)
         {
             List<CTGIOHANG> list = GetListProductInCard((int)Session["MaGH"]);
             int sum = 0;
             if (list != null)
             {
-                sum = list.Count;
+                foreach (var item in list)
+                {
+                    if (item.SOLUONG <= item.COFFEE.SOLUONG)
+                        sum += (int)item.SOLUONG;
+                }
             }
+            model.SubmitChanges();
+            gh.TONGSL = sum;
+            return sum;
+        }
+        //tính tổng sp
+        public int SumSP(GIOHANG gh)
+        {
+            List<CTGIOHANG> list = GetListProductInCard((int)Session["MaGH"]);
+            int sum = 0;
+            if (list != null)
+            {
+                foreach (var item in list)
+                {
+                    if (item.SOLUONG <= item.COFFEE.SOLUONG)
+                        sum += 1;
+                }
+            }
+            gh.TONGSP = sum;
+            model.SubmitChanges();
+
             return sum;
         }
 
         //tính tổng tiền
-        public double SumPrice()
+        public double SumPrice(GIOHANG gh)
         {
             double sum = 0;
             List<CTGIOHANG> list = GetListProductInCard((int)Session["MaGH"]);
             if (list != null)
             {
-                sum = (double)list.Sum(b => b.TONGGIA);
+                foreach (var item in list)
+                {
+                    if (item.SOLUONG <= item.COFFEE.SOLUONG)
+                        sum += (double)item.TONGGIA;
+                }
             }
+            model.SubmitChanges();
+            gh.TONGTIEN = sum;
             return sum;
         }
 
-        public ActionResult DeleteGioHang( int maCF)
+        public ActionResult DeleteGioHang(int maCF)
         {
 
             CTGIOHANG cartDetail =
@@ -142,7 +181,7 @@ namespace ChatCoffee.Controllers
             return RedirectToAction("Index", "ShoppingCard");
         }
 
-        public ActionResult UpdateGioHang( int maCF, FormCollection collection)
+        public ActionResult UpdateGioHang(int maCF, FormCollection collection)
         {
             List<CTGIOHANG> list = GetListProductInCard((int)Session["MaGH"]);
             CTGIOHANG gh = list.SingleOrDefault(b => b.MACF.Equals(maCF));
@@ -158,65 +197,104 @@ namespace ChatCoffee.Controllers
 
         public ActionResult DeleteAll()
         {
-            List<CTGIOHANG> list = new List<CTGIOHANG>();
-            list.Clear();
+            List<CTGIOHANG> list = GetListProductInCard((int)Session["MaGH"]);
+            model.CTGIOHANGs.DeleteAllOnSubmit(list);
             model.SubmitChanges();
             return RedirectToAction("Index", "ShoppingCard");
         }
-/*
+
+
+        // tạo đơn hàng từ giỏ hàng
+        // lấy thông tin từ giỏ hàng bỏ vào đơn hàng
+        // MAHD - tự sinh
+        // Id = Id
+        // TONGGIA = TONGTIEN
+        // lấy MAVT, MATT từ view
+        // ngày đặt-nhận hàng như bài trước
+
+        // lấy danh sách sp có trong CTGT --> CTHD
+        // lấy MACF, SL, GIA từ CTGH
+
+        // tạo session[soluongcon] 
+        // nếu soluong cua session[soluongcon]  ==0 thì ko thêm vòa CTDH
+        //
+
+        // Lấy MAHD từ HOADON
         [HttpGet]
         public ActionResult Order()
         {
-            if (Session["Giohang"] == null)
+            if (Session["MaGH"] == null)
             {
                 return RedirectToAction("Index", "Coffees");
             }
-            List<GioHang> lstGiohang = GetListInGioHangs();
-            ViewBag.Tongsoluong = SumQuantity();
-            ViewBag.Tongtien = SumPrice();
-            ViewBag.Tongsoluongsanpham = SumBook();
+            HOADON hoadon = new HOADON();
+            //   List<CTGIOHANG> lstGiohang = GetListProductInCard((int)Session["MaGH"]);
+            List<CTGIOHANG> lstGiohang = model.CTGIOHANGs.Where(c => c.MAGH == (int)Session["MaGH"] && c.SOLUONG <= c.COFFEE.SOLUONG).ToList();
+            GIOHANG giohang = model.GIOHANGs.Single(g => g.MAGH.Equals((int)Session["MaGH"]));
 
-            return View(lstGiohang);
-
+            ViewBag.SumQuantity = SumQuantity(giohang);
+            ViewBag.SumPrice = SumPrice(giohang);
+            ViewBag.SumSP = SumSP(giohang);
+            ViewBag.listGH = lstGiohang;
+            ViewBag.VanChuyen = GetListVanChuyen();
+            ViewBag.user = model.AspNetUsers.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.MAVT = new SelectList(model.VANCHUYENs, "MAVT", "TENVT");
+            ViewBag.MATT = new SelectList(model.THANHTOANs, "MATT", "PHUONGTHUC");
+            return View(hoadon);
         }
 
-        public ActionResult DatHang(FormCollection collection)
+        public ActionResult Order([Bind(Include = "MAGH, Id,TONGSP,TONGSL,MAVT,MATT ,TONGTIEN,NGAYDAT, NGAYGIAO")] HOADON hoadon)
         {
-            DonHang donHang = new DonHang();
-            KhachHang khachHang = (KhachHang)Session["TaiKhoan"];
-            Sach s = new Sach();
-            List<GioHang> gh = GetListInGioHangs();
-            var ngaygiao = String.Format("{0:yyyy/MM/dd}", collection["NgayGiao"]);
-            donHang.makh = khachHang.makh;
-            donHang.ngaydat = DateTime.Now;
-            donHang.ngaygiao = DateTime.Now;
-            donHang.ngaygiao = DateTime.Parse(ngaygiao);
-            donHang.giaohang = false;
-            donHang.thanhtoan = false;
-            data.DonHangs.InsertOnSubmit(donHang);
-            data.SubmitChanges();
-            foreach (var item in gh)
-            {
-                ChiTietDonHang ctgh = new ChiTietDonHang();
-                ctgh.madon = donHang.madon;
-                ctgh.masach = item.Id;
-                ctgh.soluong = item.Quantity;
-                ctgh.gia = (decimal)item.Price;
-                s = data.Saches.Single(n => n.masach == item.Id);
-                s.soluongton -= ctgh.soluong;
-                data.SubmitChanges();
-                data.ChiTietDonHangs.InsertOnSubmit(ctgh);
+            // lấy thông tin khách hàng từ 
+            //MAHD
+            GIOHANG gh = model.GIOHANGs.Single(n => n.MAGH == (int)Session["MaGH"]);
+            List<CTGIOHANG> list = GetListProductInCard(gh.MAGH);
 
+            hoadon.Id = gh.Id;
+            hoadon.TONGDONGIA = gh.TONGTIEN;
+            //MAVT
+            //MATT
+
+            hoadon.NGAYGIAO = DateTime.Now;
+            hoadon.NGAYDAT = DateTime.Now;
+            model.HOADONs.InsertOnSubmit(hoadon);
+            model.SubmitChanges();
+            foreach (var item in list)
+            {
+                if (item.SOLUONG < item.COFFEE.SOLUONG)
+                {
+                    CTDONHANG ctdh = new CTDONHANG();
+                    COFFEE cf = model.COFFEEs.Where(c => c.MACF == item.MACF).FirstOrDefault();
+                    ctdh.MAHD = hoadon.MAHD;
+                    ctdh.MACF = item.MACF;
+                    ctdh.GIA = item.TONGGIA;
+                    ctdh.SOLUONG = item.SOLUONG;
+                    cf.SOLUONG -= item.SOLUONG;
+                    cf.SLDABAN += item.SOLUONG;
+                    model.CTDONHANGs.InsertOnSubmit(ctdh);
+                    model.SubmitChanges();
+                }
             }
-            data.SubmitChanges();
-            Session["GioHang"] = null;
-            return RedirectToAction("XacnhanDonhang", "GioHang");
+            model.CTGIOHANGs.DeleteAllOnSubmit(list);
+            model.SubmitChanges();
+            return RedirectToAction("XacnhanDonhang", "ShoppingCard");
+        }
+
+        public List<VANCHUYEN> GetListVanChuyen()
+        {
+            return model.VANCHUYENs.ToList();
         }
 
         public ActionResult XacnhanDonhang()
         {
             return View();
         }
-*/    }
+
+
+
+
+
+    }
 }
+
 

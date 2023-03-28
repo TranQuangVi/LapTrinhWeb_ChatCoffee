@@ -3,13 +3,42 @@
 @{
     ViewBag.Title = "Danh Sách Sản Phẩm";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+
 }
+<link href="~/css/menu.css" rel="stylesheet" />
 <link href="~/Content/styles/product.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="~/Content/styles/categories_styles.css">
 <link rel="stylesheet" type="text/css" href="~/Content/styles/categories_responsive.css">
-<link href="~/css/style.min.css" rel="stylesheet" />
 <link href="~/css/style.css" rel="stylesheet" />
+<link href="~/css/style.min.css" rel="stylesheet" />
+
+<style>
+    input[type=text] {
+        width: 200px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        background-color: white;
+        background-image: url('searchicon.png');
+        background-position: 10px 10px;
+        background-repeat: no-repeat;
+        padding: 12px 20px 12px 40px;
+        -webkit-transition: width 0.4s ease-in-out;
+        transition: width 0.4s ease-in-out;
+    }
+
+        input[type=text]:focus {
+            width: 150%;
+        }
+</style>
 <script src="~/Content/JS/categories_custom.js"></script>
+
+@*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>*@
+
 <div class="container-fluid" style="background-color: #FFFBF2">
     <div class="row">
         <div class="col product_section clearfix">
@@ -17,11 +46,15 @@
             <!-- Breadcrumbs -->
 
             <div class="breadcrumbs d-flex flex-row align-items-center">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li class="active"><a href="/"><i class="fa fa-angle-right" aria-hidden="true"></i>Men's</a></li>
-                </ul>
+                @*                <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li class="active"><a href="/"><i class="fa fa-angle-right" aria-hidden="true"></i>Men's</a></li>
+                    </ul>*@
+                <form>
+                    <input type="text" name="search" placeholder="Tìm kiếm...">
+                </form>
             </div>
+
 
             <!-- Sidebar -->
 
@@ -31,6 +64,9 @@
                         <h5>Loại sản phẩm </h5>
                     </div>
                     @*@Html.Action("MenuLeft", "Menu")*@
+                    <!-- Trigger the modal with a button -->
+
+
                 </div>
 
                 <!-- Price Range Filtering -->
@@ -101,15 +137,7 @@
 
                             <div class="product_sorting_container product_sorting_container_top">
                                 <ul class="product_sorting">
-                                    <li>
-                                        <span class="type_sorting_text">Loại sp</span>
-                                        <i class="fa fa-angle-down"></i>
-                                        <ul class="sorting_type">
-                                            <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "original-order" }'><span>loia 1</span></li>
-                                            <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "price" }'>loai2/span></li>
-                                            <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "name" }'><span>Product Name</span></li>
-                                        </ul>
-                                    </li>
+
                                     <li>
                                         <span class="type_sorting_text">thương hiệu</span>
                                         <i class="fa fa-angle-down"></i>
@@ -167,7 +195,7 @@
 
                                                 <div class="pro_info">
                                                     <h6 style="margin-top: 25px;">
-                                                        <a>@item.TENCF</a>
+                                                        <a href="@Url.Action("details","coffees",new { @id = item.MACF })">@item.TENCF</a>
                                                     </h6>
                                                     <div class="pro_info_price">
                                                         <h6 style="margin: 0px; font-size:20px;">
@@ -176,14 +204,59 @@
                                                     </div>
 
                                                 </div>
- 
+
+
                                                 @if (@item.SOLUONG > 0)
                                                 {
                                                     <div class="pull-right">
                                                         <div class="DatMua">
-                                                            <a class="btn btn-success btn_Buy " style="display: block; margin-top: 55px; padding-top: 7px; background-color: #271010; " href="@Url.Action("AddSP", "ShoppingCard",
-                                                                new {  @maSP = item.MACF,@maGH=1 , @strURL = Request.Url.ToString() })">Thêm vào giỏ hàng</a>
+                                                            @*<a class="btn btn-success btn_Buy " style="display: block; margin-top: 55px; padding-top: 7px; background-color: #271010; " href="@Url.Action("AddSP", "ShoppingCard",
+                                                                new {  @maSP = item.MACF,@maGH=1 , @strURL = Request.Url.ToString() })">Thêm vào giỏ hàng</a>*@
+                                                            @if (Session["MaGH"] == null)
+                                                            {
+                                                                <div class="product-action" id="addToCard" onclick="alert('Xin lỗi quý khách, quý khách chưa đăng nhập')">
+                                                                    <a class="btn btn-success"
+                                                                                style="display: block; margin-top: 55px; padding-top: 7px;">
+                                                                        <span>Thêm giỏ hàng</span>
+                                                                    </a>
+                                                                </div>
+                                                            }
+                                                            else
+                                                            {
+                                                                <div onclick="alert('Đã thêm sản phẩm vòa giỏ hàng')">
+                                                                    <a href="@Url.Action("AddSP", "ShoppingCard", new {  @maSP = item.MACF,@strURL = Request.Url.ToString() })">
+                                                                        <a class="btn btn-success" 
+                                                                                style="display: block; margin-top: 55px; padding-top: 7px; ">
+                                                                            <span>Thêm giỏ hàng</span>
+                                                                        </a>
+                                                                    </a>
+
+                                                                </div>
+                                                            }
+
                                                             @*<span style="float:left"> Số lượng: @item.SOLUONG</span>*@
+
+
+                                                            <div class="modal " id="myModal">
+                                                                <!--<div class="modal-dialog modal-sm">
+                                                                <div class="modal-content">-->
+                                                                <!-- Modal Header -->
+                                                                <!--<div class="modal-header">
+                                                                    <h4 class="modal-title">Chat Coffee</h4>
+                                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                </div>-->
+                                                                <!-- Modal body -->
+                                                                <!--<div class="modal-body">
+                                                                    Đã thêm sản phẩm vào giỏ hàng
+                                                                </div>-->
+                                                                <!-- Modal footer -->
+                                                                <!--<div class="modal-footer">
+                                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>-->
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 }
@@ -191,10 +264,13 @@
                                                 {
                                                     <p style="margin: 0px; font-size: 18px; text-align:center"><a>Hết hàng </a></p>
                                                 }
-
                                             </div>
                                         </div>
                                     }
+                                }
+                                else
+                                {
+                                    <p> Không tìm thấy từ khóa</p>
                                 }
                             </div>
 

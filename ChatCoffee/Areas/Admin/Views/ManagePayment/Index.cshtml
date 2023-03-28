@@ -5,34 +5,6 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-@*<h2>Index</h2>
-
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.PHUONGTHUC)
-            </th>
-            <th></th>
-        </tr>
-
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PHUONGTHUC)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.MATT }) |
-                @Html.ActionLink("Details", "Details", new { id=item.MATT }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.MATT })
-            </td>
-        </tr>
-    }
-
-    </table>*@
-
 <section class="content">
 
     <div class="card">
@@ -56,8 +28,6 @@
                             <th> Mã Thanh Toán  </th>
                             <th> Phương Thức  </th>
 
-
-
                             <th></th>
                         </tr>
                     </thead>
@@ -73,7 +43,7 @@
                                     <td> @item.PHUONGTHUC </td>
 
                                     <td>
-                                        <a href="/admin/ManagePayment/edit/@item.MATT" class="btn btn-success">Chỉnh sửa</a>
+                                        <a href="/admin/ManagePayment/edit/@item.MATT" class="btn btn-success">Sửa</a>
                                         <a href="/admin/ManagePayment/delete/@item.PHUONGTHUC" class="btn btn-danger">Xóa</a>
 
 

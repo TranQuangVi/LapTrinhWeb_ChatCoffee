@@ -2213,7 +2213,7 @@ namespace ChatCoffee.Models.ModelViews
 		
 		private System.Nullable<int> _SOLUONG;
 		
-		private System.Nullable<int> _GIA;
+		private System.Nullable<double> _GIA;
 		
 		private EntityRef<COFFEE> _COFFEE;
 		
@@ -2229,7 +2229,7 @@ namespace ChatCoffee.Models.ModelViews
     partial void OnMAHDChanged();
     partial void OnSOLUONGChanging(System.Nullable<int> value);
     partial void OnSOLUONGChanged();
-    partial void OnGIAChanging(System.Nullable<int> value);
+    partial void OnGIAChanging(System.Nullable<double> value);
     partial void OnGIAChanged();
     #endregion
 		
@@ -2308,8 +2308,8 @@ namespace ChatCoffee.Models.ModelViews
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GIA", DbType="Int")]
-		public System.Nullable<int> GIA
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GIA", DbType="Float")]
+		public System.Nullable<double> GIA
 		{
 			get
 			{
@@ -2978,13 +2978,17 @@ namespace ChatCoffee.Models.ModelViews
 		
 		private int _MAHD;
 		
-		private System.Nullable<int> _TONGDONGIA;
+		private System.Nullable<double> _TONGDONGIA;
 		
 		private string _Id;
 		
 		private int _MAVT;
 		
 		private int _MATT;
+		
+		private System.DateTime _NGAYDAT;
+		
+		private System.DateTime _NGAYGIAO;
 		
 		private EntitySet<CTDONHANG> _CTDONHANGs;
 		
@@ -3000,7 +3004,7 @@ namespace ChatCoffee.Models.ModelViews
     partial void OnCreated();
     partial void OnMAHDChanging(int value);
     partial void OnMAHDChanged();
-    partial void OnTONGDONGIAChanging(System.Nullable<int> value);
+    partial void OnTONGDONGIAChanging(System.Nullable<double> value);
     partial void OnTONGDONGIAChanged();
     partial void OnIdChanging(string value);
     partial void OnIdChanged();
@@ -3008,6 +3012,10 @@ namespace ChatCoffee.Models.ModelViews
     partial void OnMAVTChanged();
     partial void OnMATTChanging(int value);
     partial void OnMATTChanged();
+    partial void OnNGAYDATChanging(System.DateTime value);
+    partial void OnNGAYDATChanged();
+    partial void OnNGAYGIAOChanging(System.DateTime value);
+    partial void OnNGAYGIAOChanged();
     #endregion
 		
 		public HOADON()
@@ -3039,8 +3047,8 @@ namespace ChatCoffee.Models.ModelViews
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TONGDONGIA", DbType="Int")]
-		public System.Nullable<int> TONGDONGIA
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TONGDONGIA", DbType="Float")]
+		public System.Nullable<double> TONGDONGIA
 		{
 			get
 			{
@@ -3127,6 +3135,46 @@ namespace ChatCoffee.Models.ModelViews
 					this._MATT = value;
 					this.SendPropertyChanged("MATT");
 					this.OnMATTChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NGAYDAT", DbType="DateTime NOT NULL")]
+		public System.DateTime NGAYDAT
+		{
+			get
+			{
+				return this._NGAYDAT;
+			}
+			set
+			{
+				if ((this._NGAYDAT != value))
+				{
+					this.OnNGAYDATChanging(value);
+					this.SendPropertyChanging();
+					this._NGAYDAT = value;
+					this.SendPropertyChanged("NGAYDAT");
+					this.OnNGAYDATChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NGAYGIAO", DbType="DateTime NOT NULL")]
+		public System.DateTime NGAYGIAO
+		{
+			get
+			{
+				return this._NGAYGIAO;
+			}
+			set
+			{
+				if ((this._NGAYGIAO != value))
+				{
+					this.OnNGAYGIAOChanging(value);
+					this.SendPropertyChanging();
+					this._NGAYGIAO = value;
+					this.SendPropertyChanged("NGAYGIAO");
+					this.OnNGAYGIAOChanged();
 				}
 			}
 		}

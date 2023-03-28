@@ -449,6 +449,8 @@ namespace ChatCoffee.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            Session["MaGH"] = null;
+
             return RedirectToAction("Index", "Home");
         }
 

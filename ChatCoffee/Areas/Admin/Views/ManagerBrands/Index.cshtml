@@ -10,7 +10,7 @@
             <h3 class="card-title"> Thương hiệu   </h3>
 
             <div class="card-tools">
-                <a href="/admin/ManagePayment/Create" class="btn btn-success">Thêm mới</a>
+                <a href="/admin/ManagerBrands/Create" class="btn btn-success">Thêm mới</a>
 
             </div>
         </div>
@@ -21,7 +21,7 @@
                         @Html.AntiForgeryToken()
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th></th>
                                 <th>Tên thương hiệu</th>
                                 <th></th>
                             </tr>
@@ -36,7 +36,7 @@
                                         <td>@i</td>
                                         <td>@item.TENTH</td>
                                         <td>
-                                            <a href="/admin/ManagerBrands/Edit/@item.MATH" class="btn btn-sm btn-success">Chỉnh sửa</a>
+                                            <a href="/admin/ManagerBrands/Edit/@item.MATH" class="btn btn-sm btn-success">Sửa</a>
                                             <a href="/admin/ManagerBrands/Delete/@item.MATH" class="btn btn-sm btn-danger btnDelete">Xóa</a>
                                             @*<input type="submit" value="Delete" class="btn btn-danger" />*@
                                         </td>
