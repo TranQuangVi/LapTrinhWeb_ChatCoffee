@@ -3488,13 +3488,13 @@
     <Content Include="Areas\Admin\Views\ManagerBrands\Create.cshtml" />
     <Content Include="Areas\Admin\Views\ManagerBrands\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\ManagerBrands\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Users.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Edit.cshtml" />
     <Content Include="Models\ModelViews\MyData.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>MyData.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Areas\Admin\Views\Account\Users.cshtml" />
-    <Content Include="Areas\Admin\Views\Account\Edit.cshtml" />
     <None Include="Models\ModelViews\MyData.dbml.layout">
       <DependentUpon>MyData.dbml</DependentUpon>
     </None>

@@ -1,5 +1,10 @@
 ﻿@{
-    var user = Session["acc"] as ChatCoffee.Models.ModelViews.AspNetUser;
+    ChatCoffee.Models.ModelViews.AspNetUser user = new ChatCoffee.Models.ModelViews.AspNetUser();
+    if (Session["acc"] != null)
+    {
+        user = Session["acc"] as ChatCoffee.Models.ModelViews.AspNetUser;
+
+    }
 }
 
 <div class="sidebar">

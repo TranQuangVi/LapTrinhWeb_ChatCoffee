@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ChatCoffeeDBContext" Class="MyDataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-6VS9H80\SQLEXPRESS;Initial Catalog=ChatCoffeeDBContext;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="ChatCoffeeDBContext" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=LAPTOP-SJE0D3O4\SQLEXPRESS;Initial Catalog=ChatCoffeeDBContext;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="ChatCoffeeDBContext" Provider="System.Data.SqlClient" />
   <Table Name="dbo.ANH" Member="ANHs">
     <Type Name="ANH">
       <Column Name="MAANH" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
