@@ -41,9 +41,67 @@ namespace ChatCoffee.Controllers
 
         }
 
+        public ActionResult CFCategory(string search, int id)
+        {
+            if (search == null)
+            {
+                var cOFFEEs = db.COFFEEs
+                    .Include(c => c.LOAISANPHAM)
+                    .Include(c => c.THUONGHIEU)
+                    .Include(c => c.ANHs)
+                    .Where(x => x.MALOAI == id).ToList();
+                // đây là model view
+                ViewBag.MaLoai = id;
 
-    // GET: COFFEEs/Details/5
-    public ActionResult Details(int? id)
+                return View(cOFFEEs);
+            }
+            else
+            {
+                // câu truy vấn
+                var cOFFEEs = db.COFFEEs
+                   .Include(c => c.LOAISANPHAM)
+                   .Include(c => c.THUONGHIEU)
+                   .Include(c => c.ANHs)
+                   .Where(c => c.TENCF.Contains(search));
+                
+                // trả về list sp loại a
+                
+                return View(cOFFEEs.ToList());
+            }
+        }
+
+        public ActionResult CFLocal(string search, int id)
+        {
+            if (search == null)
+            {
+                var cOFFEEs = db.COFFEEs
+                    .Include(c => c.LOAISANPHAM)
+                    .Include(c => c.THUONGHIEU)
+                    .Include(c => c.ANHs)
+                    .Where(x => x.MATH == id).ToList();
+                // đây là model view
+                ViewBag.MaTH = id;
+
+                return View(cOFFEEs);
+            }
+            else
+            {
+                // câu truy vấn
+                var cOFFEEs = db.COFFEEs
+                   .Include(c => c.LOAISANPHAM)
+                   .Include(c => c.THUONGHIEU)
+                   .Include(c => c.ANHs)
+                   .Where(c => c.TENCF.Contains(search));
+
+                // trả về list sp loại a
+
+                return View(cOFFEEs.ToList());
+            }
+        }
+
+
+        // GET: COFFEEs/Details/5
+        public ActionResult Details(int? id)
     {
         GIOHANG gIOHANG = new GIOHANG();
         if (id == null)
@@ -174,8 +232,10 @@ namespace ChatCoffee.Controllers
     }
     public ActionResult Partial_ItemsByCateId()
         {
-            var item = db.COFFEEs.ToList();
-            return PartialView(item);
+            
+            //var item = db.COFFEEs.ToList();
+            var ketqua = db.COFFEEs.Where(x => x.SLDABAN <= int.MaxValue).OrderByDescending(x => x.SLDABAN).Take(10).ToList();
+            return PartialView(ketqua);
 
         }
 }

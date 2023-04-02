@@ -1,9 +1,9 @@
 ﻿@model ChatCoffee.Models.CreateAccountViewModel
-@{ 
+@{
     ViewBag.Title = "Thêm mới tài khoản";
 }
 
-@*@section naviheader{
+@section naviheader{
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"> <i class="fas fa-bars"></i> </a>
@@ -12,10 +12,10 @@
                 <a href="/admin" class="nav-link">Trang chủ</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="/admin/category" class="nav-link">@ViewBag.Title</a>
+                <a href="/admin/account" class="nav-link">@ViewBag.Title</a>
             </li>
         </ul>
-    }*@
+    }
 
 <section class="content">
 
@@ -57,6 +57,52 @@
                     <label>Nhập lại mật khẩu</label>
                     @Html.PasswordFor(x => x.ConfirmPassword, new { @class = "form-control" })
                 </div>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <strong>Hình</strong>
+                        @Html.EditorFor(x => x.Anh, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(x => x.Anh, "", new { @class = "text-danger" })
+                        <input type="file" name="fileUpload" id="fileUpload" accept="image/*" style="display:none;" />
+                        <input type="button" id="btnUpload" value="Tải lên" class="btn btn-success" />
+                        <br />
+                        @*<img src="" id="pictureUpload" style="width: 200px; height: 200px; margin-left: 50%; border-radius: 50%; -moz-border-radius: 50%; -webkit-border-radius: 50%; "/>*@
+                    </div>
+                </div>
+                @section upload
+{
+                    <script>
+                        $(function () {
+                            $('#btnUpload').click(function () {
+                                $('#fileUpload').trigger('click');
+                            });
+                        });
+                        $('#fileUpload').change(function () {
+                            if (window.FormData !== undefined) {
+                                var fileUpload = $('#fileUpload').get(0);
+                                var files = fileUpload.files;
+                                var formData = new FormData();
+                                formData.append('file', files[0]);
+                                $.ajax(
+                                    {
+                                        type: 'POST',
+                                        url: '/Admin/Account/ProcessUpload',
+                                        contentType: false,
+                                        processData: false,
+                                        data: formData,
+                                        success: function (urlImage) {
+                                            $('#pictureUpload').attr('src', urlImage);
+                                            $('#Anh').val(urlImage);
+                                        },
+                                        error: function (err) {
+                                            alert('Error ', err.statusText);
+                                        }
+                                    });
+                            }
+                        });
+                    </script>
+                }
+
+
                 <div class="form-group">
                     <button type="submit" class="btn btn-success">Thêm mới</button>
                 </div>

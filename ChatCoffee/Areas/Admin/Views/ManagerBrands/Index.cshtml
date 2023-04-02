@@ -1,9 +1,23 @@
-﻿@model IEnumerable<ChatCoffee.Models.ModelsDefault.THUONGHIEU>
+﻿
+@model PagedList.IPagedList<ChatCoffee.Models.ModelsDefault.THUONGHIEU>
+@using PagedList.Mvc;
 @{
-    ViewBag.Title = "Danh sách Quyền";
+    ViewBag.Title = "Danh sách Thương hiệu";
 }
 
-
+@section naviheader{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"> <i class="fas fa-bars"></i> </a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/admin" class="nav-link">Trang chủ</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/admin/ManagePayment" class="nav-link">Danh sách thương hiệu</a>
+        </li>
+    </ul>
+}
 <section class="content">
     <div class="card">
         <div class="card-header">
@@ -14,43 +28,98 @@
 
             </div>
         </div>
-            <div class="card-body">
-                <table class="table table-bordered">
-                    @using (Html.BeginForm())
-                    {
-                        @Html.AntiForgeryToken()
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Tên thương hiệu</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (Model != null && Model.Any())
+        <div class="card-body">
+            <table class="table table-bordered">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Tên thương hiệu</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            var i = 1;
+                            foreach (var item in Model)
                             {
-                                var i = 1;
-                                foreach (var item in Model)
-                                {
-                                    <tr>
-                                        <td>@i</td>
-                                        <td>@item.TENTH</td>
-                                        <td>
-                                            <a href="/admin/ManagerBrands/Edit/@item.MATH" class="btn btn-sm btn-success">Sửa</a>
-                                            <a href="/admin/ManagerBrands/Delete/@item.MATH" class="btn btn-sm btn-danger btnDelete">Xóa</a>
-                                            @*<input type="submit" value="Delete" class="btn btn-danger" />*@
-                                        </td>
-                                    </tr>
-                                    i++;
-                                }
+                                <tr>
+                                    <td>@i</td>
+                                    <td>@item.TENTH</td>
+                                    <td>
+                                        <a href="/admin/ManagerBrands/Edit/@item.MATH" class="btn btn-sm btn-success">Sửa</a>
+                                        <a href="/admin/ManagerBrands/Delete/@item.MATH" class="btn btn-sm btn-danger btnDelete">Xóa</a>
+                                        @*<input type="submit" value="Delete" class="btn btn-danger" />*@
+                                    </td>
+                                </tr>
+                                i++;
                             }
-                        </tbody>
-                    }
-                </table>
-            </div>
-            <div class="card-footer">
-
-            </div>
+                        }
+                    </tbody>
+                }
+            </table>
         </div>
+        <div class="card-footer">
 
+        </div>
+    </div>
+    <div>
+        <div>
+            Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) /
+            @Model.PageCount
+        </div>
+        <div class="MenuTrang">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new
+            {
+                page = page
+            }))
+        </div>
+    </div>
+    <style>
+        .MenuTrang li {
+            display: inline;
+        }
+    </style>
+    <style type="text/css">
+        #mau-nut a {
+            clear: both;
+            background-color: orange;
+            color: snow;
+        }
+
+            #mau-nut a:hover {
+                background-color: darkcyan;
+                color: snow;
+            }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var maxLength = 100;
+            $(".show-read-more").each(function () {
+                var myStr = $(this).text();
+                if ($.trim(myStr).length > maxLength) {
+                    var newStr = myStr.substring(0, maxLength);
+                    var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
+                    $(this).empty().html(newStr);
+
+                    $(this).append(' <a href="javascript:void(0);" class="read-more">đọc tiếp...</a>');
+
+                    $(this).append('<span class="more-text">' + removedStr + '</span>');
+                }
+            });
+            $(".read-more").click(function () {
+                $(this).siblings(".more-text").contents().unwrap();
+                $(this).remove();
+            });
+        });
+    </script>
+    <style>
+        .show-read-more .more-text {
+            display: none;
+        }
+    </style>
 </section>

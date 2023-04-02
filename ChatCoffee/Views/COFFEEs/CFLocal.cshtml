@@ -3,6 +3,8 @@
 @{
     ViewBag.Title = "Danh Sách Sản Phẩm";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+
 }
 <link href="~/css/menu.css" rel="stylesheet" />
 <link href="~/Content/styles/product.css" rel="stylesheet" />
@@ -52,15 +54,15 @@
                     <input type="text" name="search" placeholder="Tìm kiếm...">
                 </form>
                 @section naviheader{
-                    <ul class="navbar-nav" style="flex-direction: row; padding-left: 1rem;">
-                        <li class="nav-item d-none d-sm-inline-block">
-                            <a href="/home/index" class="nav-link">Trang chủ</a>
-                        </li>
-                        <span class="divider" style="position: relative; top: 9px; opacity: .35; margin: 0 0.5em; font-weight: 500;">></span>
-                        <li class="nav-item d-none d-sm-inline-block" >
-                            <a href="/coffees/index" class="nav-link">@ViewBag.Title</a>
-                        </li>
-                    </ul>
+                                <ul class="navbar-nav" style="flex-direction: row; padding-left: 1rem;">
+                                    <li class="nav-item d-none d-sm-inline-block">
+                                        <a href="/home/index" class="nav-link">Trang chủ</a>
+                                    </li>
+                                    <span class="divider" style="position: relative; top: 9px; opacity: .35; margin: 0 0.5em; font-weight: 500;">></span>
+                                    <li class="nav-item d-none d-sm-inline-block">
+                                        <a href="/coffees/index" class="nav-link">@ViewBag.Title</a>
+                                    </li>
+                                </ul>
                 }
             </div>
 
@@ -201,7 +203,7 @@
                                                     </h6>
                                                     <div class="pro_info_price">
                                                         <h6 style="margin: 0px; font-size:20px;">
-                                                            <b> @String.Format("{0:0,0}", @item.GIA) <span class="woocommerce-Price-currencySymbol" style="font-size: .95em; vertical-align: top; margin-top: 0.05em ;">₫</span></b>
+                                                            <b> @item.GIA đ</b>
                                                         </h6>
                                                     </div>
 
@@ -317,4 +319,7 @@
 </div>
 
 
+@section scripts{
+    <script src="~/Content/assets/js/categories_custom.js"></script>
+}
 

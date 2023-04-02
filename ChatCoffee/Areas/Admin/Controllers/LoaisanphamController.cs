@@ -7,9 +7,11 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using ChatCoffee.Models;
 using ChatCoffee.Models.ModelsDefault;
 using ChatCoffee.Models.ModelViews;
+using PagedList;
 
 namespace ChatCoffee.Areas.Admin.Controllers
 {
@@ -20,9 +22,15 @@ namespace ChatCoffee.Areas.Admin.Controllers
 
 
         // GET: Admin/Loaisanpham
-        public ActionResult Index()
+        public ActionResult Index(int ? page)
         {
-            return View(db.LOAISANPHAMs.ToList());
+            if (page == null) page = 1;
+            var lOAISANPHAMs = (from s in db.LOAISANPHAMs select s).OrderBy(m => m.MALOAI);
+            int pageSize = 7;
+            int pageNum = page ?? 1;
+          
+            return View(lOAISANPHAMs.ToPagedList(pageNum, pageSize));
+            //return View(db.LOAISANPHAMs.ToList());
         }
 
         // GET: Admin/Loaisanpham/Details/5

@@ -21,5 +21,20 @@ namespace ChatCoffee.Controllers
             var items = data.LOAISANPHAMs.ToList();
             return PartialView("_MenuCategory", items);
         }
+        public ActionResult MenuView(int? id)
+        {
+            if(id != null)
+            {
+                ViewBag.MaLoai = id;
+            }    
+            var items = data.LOAISANPHAMs.ToList();
+            return PartialView("_MenuView", items);
+        }
+        public ActionResult MenuLocal()
+        {
+
+            var items = data.THUONGHIEUs.ToList();
+            return PartialView("_MenuLocal", items);
+        }
     }
 }

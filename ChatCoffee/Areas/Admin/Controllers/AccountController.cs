@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -13,6 +14,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace ChatCoffee.Areas.Admin.Controllers
 {
@@ -59,20 +61,64 @@ namespace ChatCoffee.Areas.Admin.Controllers
         }
 
         // GET: Admin/Account
-        public ActionResult Index()
+        public ActionResult Users(int ? page)
         {
-            var items = db.Users.Include(c => c.Roles);
-            //if (items.FirstOrDefault().Role)
-            //{
+
+            //var items = data.AspNetUserRoles.Include(c => c.AspNetUser).Where(x => x.RoleId == "90ecb062-774f-4464-adf5-09a1cfc52e1d");
+           // lấy danh sách chi teiets  role
+           var CTrole = data.AspNetUserRoles.ToList();
+
+            //lấy use usr có role là user
+            var user = data.AspNetUsers.ToList().OrderBy(m => m.Id);
+            List<AspNetUser> users = new List<AspNetUser>();    
+            foreach( var u in user)
+            {
+                foreach(var r in CTrole)
+                {
+                    if (r.RoleId.Equals("90ecb062-774f-4464-adf5-09a1cfc52e1d") && r.UserId.Equals(u.Id))
+                    {
+                        users.Add(u);
+                    }
+                }
+            }
+            if (page == null) page = 1;
+            //var users1 = (from s in db.Users select s).OrderBy(m => m.Id);
+            int pageSize = 7;
+            int pageNum = page ?? 1;
+
+            return View(users.ToPagedList(pageNum, pageSize));
 
 
-                return View(items.ToList());
-            //}
-            //else
-            //{
-            //    var item = db.KHACHHANGs.ToList();
-            //    return View(item);
-            //}
+        }
+
+        public ActionResult Index(int ? page)
+        {
+
+            //var items = data.AspNetUserRoles.Include(c => c.AspNetUser).Where(x => x.RoleId == "90ecb062-774f-4464-adf5-09a1cfc52e1d");
+            // lấy danh sách chi teiets  role
+            var CTrole = data.AspNetUserRoles.ToList();
+
+            //lấy use usr có role là user
+            var user = data.AspNetUsers.ToList().OrderBy(m => m.Id);
+            List<AspNetUser> users = new List<AspNetUser>();
+            foreach (var u in user)
+            {
+                foreach (var r in CTrole)
+                {
+                    if (r.RoleId.Equals("bb6d30ed-89b2-47ad-9ec0-6b4c24bfdcc2") && r.UserId.Equals(u.Id))
+                    {
+                        users.Add(u);
+                    }
+                }
+            }
+
+            if (page == null) page = 1;
+            //var users1 = (from s in db.Users select s).OrderBy(m => m.Id);
+            int pageSize = 7;
+            int pageNum = page ?? 1;
+
+            return View(users.ToPagedList(pageNum, pageSize));
+
 
         }
 
@@ -136,7 +182,8 @@ namespace ChatCoffee.Areas.Admin.Controllers
                     UserName = model.UserName,
                     Email = model.Email,
                     FullName = model.FullName,
-                    Phone = model.Phone
+                    Phone = model.Phone,
+                    Anh = model.Anh
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -168,6 +215,38 @@ namespace ChatCoffee.Areas.Admin.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    ApplicationUser = db.Users.Find(id);
+        //    if (user == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+
+        //    return View(user);
+        //}
+
+        //// POST: Admin/ManageCoffees/Edit/5
+        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit(AspNetUser uSer)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(uSer).State = EntityState.Modified;
+        //        UpdateModel(uSer);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    return View(uSer);
+        //}
 
         public ActionResult Delete(string id)
         {
@@ -234,6 +313,15 @@ namespace ChatCoffee.Areas.Admin.Controllers
             {
                 ModelState.AddModelError("", error);
             }
+        }
+        public string ProcessUpload(HttpPostedFileBase file)
+        {
+            if (file == null)
+            {
+                return "";
+            }
+            file.SaveAs(Server.MapPath("~/Content/images/" + file.FileName));
+            return "/Content/images/" + file.FileName;
         }
 
     }

@@ -1,5 +1,4 @@
-﻿    @using ChatCoffee.Models
-@model LoginViewModel
+﻿@model ChatCoffee.Models.LoginViewModel
 @{
     ViewBag.Title = "Đăng nhập";
 }
@@ -15,7 +14,7 @@
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
-                     <h6 style="margin-left: 13px;">Tên đăng nhập:</h6>
+                    <h6 style="margin-left: 13px;">Tên đăng nhập:</h6>
                     <div class="col-md-10">
                         @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
@@ -44,10 +43,6 @@
                 <p style="margin-left: 15px;">
                     @Html.ActionLink("Đăng kí", "Register")
                 </p>
-                @* Enable this once you have account confirmation enabled for password reset functionality
-                    <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
             }
         </section>
     </div>

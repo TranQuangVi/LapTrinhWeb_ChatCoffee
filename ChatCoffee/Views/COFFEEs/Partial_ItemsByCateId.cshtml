@@ -10,8 +10,8 @@
 
             strImge = img.LINKANH;
         }
-        <div class="col-lg-3 pro-item " >
-            <div class="pro  "style="width: 190px; height: 280px; margin-top: -30px;">
+        <div class="col-lg-3 pro-item ">
+            <div class="pro  " style="width: 190px; height: 280px; margin-top: -30px;">
                 <img src="@strImge" alt="@item.TENCF" class="pro_image" style="margin-left:0; margin-top:0;">
 
                 <div class="pro_info">
@@ -20,7 +20,7 @@
                     </h6>
                     <div class="pro_info_price">
                         <h6 style="margin: 0px; font-size:20px;">
-                            <b> @item.GIA đ</b>
+                            <b>@String.Format("{0:0,0}", @item.GIA) <span class="woocommerce-Price-currencySymbol" style="font-size: .95em; vertical-align: top; margin-top: 0.05em ;">₫</span></b>
                         </h6>
                     </div>
 
@@ -45,6 +45,7 @@
         </div>
     }
 }
+
 
 
 

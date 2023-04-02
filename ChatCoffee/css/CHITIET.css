@@ -4,7 +4,7 @@
 .content {
     background-color: aliceblue;
     display: flex;
-    height: auto;
+    height: 500px;
 }
 
 .Content-left {
@@ -45,7 +45,7 @@
 
 .Content-right-name p {
     color: darkgrey;
-    font-size: 15px;
+    font-size: 18px;
 }
 
 .Content-right-price {
@@ -70,6 +70,7 @@
         width: 55px;
         padding-left: 3px;
         font-size: 16px;
+        font-weight: 700;
     }
 
 

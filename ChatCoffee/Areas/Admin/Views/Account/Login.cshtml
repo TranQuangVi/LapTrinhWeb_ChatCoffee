@@ -6,8 +6,9 @@
 
 }
 
+
 <div class="card-body login-card-body">
-    <p class="login-box-msg">Sign in to start your session</p>
+    <p class="login-box-msg">Chat Coffee xin chào</p>
     @using (Html.BeginForm("Login", "Account", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
@@ -35,13 +36,13 @@
                     @*<input type="checkbox" id="remember">*@
                     @Html.CheckBoxFor(x => x.RememberMe)
                     <label for="remember">
-                        Remember Me
+                        Nhớ mật khẩu
                     </label>
                 </div>
             </div>
             <!-- /.col -->
             <div class="col-4">
-                <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                <button type="submit" class="btn btn-primary btn-block" style="width: 120px; margin-left: -20px;">Đăng nhập</button>
             </div>
             <!-- /.col -->
         </div>
@@ -51,7 +52,7 @@
     <!-- /.social-auth-links -->
 
     <p class="mb-1">
-        <a href="#">I forgot my password</a>
+        <a href="#">Quên mật khẩu</a>
     </p>
     @*<p class="mb-0">
             <a href="register.html" class="text-center">Register a new membership</a>

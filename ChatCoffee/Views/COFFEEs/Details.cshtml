@@ -9,13 +9,32 @@
 <link rel="stylesheet" type="text/css" href="~/Content/styles/single_responsive.css">
 <script src="~/Content/JS/single_custom.js"></script>
 
+<link href="~/css/style.css" rel="stylesheet" />
+<link href="~/css/style.min.css" rel="stylesheet" />
 
-<h2>Chi Tiết Sản Phẩm </h2>
+@section naviheader{
+    <ul class="navbar-nav" style="flex-direction: row; padding-left: 1rem;">
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/home/index" class="nav-link">Trang chủ</a>
+        </li>
+        <span class="divider" style="position: relative; top: 9px; opacity: .35; margin: 0 0.5em; font-weight: 500;">/</span>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/coffees/index" class="nav-link">Sản phẩm</a>
+        </li>
+        <span class="divider" style="position: relative; top: 9px; opacity: .35; margin: 0 0.5em; font-weight: 500;">/</span>
+        <li class="nav-item d-none d-sm-inline-block">
+            @*<a href="/coffees/details/" class="nav-link">@Model.TENCF</a>*@
+            <a href="@Url.Action("details", "coffees", new { @id = Model.MACF })" class="nav-link">@Model.TENCF</a>
+        </li>
+    </ul>
+}
+
 <div class="container">
-    <div class="content">
-        <div class="Content-left">
+    <div class="content" style="height: 500px;">
+        <div class="Content-left" style="margin-left: 15px;">
             <div class="Content-left-img-big">
-                <img src="~/img/menu-1.jpg" alt="Card image" style="height:400px; width:400px">
+
+                <img src="@Model.ANHs.Where(x => x.MACF == Model.MACF).FirstOrDefault().LINKANH" alt="Card image" style="height: 446px; margin-top: 15px; width: 470px; object-fit: cover; ">
             </div>
         </div>
         <div class="Content-right">
@@ -24,13 +43,13 @@
             {
                 <div class="Content-right-name">
                     <br />
-                    <h1 style="font-weight: bold; font-size:20px;">@Model.TENCF</h1>
-                    <p>Thương hiệu: @Model.THUONGHIEU.TENTH</p>
-                    <p>Loại sản phẩm: @Model.LOAISANPHAM.TENLOAI</p>
+                    <h1 style="font-weight: bold; font-size: 1.7em; line-height: 1.3;">@Model.TENCF</h1>
+                    @*<p>Thương hiệu: @Model.THUONGHIEU.TENTH</p>
+                        <p>Loại sản phẩm: @Model.LOAISANPHAM.TENLOAI</p>*@
                     <p>Lượt xem: <b>@Model.ViewCount</b></p>
                 </div>
                 <div class="Content-right-price">
-                    <p style="font-size:30px">@Model.GIA <sup>VNĐ</sup> </p>
+                    <p> @String.Format("{0:0,0}", @Model.GIA) <span class="woocommerce-Price-currencySymbol" style="font-size: .95em; vertical-align: top; margin-top: 0.05em ;">₫</span> </p>
                 </div>
 
                 if (Model.SOLUONG > 0)
@@ -69,7 +88,7 @@
         <div class="tab-content">
             <div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel" aria-labelledby="product-desc-link">
                 <table class="table table-striped">
-                    <h4>Product Information</h4>
+                    <h4>Chi tiết sản phẩm</h4>
                     <tbody>
                         <tr>
                             <td> Tên</td>
@@ -124,7 +143,7 @@
             </div><!-- .End .tab-pane -->
             <div class="tab-pane fade" id="product-info-tab" role="tabpanel" aria-labelledby="product-info-link">
                 <div class="product-desc-content">
-                    <p>@Model.MOTA</p>
+                    <p style="font-weight: 30; font-size: 20px;">@Model.MOTA</p>
 
 
                 </div><!-- End .product-desc-content -->
@@ -134,4 +153,5 @@
     </div><!-- End .product-details-tab -->
 
 </div>
+
 

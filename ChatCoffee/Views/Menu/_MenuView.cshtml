@@ -1,0 +1,24 @@
+﻿﻿@model IEnumerable<ChatCoffee.Models.ModelsDefault.LOAISANPHAM>
+@if (Model != null && Model.Any())
+{
+    <ul class="sidebar_categories">
+        
+        <li class=""><a href="/COFFEEs"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>Tất cả</a></li>
+        @foreach (var item in Model)
+        {
+            if (ViewBag.MaLoai == item.MALOAI)
+            {
+                <li class="active"><a href="/COFFEEs/CFCategory/@item.MALOAI"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>@item.TENLOAI</a></li>
+            }
+            else
+            {
+                <li><a href="/COFFEEs/CFCategory/@item.MALOAI">@item.TENLOAI</a> </li>
+            }
+
+
+            @*<li>  <a href="@Url.Action("CFCategory","COFFEEs",new { @id = item.MALOAI })">@item.TENLOAI</a>  </li>*@
+        }
+
+
+    </ul>
+}

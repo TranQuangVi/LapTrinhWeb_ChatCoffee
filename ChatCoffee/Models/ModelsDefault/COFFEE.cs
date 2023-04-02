@@ -20,12 +20,12 @@ namespace ChatCoffee.Models.ModelsDefault
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int MACF { get; set; }
-
+        [Required(ErrorMessage = "Tên sản phẩm không để trống")]
         [StringLength(50)]
         public string TENCF { get; set; }
-
+        [Required(ErrorMessage = "Giá không để trống")]
         public int? GIA { get; set; }
-
+        [Required(ErrorMessage = "Số lượng không để trống")]
         public int? SOLUONG { get; set; }
 
         public int ViewCount { get; set; }

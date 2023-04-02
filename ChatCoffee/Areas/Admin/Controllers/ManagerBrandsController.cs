@@ -6,8 +6,10 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using ChatCoffee.Models;
 using ChatCoffee.Models.ModelsDefault;
+using PagedList;
 
 namespace ChatCoffee.Areas.Admin.Controllers
 {
@@ -16,9 +18,14 @@ namespace ChatCoffee.Areas.Admin.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: ManagerBrands
-        public ActionResult Index()
+        public ActionResult Index(int ? page)
         {
-            return View(db.THUONGHIEUs.ToList());
+            if (page == null) page = 1;
+            var tHUONGHIEUs = (from s in db.THUONGHIEUs select s).OrderBy(m => m.MATH);
+            int pageSize = 7;
+            int pageNum = page ?? 1;
+
+            return View(tHUONGHIEUs.ToPagedList(pageNum, pageSize));
         }
 
         // GET: ManagerBrands/Create

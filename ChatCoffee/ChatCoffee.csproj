@@ -46,10 +46,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CKFinder, Version=2.4.0.2631, Culture=neutral, PublicKeyToken=579e7adc719a1423, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Content\ckfinder\bin\Release\CKFinder.dll</HintPath>
+    </Reference>
     <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapper.2.0.123\lib\net461\Dapper.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
@@ -213,6 +223,7 @@
     <Compile Include="Models\ModelsDefault\THANHTOAN.cs" />
     <Compile Include="Models\ModelsDefault\ThongKe.cs" />
     <Compile Include="Models\ModelsDefault\THUONGHIEU.cs" />
+    <Compile Include="Models\ModelsDefault\UserView.cs" />
     <Compile Include="Models\ModelsDefault\VANCHUYEN.cs" />
     <Compile Include="Models\ModelViews\MyData.designer.cs">
       <AutoGen>True</AutoGen>
@@ -3185,6 +3196,7 @@
     <Content Include="Content\images\blog_1.jpg" />
     <Content Include="Content\images\blog_2.jpg" />
     <Content Include="Content\images\blog_3.jpg" />
+    <Content Include="Content\images\Chat Coffee.png" />
     <Content Include="Content\images\deal_ofthe_week.png" />
     <Content Include="Content\images\desc_1.jpg" />
     <Content Include="Content\images\desc_2.jpg" />
@@ -3212,6 +3224,7 @@
     <Content Include="Content\JS\custom.js" />
     <Content Include="Content\JS\jquery-3.2.1.min.js" />
     <Content Include="Content\JS\single_custom.js" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\plugins\easing\easing.js" />
     <Content Include="Content\plugins\font-awesome-4.7.0\css\font-awesome.css" />
     <Content Include="Content\plugins\font-awesome-4.7.0\css\font-awesome.min.css" />
@@ -3480,6 +3493,8 @@
       <LastGenOutput>MyData.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Areas\Admin\Views\Account\Users.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Edit.cshtml" />
     <None Include="Models\ModelViews\MyData.dbml.layout">
       <DependentUpon>MyData.dbml</DependentUpon>
     </None>
@@ -3636,6 +3651,10 @@
     <Content Include="Views\Menu\_MenuCategory.cshtml" />
     <Content Include="Views\ShoppingCard\Order.cshtml" />
     <Content Include="Views\ShoppingCard\XacnhanDonhang.cshtml" />
+    <Content Include="Views\Menu\_MenuView.cshtml" />
+    <Content Include="Views\COFFEEs\CFCategory.cshtml" />
+    <Content Include="Views\Menu\_MenuLocal.cshtml" />
+    <Content Include="Views\COFFEEs\CFLocal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />

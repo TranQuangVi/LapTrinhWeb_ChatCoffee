@@ -1,0 +1,38 @@
+﻿﻿@model IEnumerable<ChatCoffee.Models.ModelsDefault.THUONGHIEU>
+@section naviheader{
+    <ul class="navbar-nav" style="flex-direction: row; padding-left: 1rem;">
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/home/index" class="nav-link">Trang chủ</a>
+        </li>
+        <span class="divider" style="position: relative; top: 9px; opacity: .35; margin: 0 0.5em; font-weight: 500;">></span>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/coffees/index" class="nav-link">Sản phẩm</a>
+        </li>
+        <span class="divider" style="position: relative; top: 9px; opacity: .35; margin: 0 0.5em; font-weight: 500;">></span>
+        <li class="nav-item d-none d-sm-inline-block">
+            @*<a href="/coffees/details/" class="nav-link">@Model.TENCF</a>*@
+            @*<a href="#" class="nav-link">@Model.Where(x => x.TENTH = )</a>*@
+        </li>
+    </ul>
+}
+@if (Model != null && Model.Any())
+{
+
+    <li class="myDIV">
+        <span class="type_sorting_text">Thương hiệu</span>
+    
+    <i class="fa fa-angle-down"></i>
+    <ul class="sorting_type">
+        <li class="type_sorting_btn"><a href="/COFFEEs/CFLocal"> <span>Tất cả</span></a></li>
+        @foreach (var item in Model)
+        {
+            @*<li class="active"><a href="/COFFEEs/CFCategory/@item.MATH"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>@item.TENTH</a></li>*@
+            <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "@item.TENTH" }'><a href="/COFFEEs/CFLocal/@item.MATH"> <span>@item.TENTH</span></a></li>
+            @*<li><a href="/COFFEEs/CFLocal/@item.MATH">@item.TENTH</a> </li>*@
+        }
+    </ul>
+    </li>
+
+
+}
+

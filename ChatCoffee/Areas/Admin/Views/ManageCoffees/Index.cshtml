@@ -1,8 +1,24 @@
-﻿@model IEnumerable<ChatCoffee.Models.ModelsDefault.COFFEE>
-
+﻿
+@model PagedList.IPagedList<ChatCoffee.Models.ModelsDefault.COFFEE>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section naviheader{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"> <i class="fas fa-bars"></i> </a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/admin" class="nav-link">Trang chủ</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/admin/ManageCoffees" class="nav-link">Danh sách sản phẩm</a>
+        </li>
+
+    </ul>
 }
 
 <section class="content">
@@ -25,41 +41,41 @@
 
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.LOAISANPHAM.TENLOAI)
+                                <h5>Tên loại</h5>
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.THUONGHIEU.TENTH)
+                                <h5>Thương hiệu</h5>
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.TENCF)
+                                <h5>Tên cà phê</h5>
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.GIA)
+                                <h5>Tên giá</h5>
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.SOLUONG)
+                                <h5>Số lượng</h5>
                             </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ViewCount)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.SLDABAN)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.KHOILUONG)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.XUATXU)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.HSD)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.DANGCF)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.MOTA)
-                            </th>
+                            @*<th>
+                                    @Html.DisplayNameFor(model => model.ViewCount)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.SLDABAN)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.KHOILUONG)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.XUATXU)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.HSD)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.DANGCF)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.MOTA)
+                                </th>*@
                             <th></th>
                         </tr>
                     </thead>
@@ -71,8 +87,8 @@
                             {
                                 <tr>
                                     <td>
-                                        <img src="@Html.DisplayFor(modelItem => item.ANHs.Where(c=>c.MACF==item.MACF).FirstOrDefault().LINKANH)" 
-                                             style="width:50px;height:50px"/>
+                                        <img src="@Html.DisplayFor(modelItem => item.ANHs.Where(c=>c.MACF==item.MACF).FirstOrDefault().LINKANH)"
+                                             style="width:50px;height:50px" />
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.LOAISANPHAM.TENLOAI)
@@ -89,27 +105,27 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.SOLUONG)
                                     </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.ViewCount)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.SLDABAN)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.KHOILUONG)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.XUATXU)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.HSD)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.DANGCF)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.MOTA)
-                                    </td>
+                                    @*<td>
+                                            @Html.DisplayFor(modelItem => item.ViewCount)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SLDABAN)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.KHOILUONG)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.XUATXU)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.HSD)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DANGCF)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.MOTA)
+                                        </td>*@
                                     <td>
                                         <a href="/Admin/ManageCoffees/edit/@item.MACF" class="btn btn-success">Sửa</a>
 
@@ -124,10 +140,67 @@
                 }
             </table>
         </div>
+
         <div class="card-footer">
 
         </div>
     </div>
 
 </section>
+<div>
+    <div>
+        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) /
+        @Model.PageCount
+    </div>
+    <div class="MenuTrang">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new
+        {
+            page = page
+        }))
+    </div>
+</div>
+<style>
+    .MenuTrang li {
+        display: inline;
+    }
+</style>
+<style type="text/css">
+    #mau-nut a {
+        clear: both;
+        background-color: orange;
+        color: snow;
+    }
+
+        #mau-nut a:hover {
+            background-color: darkcyan;
+            color: snow;
+        }
+</style>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var maxLength = 100;
+        $(".show-read-more").each(function () {
+            var myStr = $(this).text();
+            if ($.trim(myStr).length > maxLength) {
+                var newStr = myStr.substring(0, maxLength);
+                var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
+                $(this).empty().html(newStr);
+
+                $(this).append(' <a href="javascript:void(0);" class="read-more">đọc tiếp...</a>');
+
+                $(this).append('<span class="more-text">' + removedStr +'</span>');
+            }
+        });
+        $(".read-more").click(function () {
+            $(this).siblings(".more-text").contents().unwrap();
+            $(this).remove();
+        });
+    });
+</script>
+<style>
+    .show-read-more .more-text {
+        display: none;
+    }
+</style>
 
