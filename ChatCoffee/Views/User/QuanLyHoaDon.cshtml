@@ -1,0 +1,96 @@
+﻿@model IEnumerable<ChatCoffee.Models.ModelViews.HOADON>
+
+@{
+    Layout = "~/Views/Shared/LayoutUser.cshtml";
+    List<ChatCoffee.Models.ModelViews.HOADON> listHD = ViewBag.listHD;
+    List<ChatCoffee.Models.ModelViews.CTDONHANG> listCTHD = ViewBag.TenCF;
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link href="~/css/profile.css" rel="stylesheet" />
+<section class="content">
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"> Quản lý đơn hàng </h3>
+
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <thead style="text-align:center">
+                        <tr>
+                            <th>
+                                Mã hóa đơn
+                            </th>
+                            <th>
+                                Tên sản phẩm
+                            </th>
+                            <th>
+                                Ngày đặt
+                            </th>
+                            <th>
+                                Ngày giao
+                            </th>
+                            <th>
+                                Trạng thái
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody style="text-align:center">
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @item.MAHD
+                                    </td>
+                                    <td>
+                                        @foreach (var ct in listCTHD)
+                                        {
+                                            if (ct.MAHD == item.MAHD)
+                                            {
+                                                @Html.DisplayName(ct.COFFEE.TENCF) <br />
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @*@Html.DisplayName(item.NGAYDAT.ToString())*@
+                                        @Html.DisplayName(item.NGAYDAT.ToString())
+                                    </td>
+                                    <td>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+                                        @Html.DisplayName(item.NGAYGIAO.ToString())
+                                    </td>
+                                    <td>
+                                        @Html.DisplayName(item.TRANGTHAI)
+                                    <td>
+                                        <button type="button" class="btn btn-success"
+                                                data-toggle="modal" data-target="#myModal"
+                                                href="">
+                                            Setting
+                                        </button>
+                                        <a href="/user/DetailHoaDon/@item.MAHD" class="btn btn-success">Chi tiết</a>
+                                        <a class="btn btn-success" href="@Url.Action("DetailHoaDon", "User", new { @MAHD = item.MAHD})">Cập nhật</a>
+
+
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                }
+            </table>
+        </div>
+        <div class="card-footer">
+
+        </div>
+    </div>
+
+</section>
+
+

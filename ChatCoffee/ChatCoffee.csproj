@@ -3251,6 +3251,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="img\about.png" />
+    <Content Include="img\avatas\co-gai-cuc-cool-ngau.jpg" />
     <Content Include="img\bg.jpg" />
     <Content Include="img\carousel-1.jpg" />
     <Content Include="img\carousel-2.jpg" />
@@ -3636,6 +3637,10 @@
     <Content Include="Views\Menu\_MenuCategory.cshtml" />
     <Content Include="Views\ShoppingCard\Order.cshtml" />
     <Content Include="Views\ShoppingCard\XacnhanDonhang.cshtml" />
+    <Content Include="Views\User\QuanLyHoaDon.cshtml" />
+    <Content Include="Views\User\DetailHoaDon.cshtml" />
+    <Content Include="Views\User\IndexDiaChi.cshtml" />
+    <Content Include="Views\User\EditDiaChi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />

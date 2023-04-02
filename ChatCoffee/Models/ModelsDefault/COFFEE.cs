@@ -31,6 +31,7 @@ namespace ChatCoffee.Models.ModelsDefault
         public int ViewCount { get; set; }
         public int SLDABAN { get; set; }
         public int? KHOILUONG { get; set; }
+        public bool TRANGTHAI { get; set; }
 
         [StringLength(20)]
         public string XUATXU { get; set; }
@@ -56,5 +57,11 @@ namespace ChatCoffee.Models.ModelsDefault
         public virtual LOAISANPHAM LOAISANPHAM { get; set; }
 
         public virtual THUONGHIEU THUONGHIEU { get; set; }
+    }
+
+    public enum TrangThai
+    {
+        True,
+        False
     }
 }

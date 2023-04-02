@@ -1,33 +1,45 @@
 ﻿using ChatCoffee.Models.ModelViews;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Data.Linq;
 using System.Linq;
+using System.Net;
 using System.Web;
+using System.Web.Caching;
 using System.Web.Mvc;
+using DIACHI = ChatCoffee.Models.ModelViews.DIACHI;
 
 namespace ChatCoffee.Controllers
 {
     public class UserController : Controller
     {
-        MyDataDataContext data = new MyDataDataContext();
+        public MyDataDataContext data = new MyDataDataContext();
         // GET: User
         public ActionResult Index()
         {
-            return View();
+            //var user = data.AspNetUsers.Single(u => u.UserName.Equals(User.Identity.Name));
+            var user = data.AspNetUsers.
+                Where(u => u.UserName.Equals(User.Identity.Name)).
+                FirstOrDefault();
+            return View(user);
         }
 
-        public ActionResult Edit(string id)
+/*        public ActionResult Edit(string id)
         {
             var E_sach = data.AspNetUsers.First(m => m.Id == id);
-            return View(E_sach);
-        }
+            return  RedirectToAction("Index");
+        }*/
         [HttpPost]
         public ActionResult Edit(string id, FormCollection collection)
         {
             var E_id = data.AspNetUsers.First(m => m.Id == id);
-            var E_hoten = collection["hoten"];
-            var E_sdt = collection["sodienthoai"];
-            var E_email = collection["email"];
+            var E_hoten = collection["FULLNAME"];
+            var E_sdt = collection["PHONE"];
+            var E_email = collection["Email"];
+            var E_gioitinh = collection["GIOITINH"];
+            var E_ngaysinh = String.Format("{0:yyyy/MM/dd}", collection["NGAYSINH"]);
 
             E_id.Id = id;
             if (string.IsNullOrEmpty(E_hoten))
@@ -36,15 +48,79 @@ namespace ChatCoffee.Controllers
             }
             else
             {
-                E_id.UserName = E_hoten;
+                E_id.FullName = E_hoten;
                 E_id.Phone = E_sdt;
-                E_id.UserName = E_email;
+                E_id.GIOITINH = E_gioitinh;
+                if (E_ngaysinh!=null)
+                    E_id.NGAYSINH = DateTime.Parse(E_ngaysinh);
+
                 UpdateModel(E_id);
                 data.SubmitChanges();
                 return RedirectToAction("Index");
             }
-            return this.Edit(id);
+           // return this.Edit(id);
+            return RedirectToAction("Index");
         }
+
+        public ActionResult QuanLyHoaDon()
+        {
+            var user = data.AspNetUsers.
+                Where(u => u.UserName.Equals(User.Identity.Name)).
+                FirstOrDefault();
+            List<HOADON> hd = new List<HOADON>();
+            ViewBag.listHD = GetHDByKH(user.Id);
+            hd = GetHDByKH(user.Id);
+            ViewBag.TenCF = data.CTDONHANGs.Where(c => c.HOADON.Id.Equals(user.Id)).ToList();
+            return View(hd);
+        }
+
+        public List<HOADON> GetHDByKH(string id)
+        {
+            return data.HOADONs.Where(h=>h.Id.Equals(id)).ToList();
+        }
+
+
+        public ActionResult DetailHoaDon(int? MAHD)
+        {
+            List<CTDONHANG> ctdh = data.CTDONHANGs.Where(c => c.MAHD == MAHD).ToList();
+            return View(ctdh);
+        }
+
+        public ActionResult IndexDiaChi()
+        {
+            var user = data.AspNetUsers.
+                Where(u => u.UserName.Equals(User.Identity.Name)).
+                FirstOrDefault();
+            List<DIACHI> listDC = new List<DIACHI>();
+            listDC = data.DIACHIs.Where(c => c.Id.Equals(user.Id)).ToList();
+
+            ViewBag.dc = listDC;
+            return View(listDC);
+        }
+
+
+
+        public ActionResult EditDiaChi(int? MADC, FormCollection collection)
+        {
+            var diachi = data.DIACHIs.First(c => c.MADC == MADC);
+            diachi.TENDC = collection["TENDC"];
+            //dc.AspNetUser = diachi.AspNetUser;
+            UpdateModel(diachi);
+            data.SubmitChanges();
+            return RedirectToAction("IndexDiaChi");
+        }
+        
+        public ActionResult Delete(int? MADC)
+        {
+
+            Models.ModelViews.DIACHI dc = data.DIACHIs.First(c => c.MADC == MADC);
+
+            data.DIACHIs.DeleteOnSubmit(dc);
+            data.SubmitChanges();
+            return RedirectToAction("IndexDiaChi");
+        }
+
+
         public string ProcessUpload(HttpPostedFileBase file)
         {
             if (file == null)

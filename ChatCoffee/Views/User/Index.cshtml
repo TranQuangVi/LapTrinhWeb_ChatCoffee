@@ -1,227 +1,183 @@
-﻿@model ChatCoffee.Models.ModelsDefault.KHACHHANG
+﻿@model ChatCoffee.Models.ModelViews.AspNetUser
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/LayoutUser.cshtml";
+    var dc = ViewBag.dc;
 }
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link href="~/css/profile.css" rel="stylesheet" />
+
 <h2>Thông tin tài khoản</h2>
 
-
-
-<!-- Content Header (Page header) -->
-<!--<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Thêm mới Tin tức</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Tin tức</a></li>
-                    <li class="breadcrumb-item active">Thêm mới</li>
-                </ol>
-            </div>
-        </div>
-    </div>-->
-<!-- /.container-fluid -->
-<!--</section>-->
 <!-- Main content -->
 <section class="content">
     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Setting</button>
     <!-- Default box -->
-    <div>
-        <hr />
-        <dl class="dl-horizontal" style="margin-left: 26%;">
-            <dd>
-                <button type="button" class="btn btn-info btn-lg" id="btn_avatar" data-toggle="modal" data-target="#Modal"></button>
-                <img src="https://kynguyenlamdep.com/wp-content/uploads/2022/08/avatar-co-gai-cuc-cool-ngau-600x592.jpg" ," alt="Alternate Text" , id="avatar" />
-                <div class="modal" id="Modal" role="dialog">
-                    @*<div class="modal-content" id="modal_content"  >*@
-                    <!-- Modal content-->
-                    <div class="modal-body" id="modal_body">
-                        <img src="https://kynguyenlamdep.com/wp-content/uploads/2022/08/avatar-co-gai-cuc-cool-ngau-600x592.jpg" alt="Alternate Text" />
-                    </div>
 
-                    @*</div>*@
-                </div>
-            </dd>
-            <div class="form-group">
-                @*<h5 class="control-label col-md-2" style="margin-top:-1px"> <b>Hình:</b></h5>*@
-                <div class="col-md-1" style="margin-top: -40px">
-                    @*@Html.EditorFor(model => model.ANH, new { htmlAttributes = new { @class = "form-control" } })*@
-                    @*@Html.ValidationMessageFor(model => model.ANH, "", new { @class = "text-danger" })*@
-                    <input type="file" name="fileUpload" id="fileUpload" accept="image/*" style="display:none;" />
-                    <br />
-                    <input type="button" id="btnUpload" value="Chọn" class="btn btn-success"  />
-                    @*<br />
-                    <br />*@
-                    @*<img src="https://kynguyenlamdep.com/wp-content/uploads/2022/08/avatar-co-gai-cuc-cool-ngau-600x592.jpg" id="pictureUpload" width="200px" height="300px" />*@
-                </div>
-            </div>
-            @section upload
-{
-                <script>
-                    $(function () {
-                        $('#btnUpload').click(function () {
-                            $('#fileUpload').trigger('click');
-                        });
-                    });
-                    $('#fileUpload').change(function () {
-                        if (window.FormData !== undefined) {
-                            var fileUpload = $('#fileUpload').get(0);
-                            var files = fileUpload.files;
-                            var formData = new FormData();
-                            formData.append('file', files[0]);
-                            $.ajax(
-                                {
-                                    type: 'POST',
-                                    url: '/Sach/ProcessUpload',
-                                    contentType: false,
-                                    processData: false,
-                                    data: formData,
-                                    success: function (urlImage) {
-                                        $('#pictureUpload').attr('src', urlImage);
-                                        $('#hinh').val(urlImage);
-                                    },
-                                    error: function (err) {
-                                        alert('Error ', err.statusText);
+    <div style="text-align: -webkit-center">
+
+        <div style="width: 600px; background-color:white; border-radius: 10px">
+            <div>
+                <div>
+                    <hr />
+                    <dl class="dl-horizontal" style="text-align:center">
+                        <dd style="margin-left: 0">
+                            <button type="button" class="btn btn-info btn-lg" id="btn_avatar" data-toggle="modal" data-target="#Modal"></button>
+                            @if (Model.ANH != null)
+                            {
+                                <img src="@Model.ANH" ," alt="Alternate Text" , id="avatar" />
+                            }
+                            else
+                            {
+                                <img src="https://kynguyenlamdep.com/wp-content/uploads/2022/08/avatar-co-gai-cuc-cool-ngau-600x592.jpg" ," alt="Alternate Text" , id="avatar" />
+                            }
+
+                            <div class="modal" id="Modal" role="dialog">
+                                @*<div class="modal-content" id="modal_content"  >*@
+                                <!-- Modal content-->
+                                <div class="modal-body" id="modal_body">
+                                    @if (Model.ANH != null)
+                                    {
+                                        <img src="@Model.ANH" ," alt="Alternate Text" />
                                     }
-                                });
-                        }
-                    });
-                </script>
-            }
-            
-            <div class="pro_group">
-                <dt>
-                    <h4><b>Mã KH:</b></h4>
-                </dt>
-                <dd>
-                    <h4>007</h4>
+                                    else
+                                    {
+                                        <img src="https://kynguyenlamdep.com/wp-content/uploads/2022/08/avatar-co-gai-cuc-cool-ngau-600x592.jpg" ," alt="Alternate Text" />
+                                    }
+                                </div>
 
-                    @*@Html.DisplayFor(model => model.TENKH)*@
-                </dd>
-                <dt>
-                    <h4><b>Họ tên:</b></h4>
-                </dt>
-                <dd>
-                    <h4>Nguyễn Đình Hiếu</h4>
+                                @*</div>*@
+                            </div>
+                        </dd>
+                        <div class="form-group">
+                            @*<h5 class="control-label col-md-2" style="margin-top:-1px"> <b>Hình:</b></h5>*@
+                            <div class="col-md-1" style="margin-top: -40px">
+                                @*@Html.EditorFor(model => model.ANH, new { htmlAttributes = new { @class = "form-control" } })*@
+                                @*@Html.ValidationMessageFor(model => model.ANH, "", new { @class = "text-danger" })*@
+                                <input type="file" name="fileUpload" id="fileUpload" accept="image/*" style="display:none;" />
+                                <br />
+                                <input type="button" id="btnUpload" value="Chọn" class="btn btn-success" />
+                                @*<br />
+                                    <br />*@
+                                @*<img src="https://kynguyenlamdep.com/wp-content/uploads/2022/08/avatar-co-gai-cuc-cool-ngau-600x592.jpg" id="pictureUpload" width="200px" height="300px" />*@
+                            </div>
+                        </div>
 
-                    @*@Html.DisplayFor(model => model.TENKH)*@
-                </dd>
-                <dt>
-                    <h4><b>Email:</b></h4>
-                </dt>
-                <dd>
-                    <h4>hieugia777@gmail.com</h4>
 
-                    @*@Html.DisplayFor(model => model.EMAIL)*@
-                </dd>
+                        <div class="pro_group">
+                            <dt>
+                                <h4 style="float:left"><b>Họ tên:</b></h4>
+                            </dt>
 
-                <dt>
-                    <h4><b>Số điện thoại:</b></h4>
-                </dt>
-                <dd>
-                    <h4>0943218184</h4>
-                    @*@Html.DisplayFor(model => model.SDT)*@
-                </dd>
-                <dt>
-                    <h4><b>Địa chỉ:</b></h4>
-                </dt>
-                <dd>
-                    <h4>60 thôn 8, CưMgar, Đaklak</h4>
-                    @*@Html.DisplayFor(model => model.DIACHI)*@
-                </dd>
+                            <dd>
+                                <h4 style="float:left">@Model.FullName</h4>
+                            </dd>
+                            <dt>
+                                <h4 style="float:left"><b>Giới tính:</b></h4>
+                            </dt>
+
+                            <dd>
+                                <h4 style="float:left">@Model.GIOITINH</h4>
+                            </dd>
+                            <dt>
+                                <h4 style="float:left"><b>Năm sinh:</b></h4>
+                            </dt>
+
+                            <dd>
+                                <h4 style="float:left">@Model.NGAYSINH</h4>
+                            </dd>
+                            <dt>
+                                <h4 style="float:left"><b>Email:</b></h4>
+                            </dt>
+                            <dd>
+                                <h4 style="float:left">@Model.Email</h4>
+                            </dd>
+                            <dt>
+                                <h4 style="float:left"><b>Số điện thoại:</b></h4>
+                            </dt>
+                            <dd>
+                                <h4 style="float:left">@Model.Phone</h4>
+                            </dd>
+                        </div>
+
+                    </dl>
+                </div>
             </div>
-
-        </dl>
+        </div>
     </div>
 
 
+    <div class="modal" id="myModal" role="dialog">
+        @*<div class="modal-header">
 
-            <div class="modal" id="myModal" role="dialog">
-                @*<div class="modal-header">
-                    
-                </div>*@
-                <div class="modal-content" style="width: 50%; margin-left: 400px; height: auto;">
-                    <h3 class="card-title">Thông tin tài khoản</h3>
-                    <div class="modal-body" >
-                        @using (Html.BeginForm())
-                        {
-                            @Html.AntiForgeryToken()
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            @Html.HiddenFor(x => x.MAKH)
-                            <!-- your steps content here -->
-                            <div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Mã KH</label>
-                                    @Html.EditorFor(x => x.MAKH, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(x => x.MAKH, null, new { @class = "text-danger" })
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Họ tên</label>
-                                    @Html.EditorFor(x => x.TENKH, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(x => x.TENKH, null, new { @class = "text-danger" })
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Giới tính</label>
-                                    @Html.EditorFor(x => x.GIOITINH, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(x => x.GIOITINH, null, new { @class = "text-danger" })
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Số điện thoại</label>
-                                    @Html.EditorFor(x => x.SDT, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(x => x.SDT, null, new { @class = "text-danger" })
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Email</label>
-                                    @Html.EditorFor(x => x.EMAIL, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(x => x.EMAIL, null, new { @class = "text-danger" })
-                                </div>
-                                <div class="form-group">
-                                    <label>Địa chỉ</label>
-                                    @Html.EditorFor(x => x.DIACHI.TENDC, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(x => x.DIACHI.TENDC, null, new { @class = "text-danger" })
-                                </div>
-                                @*<div class="form-group">
-                        <label for="exampleInputFile">Ảnh đại diện</label>
-                        <div class="input-group">
-                            <div class="custom-file">
-                                @Html.TextBoxFor(x => x.Image, new { @id = "txtImage", @class = "form-control" })
-                            </div>
-                            <div class="input-group-append">
-                                <input type="button" value="Tải ảnh" onclick="BrowseServer('txtImage');" />
-                            </div>
+            </div>*@
+        <div class="modal-content" style="width: 50%; margin-left: 400px; height: auto;">
+            <h3 class="card-title">Thông tin tài khoản</h3>
+            <div class="modal-body">
+                @using (Html.BeginForm("edit", "user", new { @id = Model.Id }, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(x => x.Id)
+                    <!-- your steps content here -->
+                    <div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Mã KH</label>
+                            @Html.EditorFor(x => x.Id, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(x => x.Id, null, new { @class = "text-danger" })
                         </div>
-                    </div>*@
 
+                        <div class="form-group">
+                            <label>Họ tên</label>
+                            @Html.EditorFor(x => x.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(x => x.FullName, null, new { @class = "text-danger" })
+                        </div>
 
-                            <div class="modal-footer">
-
-                                <button type="submit" class="btn btn-primary">Lưu</button>
-                                @*<a href="#" class="btn btn-danger">Quay lại</a>*@
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Trở lại</button>
+                        <div class="form-group">
+                                <label>Giới tính</label>
+                                @Html.EditorFor(x => x.GIOITINH, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(x => x.GIOITINH, null, new { @class = "text-danger" })
                             </div>
-                            </div>
-                            
-                        }
+                        <div class="form-group">
+                            <label>Ngày sinh</label>
 
+                            <input type="date" name="NGAYSINH" value="@DateTime.Parse(Model.NGAYSINH.ToString()).ToString("yyyy-MM-dd")" 
+                                   max="@DateTime.Now.ToString("yyyy-MM-dd")"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Số điện thoại</label>
+                            @Html.EditorFor(x => x.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(x => x.Phone, null, new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email</label>
+                            @Html.EditorFor(x => x.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(x => x.Email, null, new { @class = "text-danger" })
+                        </div>
+
+                        <div class="modal-footer">
+
+                            <button type="submit" class="btn btn-primary">Lưu</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Trở lại</button>
+                        </div>
                     </div>
-                </div>
-                <!-- /.card-body -->
-                <div class="card-footer">
 
-                </div>
-                <!-- /.card-footer-->
+                }
+
             </div>
-            <!-- /.card -->
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+
+        </div>
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
 
 </section>
+
 <!-- /.content -->
 @*@section  scripts{
         <script>
@@ -241,3 +197,38 @@
 
         </script>
     }*@
+
+
+@section upload
+{
+    <script>
+        $(function () {
+            $('#btnUpload').click(function () {
+                $('#fileUpload').trigger('click');
+            });
+        });
+        $('#fileUpload').change(function () {
+            if (window.FormData !== undefined) {
+                var fileUpload = $('#fileUpload').get(0);
+                var files = fileUpload.files;
+                var formData = new FormData();
+                formData.append('file', files[0]);
+                $.ajax(
+                    {
+                        type: 'POST',
+                        url: '/Sach/ProcessUpload',
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        success: function (urlImage) {
+                            $('#pictureUpload').attr('src', urlImage);
+                            $('#hinh').val(urlImage);
+                        },
+                        error: function (err) {
+                            alert('Error ', err.statusText);
+                        }
+                    });
+            }
+        });
+    </script>
+}

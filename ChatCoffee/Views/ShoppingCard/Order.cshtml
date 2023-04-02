@@ -1,55 +1,16 @@
-﻿
+﻿@using System.Linq;
 @{
     ViewBag.Title = "Order";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var listGH = ViewBag.listGH;
     var khach = ViewBag.user;
+    int maso = 0;
+    List<ChatCoffee.Models.ModelViews.VANCHUYEN> listVC = ViewBag.VanChuyen;
+    int gia = (int)listVC.FirstOrDefault().GIA;
 
+    var diachi = ViewBag.DIACHIGIAO;
 }
-
 <div class="container">
-
-    <table class="table">
-        <tr>
-            <th>
-                Tên sản phẩm
-            </th>
-            <th>
-                Ảnh
-            </th>
-            <th>
-                Giá
-            </th>
-            <th>
-                Số lượng
-            </th>
-            <th>
-                Thành tiền
-            </th>
-            <th></th>
-        </tr>
-        @foreach (var item in listGH)
-        {
-            <tr>
-                <td> @item.COFFEE.TENCF</td>
-                <td>
-                    <a href="@Url.Action("Details", "Coffees", new {@id=item.MACF})">
-                        <img src="@*/@item.COFFEE.LINKANH*@" width="90" />
-                    </a>
-                </td>
-                <td>@String.Format("{0:0,0}", item.GIA) VNĐ</td>
-                <td><input type="number" min="1" name="txtSolg" value="@item.SOLUONG" /></td>
-                <td>  @item.TONGGIA </td>
-            </tr>
-
-        }
-        <tr style="font-weight:bold; text-align:left; color:red">
-            <td colspan="2"> Tổng sản phẩm:  @ViewBag.SumSP</td>
-            <td colspan="2"> Số lượng sản phẩm:  @ViewBag.SumQuantity</td>
-            <td colspan="4"> Tổng tiền:  @String.Format("{0:0,0}", @ViewBag.SumPrice) VNĐ</td>
-        </tr>
-    </table>
-
     <h2 style="text-align:center"> Thông tin đặt hàng </h2>
     @{
         @*  ChatCoffee.Models.ModelViews.AspNetUser user = ViewBag.user;
@@ -58,7 +19,7 @@
         @model ChatCoffee.Models.ModelViews.HOADON
     }
     <table align="center">
-        @using (Html.BeginForm("Order", "ShoppingCard", FormMethod.Post))
+        @using (Html.BeginForm("Order", "ShoppingCard"))
         {
             @Html.ValidationSummary(false)
             @Html.AntiForgeryToken()
@@ -72,55 +33,152 @@
                 <td style="font-weight:bold">@khach.Email </td>
 
             </tr>
-            <tr style="height:40px">
+            <tr class="form-group">
+                <td>Địa  chỉ:</td>
+                <td>
+
+
+                    @*@Html.DropDownList("DIACHIGIAO", null, htmlAttributes: new { @class = "form-control" })*@
+
+                    <select class="form-control" id="TENDC" name="DIACHIGIAO" >
+                        @foreach (var item in diachi)
+                        {
+                            <option value="@item.TENDC">
+                                @item.TENDC
+                            </option>
+
+                        }
+                    </select>
+                </td>
+            </tr>
+@*            <tr style="height:40px">
                 <td> Địa  chỉ:</td>
-                <td style="font-weight:bold">khach.diachi </td>
+                <td style="font-weight:bold">@khach.DIACHIs.ElementAt(0) </td>
 
-            </tr>
+            </tr>*@
 
-            <tr style="height:40px">
-                <td> Điện thoại:</td>
-                <td style="font-weight:bold">@khach.Phone </td>
-            </tr>
+    <tr style="height:40px">
+        <td> Điện thoại:</td>
+        @*<td style="font-weight:bold">@khach.Phone </td>*@
+    <td style="font-weight:bold">
+        <input class="input-validation-error form-control"
+               data-val="true" data-val-required="The UserName field is required."
+               type="text" name="SDTDAT" value="@khach.Phone">
+        <span class="field-validation-valid text-danger" data-valmsg-for="Phone" data-valmsg-replace="true"></span>
+    </td>
+    </tr>
 
             <tr class="form-group">
 
                 <td>Phương thức vận chuyển</td>
                 <td>
 
-                    @Html.DropDownList("MAVT", null, htmlAttributes: new { @class = "form-control" })
+                    @*         @Html.DropDownList("MAVT", null, htmlAttributes: new { @class = "form-control", onclick = "display();" })*@
+
+
+                    <select class="form-control" id="MAVT" name="MAVT" onchange="display('MAVT');">
+                        @foreach (var item in listVC)
+                        {
+                            <option value="@item.MAVT">
+                                @item.TENVT (@item.GIA)
+                            </option>
+
+                        }
+                    </select>
+                    <div>
+                        <script>
+                            function display(ma) {
+                                var d = new Date();
+
+                                var x =  document.getElementById(ma).value;
+                                var div = document.getElementById('content');
+                                if (x == '1') {
+                                    var day = new Date(d.setDate(d.getDate() + 5));
+                                    div.innerHTML = @listVC.FirstOrDefault(c => c.MAVT==1).GIA + @ViewBag.SumPrice + " VNĐ";
+                                    document.getElementById('ngaygiao').innerHTML = day.getDate() + "/" + day.getMonth() + "/" + day.getFullYear();
+                                }
+                                else if (x == '2') {
+                                    var day = new Date(d.setDate(d.getDate() + 2));
+                                    div.innerHTML = @listVC.FirstOrDefault(c => c.MAVT==2).GIA + @ViewBag.SumPrice+ " VNĐ";
+                                    @*document.getElementById('ngaygiao').innerHTML = @DateTime.Now.AddDays(+2).ToShortDateString();*@
+                                    document.getElementById('ngaygiao').innerHTML = day.getDate() + "/" + day.getMonth() + "/" + day.getFullYear();
+                                }
+                            }
+                        </script>
+                    </div>
                 </td>
             </tr>
             <tr class="form-group">
-
                 <td>Phương thức thanh toán</td>
                 <td>
-
                     @Html.DropDownList("MATT", null, htmlAttributes: new { @class = "form-control" })
                 </td>
             </tr>
             <tr style="height:40px">
                 <td> Ngày đặt:</td>
                 <td style="font-weight:bold">@DateTime.Now.ToShortDateString() </td>
+            </tr>
+
+            <tr style="height:40px">
+                <td> Ngày giao dự kiến: <br /><i>(Đơn hàng sẽ được giao trước ngày giao dự kiến)</i></td>
+                <td id="ngaygiao" style="font-weight:bold">@DateTime.Now.AddDays(+5).ToShortDateString() </td>
 
             </tr>
 
             <tr style="height:40px">
-                <td> Ngày giao:</td>
-                <td style="font-weight:bold">
-                    <input type="date" name="NgayGiao" />
-                </td>
-
-            </tr>
-
-
-            <tr style="height:40px">
+                <td></td>
+                <td></td>
                 <td></td>
                 <td style="font-weight:bold">
                     <input type="submit" value="Xác nhận " class="btn-btn-success" />
                 </td>
 
             </tr>
+
         }
     </table>
+    <div class="container">
+
+        <table class="table">
+            <tr>
+                <th>
+                    Tên sản phẩm
+                </th>
+                <th>
+                    Ảnh
+                </th>
+                <th>
+                    Giá
+                </th>
+                <th>
+                    Số lượng
+                </th>
+                <th>
+                    Thành tiền
+                </th>
+                <th></th>
+            </tr>
+            @foreach (var item in listGH)
+            {
+                <tr>
+                    <td> @item.COFFEE.TENCF</td>
+                    <td>
+                        <a href="@Url.Action("Details", "Coffees", new {@id=item.MACF})">
+                            <img src="@*/@item.COFFEE.LINKANH*@" width="90" />
+                        </a>
+                    </td>
+                    <td>@item.GIA <sup>VNĐ</sup></td>
+                    <td>@item.SOLUONG</td>
+                    <td>  @item.TONGGIA </td>
+                </tr>
+
+            }
+            <tr style="font-weight:bold; text-align:left; color:red">
+                <td colspan="2"> Tổng sản phẩm:  @ViewBag.SumSP</td>
+                <td colspan="2"> Số lượng sản phẩm:  @ViewBag.SumQuantity</td>
+                <td id="content" colspan="4"> Tổng tiền:  @String.Format("{0:0,00}", @ViewBag.SumPrice + @gia) VNĐ</td>
+            </tr>
+
+        </table>
+    </div>
 </div>

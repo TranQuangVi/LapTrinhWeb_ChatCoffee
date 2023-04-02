@@ -1183,11 +1183,19 @@ namespace ChatCoffee.Models.ModelViews
 		
 		private string _ANH;
 		
+		private System.Nullable<System.DateTime> _NGAYSINH;
+		
+		private string _GIOITINH;
+		
+		private bool _TRANGTHAI;
+		
 		private EntitySet<AspNetUserClaim> _AspNetUserClaims;
 		
 		private EntitySet<AspNetUserLogin> _AspNetUserLogins;
 		
 		private EntitySet<AspNetUserRole> _AspNetUserRoles;
+		
+		private EntitySet<DIACHI> _DIACHIs;
 		
 		private EntitySet<GIOHANG> _GIOHANGs;
 		
@@ -1227,6 +1235,12 @@ namespace ChatCoffee.Models.ModelViews
     partial void OnUserNameChanged();
     partial void OnANHChanging(string value);
     partial void OnANHChanged();
+    partial void OnNGAYSINHChanging(System.Nullable<System.DateTime> value);
+    partial void OnNGAYSINHChanged();
+    partial void OnGIOITINHChanging(string value);
+    partial void OnGIOITINHChanged();
+    partial void OnTRANGTHAIChanging(bool value);
+    partial void OnTRANGTHAIChanged();
     #endregion
 		
 		public AspNetUser()
@@ -1234,6 +1248,7 @@ namespace ChatCoffee.Models.ModelViews
 			this._AspNetUserClaims = new EntitySet<AspNetUserClaim>(new Action<AspNetUserClaim>(this.attach_AspNetUserClaims), new Action<AspNetUserClaim>(this.detach_AspNetUserClaims));
 			this._AspNetUserLogins = new EntitySet<AspNetUserLogin>(new Action<AspNetUserLogin>(this.attach_AspNetUserLogins), new Action<AspNetUserLogin>(this.detach_AspNetUserLogins));
 			this._AspNetUserRoles = new EntitySet<AspNetUserRole>(new Action<AspNetUserRole>(this.attach_AspNetUserRoles), new Action<AspNetUserRole>(this.detach_AspNetUserRoles));
+			this._DIACHIs = new EntitySet<DIACHI>(new Action<DIACHI>(this.attach_DIACHIs), new Action<DIACHI>(this.detach_DIACHIs));
 			this._GIOHANGs = new EntitySet<GIOHANG>(new Action<GIOHANG>(this.attach_GIOHANGs), new Action<GIOHANG>(this.detach_GIOHANGs));
 			this._HOADONs = new EntitySet<HOADON>(new Action<HOADON>(this.attach_HOADONs), new Action<HOADON>(this.detach_HOADONs));
 			OnCreated();
@@ -1539,6 +1554,66 @@ namespace ChatCoffee.Models.ModelViews
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NGAYSINH", DbType="DateTime")]
+		public System.Nullable<System.DateTime> NGAYSINH
+		{
+			get
+			{
+				return this._NGAYSINH;
+			}
+			set
+			{
+				if ((this._NGAYSINH != value))
+				{
+					this.OnNGAYSINHChanging(value);
+					this.SendPropertyChanging();
+					this._NGAYSINH = value;
+					this.SendPropertyChanged("NGAYSINH");
+					this.OnNGAYSINHChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GIOITINH", DbType="NVarChar(5)")]
+		public string GIOITINH
+		{
+			get
+			{
+				return this._GIOITINH;
+			}
+			set
+			{
+				if ((this._GIOITINH != value))
+				{
+					this.OnGIOITINHChanging(value);
+					this.SendPropertyChanging();
+					this._GIOITINH = value;
+					this.SendPropertyChanged("GIOITINH");
+					this.OnGIOITINHChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TRANGTHAI", DbType="Bit NOT NULL")]
+		public bool TRANGTHAI
+		{
+			get
+			{
+				return this._TRANGTHAI;
+			}
+			set
+			{
+				if ((this._TRANGTHAI != value))
+				{
+					this.OnTRANGTHAIChanging(value);
+					this.SendPropertyChanging();
+					this._TRANGTHAI = value;
+					this.SendPropertyChanged("TRANGTHAI");
+					this.OnTRANGTHAIChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_AspNetUserClaim", Storage="_AspNetUserClaims", ThisKey="Id", OtherKey="UserId")]
 		public EntitySet<AspNetUserClaim> AspNetUserClaims
 		{
@@ -1575,6 +1650,19 @@ namespace ChatCoffee.Models.ModelViews
 			set
 			{
 				this._AspNetUserRoles.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_DIACHI", Storage="_DIACHIs", ThisKey="Id", OtherKey="Id")]
+		public EntitySet<DIACHI> DIACHIs
+		{
+			get
+			{
+				return this._DIACHIs;
+			}
+			set
+			{
+				this._DIACHIs.Assign(value);
 			}
 		}
 		
@@ -1660,6 +1748,18 @@ namespace ChatCoffee.Models.ModelViews
 			entity.AspNetUser = null;
 		}
 		
+		private void attach_DIACHIs(DIACHI entity)
+		{
+			this.SendPropertyChanging();
+			entity.AspNetUser = this;
+		}
+		
+		private void detach_DIACHIs(DIACHI entity)
+		{
+			this.SendPropertyChanging();
+			entity.AspNetUser = null;
+		}
+		
 		private void attach_GIOHANGs(GIOHANG entity)
 		{
 			this.SendPropertyChanging();
@@ -1717,6 +1817,8 @@ namespace ChatCoffee.Models.ModelViews
 		
 		private int _MATH;
 		
+		private bool _TRANGTHAI;
+		
 		private EntitySet<ANH> _ANHs;
 		
 		private EntitySet<CTDONHANG> _CTDONHANGs;
@@ -1757,6 +1859,8 @@ namespace ChatCoffee.Models.ModelViews
     partial void OnMALOAIChanged();
     partial void OnMATHChanging(int value);
     partial void OnMATHChanged();
+    partial void OnTRANGTHAIChanging(bool value);
+    partial void OnTRANGTHAIChanged();
     #endregion
 		
 		public COFFEE()
@@ -2033,6 +2137,26 @@ namespace ChatCoffee.Models.ModelViews
 					this._MATH = value;
 					this.SendPropertyChanged("MATH");
 					this.OnMATHChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TRANGTHAI", DbType="Bit NOT NULL")]
+		public bool TRANGTHAI
+		{
+			get
+			{
+				return this._TRANGTHAI;
+			}
+			set
+			{
+				if ((this._TRANGTHAI != value))
+				{
+					this.OnTRANGTHAIChanging(value);
+					this.SendPropertyChanging();
+					this._TRANGTHAI = value;
+					this.SendPropertyChanged("TRANGTHAI");
+					this.OnTRANGTHAIChanged();
 				}
 			}
 		}
@@ -2665,7 +2789,11 @@ namespace ChatCoffee.Models.ModelViews
 		
 		private int _MADC;
 		
+		private string _Id;
+		
 		private string _TENDC;
+		
+		private EntityRef<AspNetUser> _AspNetUser;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2673,12 +2801,15 @@ namespace ChatCoffee.Models.ModelViews
     partial void OnCreated();
     partial void OnMADCChanging(int value);
     partial void OnMADCChanged();
+    partial void OnIdChanging(string value);
+    partial void OnIdChanged();
     partial void OnTENDCChanging(string value);
     partial void OnTENDCChanged();
     #endregion
 		
 		public DIACHI()
 		{
+			this._AspNetUser = default(EntityRef<AspNetUser>);
 			OnCreated();
 		}
 		
@@ -2702,7 +2833,31 @@ namespace ChatCoffee.Models.ModelViews
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TENDC", DbType="NVarChar(20)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="NVarChar(128) NOT NULL", CanBeNull=false)]
+		public string Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					if (this._AspNetUser.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TENDC", DbType="NVarChar(150)")]
 		public string TENDC
 		{
 			get
@@ -2718,6 +2873,40 @@ namespace ChatCoffee.Models.ModelViews
 					this._TENDC = value;
 					this.SendPropertyChanged("TENDC");
 					this.OnTENDCChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_DIACHI", Storage="_AspNetUser", ThisKey="Id", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public AspNetUser AspNetUser
+		{
+			get
+			{
+				return this._AspNetUser.Entity;
+			}
+			set
+			{
+				AspNetUser previousValue = this._AspNetUser.Entity;
+				if (((previousValue != value) 
+							|| (this._AspNetUser.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._AspNetUser.Entity = null;
+						previousValue.DIACHIs.Remove(this);
+					}
+					this._AspNetUser.Entity = value;
+					if ((value != null))
+					{
+						value.DIACHIs.Add(this);
+						this._Id = value.Id;
+					}
+					else
+					{
+						this._Id = default(string);
+					}
+					this.SendPropertyChanged("AspNetUser");
 				}
 			}
 		}
@@ -2990,6 +3179,12 @@ namespace ChatCoffee.Models.ModelViews
 		
 		private System.DateTime _NGAYGIAO;
 		
+		private string _TRANGTHAI;
+		
+		private string _SDTDAT;
+		
+		private string _DIACHIGIAO;
+		
 		private EntitySet<CTDONHANG> _CTDONHANGs;
 		
 		private EntityRef<AspNetUser> _AspNetUser;
@@ -3016,6 +3211,12 @@ namespace ChatCoffee.Models.ModelViews
     partial void OnNGAYDATChanged();
     partial void OnNGAYGIAOChanging(System.DateTime value);
     partial void OnNGAYGIAOChanged();
+    partial void OnTRANGTHAIChanging(string value);
+    partial void OnTRANGTHAIChanged();
+    partial void OnSDTDATChanging(string value);
+    partial void OnSDTDATChanged();
+    partial void OnDIACHIGIAOChanging(string value);
+    partial void OnDIACHIGIAOChanged();
     #endregion
 		
 		public HOADON()
@@ -3179,6 +3380,66 @@ namespace ChatCoffee.Models.ModelViews
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TRANGTHAI", DbType="NVarChar(50)")]
+		public string TRANGTHAI
+		{
+			get
+			{
+				return this._TRANGTHAI;
+			}
+			set
+			{
+				if ((this._TRANGTHAI != value))
+				{
+					this.OnTRANGTHAIChanging(value);
+					this.SendPropertyChanging();
+					this._TRANGTHAI = value;
+					this.SendPropertyChanged("TRANGTHAI");
+					this.OnTRANGTHAIChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SDTDAT", DbType="NVarChar(10)")]
+		public string SDTDAT
+		{
+			get
+			{
+				return this._SDTDAT;
+			}
+			set
+			{
+				if ((this._SDTDAT != value))
+				{
+					this.OnSDTDATChanging(value);
+					this.SendPropertyChanging();
+					this._SDTDAT = value;
+					this.SendPropertyChanged("SDTDAT");
+					this.OnSDTDATChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DIACHIGIAO", DbType="NVarChar(150)")]
+		public string DIACHIGIAO
+		{
+			get
+			{
+				return this._DIACHIGIAO;
+			}
+			set
+			{
+				if ((this._DIACHIGIAO != value))
+				{
+					this.OnDIACHIGIAOChanging(value);
+					this.SendPropertyChanging();
+					this._DIACHIGIAO = value;
+					this.SendPropertyChanged("DIACHIGIAO");
+					this.OnDIACHIGIAOChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="HOADON_CTDONHANG", Storage="_CTDONHANGs", ThisKey="MAHD", OtherKey="MAHD")]
 		public EntitySet<CTDONHANG> CTDONHANGs
 		{
@@ -3337,6 +3598,8 @@ namespace ChatCoffee.Models.ModelViews
 		
 		private string _TENLOAI;
 		
+		private string _ANH;
+		
 		private EntitySet<COFFEE> _COFFEEs;
 		
     #region Extensibility Method Definitions
@@ -3347,6 +3610,8 @@ namespace ChatCoffee.Models.ModelViews
     partial void OnMALOAIChanged();
     partial void OnTENLOAIChanging(string value);
     partial void OnTENLOAIChanged();
+    partial void OnANHChanging(string value);
+    partial void OnANHChanged();
     #endregion
 		
 		public LOAISANPHAM()
@@ -3391,6 +3656,26 @@ namespace ChatCoffee.Models.ModelViews
 					this._TENLOAI = value;
 					this.SendPropertyChanged("TENLOAI");
 					this.OnTENLOAIChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ANH", DbType="NVarChar(100)")]
+		public string ANH
+		{
+			get
+			{
+				return this._ANH;
+			}
+			set
+			{
+				if ((this._ANH != value))
+				{
+					this.OnANHChanging(value);
+					this.SendPropertyChanging();
+					this._ANH = value;
+					this.SendPropertyChanged("ANH");
+					this.OnANHChanged();
 				}
 			}
 		}
@@ -3675,6 +3960,8 @@ namespace ChatCoffee.Models.ModelViews
 		
 		private string _TENTH;
 		
+		private string _ANH;
+		
 		private EntitySet<COFFEE> _COFFEEs;
 		
     #region Extensibility Method Definitions
@@ -3685,6 +3972,8 @@ namespace ChatCoffee.Models.ModelViews
     partial void OnMATHChanged();
     partial void OnTENTHChanging(string value);
     partial void OnTENTHChanged();
+    partial void OnANHChanging(string value);
+    partial void OnANHChanged();
     #endregion
 		
 		public THUONGHIEU()
@@ -3729,6 +4018,26 @@ namespace ChatCoffee.Models.ModelViews
 					this._TENTH = value;
 					this.SendPropertyChanged("TENTH");
 					this.OnTENTHChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ANH", DbType="NVarChar(100)")]
+		public string ANH
+		{
+			get
+			{
+				return this._ANH;
+			}
+			set
+			{
+				if ((this._ANH != value))
+				{
+					this.OnANHChanging(value);
+					this.SendPropertyChanging();
+					this._ANH = value;
+					this.SendPropertyChanged("ANH");
+					this.OnANHChanged();
 				}
 			}
 		}
