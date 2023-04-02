@@ -136,15 +136,22 @@
                         </div>
 
                         <div class="form-group">
-                                <label>Giới tính</label>
-                                @Html.EditorFor(x => x.GIOITINH, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(x => x.GIOITINH, null, new { @class = "text-danger" })
-                            </div>
+                            <label>Giới tính</label>
+                            @Html.EditorFor(x => x.GIOITINH, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(x => x.GIOITINH, null, new { @class = "text-danger" })
+                        </div>
                         <div class="form-group">
                             <label>Ngày sinh</label>
-
-                            <input type="date" name="NGAYSINH" value="@DateTime.Parse(Model.NGAYSINH.ToString()).ToString("yyyy-MM-dd")" 
-                                   max="@DateTime.Now.ToString("yyyy-MM-dd")"/>
+                            @if (Model.NGAYSINH == null)
+                            {
+                                <input type="date" name="NGAYSINH" value=""
+                                       max="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                            }
+                            else
+                            {
+                                <input type="date" name="NGAYSINH" value="@DateTime.Parse(Model.NGAYSINH.ToString()).ToString("yyyy-MM-dd")"
+                                       max="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                            }
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Số điện thoại</label>
