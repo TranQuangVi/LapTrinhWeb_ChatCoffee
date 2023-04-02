@@ -1,0 +1,79 @@
+﻿@model IEnumerable<ChatCoffee.Models.ModelViews.DIACHI>
+
+@{
+    ViewBag.Title = "IndexDiaChi";
+    Layout = "~/Views/Shared/LayoutUser.cshtml";
+    var listDC = ViewBag.dc;
+}
+
+<section class="content">
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"> Địa chỉ giao hàng </h3>
+
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered">
+
+                @*@Html.ValidationSummary(false)
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+                <thead style="text-align:center">
+                    <tr>
+                        <th>
+                            STT
+                        </th>
+                        <th>
+                            Tên địa chỉ
+                        </th>
+                        <th>
+
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody style="text-align:center">
+
+                    @if (Model != null && Model.Any())
+                    {
+                        int i = 1;
+
+                        foreach (var item in Model)
+                        {
+                            using (Html.BeginForm("EditDiaChi", "user",  new { @MADC = item.MADC }))
+                            {
+                                <tr>
+                                    <th>
+                                        @i
+                                    </th>
+                                    <th>
+                                        <input class = "form-control" type="text" name="TENDC" value="@item.TENDC"><br><br>
+
+                                    </th>
+                                    <th>
+                                        <div class="pull-right">
+                                            <div class="DatMua">
+                                                <input class="btn btn-success" type="submit" value="Cập nhật">
+                                                <a class="btn btn-success" href="@Url.Action("Delete", "User", new { @MADC = item.MADC })">Xóa</a>
+
+                                            </div>
+                                        </div>
+                                    </th>
+
+                </tr>
+                i++;
+            }
+        }
+    }
+                    </tbody>
+                    </table>
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                    </div>
+
+                </section>
+
+

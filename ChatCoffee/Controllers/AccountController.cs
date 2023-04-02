@@ -11,6 +11,8 @@ using Microsoft.Owin.Security;
 using ChatCoffee.Models;
 using System.Collections.Generic;
 using ChatCoffee.Models.ModelViews;
+using ChatCoffee.Models.ModelsDefault;
+using GIOHANG = ChatCoffee.Models.ModelViews.GIOHANG;
 
 namespace ChatCoffee.Controllers
 {
@@ -100,6 +102,7 @@ namespace ChatCoffee.Controllers
         {
             AspNetUser user = model.AspNetUsers.Single(u => u.UserName.Equals(name));
             // MaKH = user.Id;
+
             int MaGH = (int)model.GIOHANGs.Where(x => x.Id.Equals(user.Id)).FirstOrDefault().MAGH;
 
             // lưu id giỏ hàng vào Session
@@ -172,7 +175,8 @@ namespace ChatCoffee.Controllers
                     UserName = model.UserName,
                     Email = model.Email,
                     FullName = model.FullName,
-                    Phone = model.Phone
+                    Phone = model.Phone,
+                    TRANGTHAI = true,
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

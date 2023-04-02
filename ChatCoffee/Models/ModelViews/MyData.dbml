@@ -65,9 +65,13 @@
       <Column Name="AccessFailedCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="UserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
       <Column Name="ANH" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="NGAYSINH" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="GIOITINH" Type="System.String" DbType="NVarChar(5)" CanBeNull="true" />
+      <Column Name="TRANGTHAI" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="AspNetUser_AspNetUserClaim" Member="AspNetUserClaims" ThisKey="Id" OtherKey="UserId" Type="AspNetUserClaim" />
       <Association Name="AspNetUser_AspNetUserLogin" Member="AspNetUserLogins" ThisKey="Id" OtherKey="UserId" Type="AspNetUserLogin" />
       <Association Name="AspNetUser_AspNetUserRole" Member="AspNetUserRoles" ThisKey="Id" OtherKey="UserId" Type="AspNetUserRole" />
+      <Association Name="AspNetUser_DIACHI" Member="DIACHIs" ThisKey="Id" OtherKey="Id" Type="DIACHI" />
       <Association Name="AspNetUser_GIOHANG" Member="GIOHANGs" ThisKey="Id" OtherKey="Id" Type="GIOHANG" />
       <Association Name="AspNetUser_HOADON" Member="HOADONs" ThisKey="Id" OtherKey="Id" Type="HOADON" />
     </Type>
@@ -87,6 +91,7 @@
       <Column Name="MOTA" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Column Name="MALOAI" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="MATH" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TRANGTHAI" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="COFFEE_ANH" Member="ANHs" ThisKey="MACF" OtherKey="MACF" Type="ANH" />
       <Association Name="COFFEE_CTDONHANG" Member="CTDONHANGs" ThisKey="MACF" OtherKey="MACF" Type="CTDONHANG" />
       <Association Name="COFFEE_CTGIOHANG" Member="CTGIOHANGs" ThisKey="MACF" OtherKey="MACF" Type="CTGIOHANG" />
@@ -118,7 +123,9 @@
   <Table Name="dbo.DIACHIs" Member="DIACHIs">
     <Type Name="DIACHI">
       <Column Name="MADC" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="TENDC" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Id" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="TENDC" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Association Name="AspNetUser_DIACHI" Member="AspNetUser" ThisKey="Id" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.GIOHANG" Member="GIOHANGs">
@@ -141,6 +148,9 @@
       <Column Name="MATT" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="NGAYDAT" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="NGAYGIAO" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="TRANGTHAI" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SDTDAT" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="DIACHIGIAO" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
       <Association Name="HOADON_CTDONHANG" Member="CTDONHANGs" ThisKey="MAHD" OtherKey="MAHD" Type="CTDONHANG" />
       <Association Name="AspNetUser_HOADON" Member="AspNetUser" ThisKey="Id" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="VANCHUYEN_HOADON" Member="VANCHUYEN" ThisKey="MAVT" OtherKey="MAVT" Type="VANCHUYEN" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
@@ -151,6 +161,7 @@
     <Type Name="LOAISANPHAM">
       <Column Name="MALOAI" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="TENLOAI" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="ANH" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Association Name="LOAISANPHAM_COFFEE" Member="COFFEEs" ThisKey="MALOAI" OtherKey="MALOAI" Type="COFFEE" />
     </Type>
   </Table>
@@ -172,6 +183,7 @@
     <Type Name="THUONGHIEU">
       <Column Name="MATH" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="TENTH" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ANH" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Association Name="THUONGHIEU_COFFEE" Member="COFFEEs" ThisKey="MATH" OtherKey="MATH" Type="COFFEE" />
     </Type>
   </Table>

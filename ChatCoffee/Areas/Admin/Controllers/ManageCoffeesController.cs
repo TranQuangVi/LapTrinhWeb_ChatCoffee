@@ -18,6 +18,7 @@ namespace ChatCoffee.Areas.Admin.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+
         // GET: Admin/ManageCoffees
         public ActionResult Index(int ? page)
         {
@@ -44,12 +45,13 @@ namespace ChatCoffee.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MACF,TENCF,GIA,SOLUONG,ViewCount,SLDABAN,KHOILUONG,XUATXU,HSD,DANGCF,MOTA,MALOAI,MATH")] COFFEE cOFFEE)
+        public ActionResult Create([Bind(Include = "MACF,TENCF,GIA,SOLUONG,ViewCount,SLDABAN,KHOILUONG,XUATXU,HSD,DANGCF,MOTA,MALOAI,MATH,TRANGTHAI")] COFFEE cOFFEE)
         {
             if (ModelState.IsValid)
             {
                 cOFFEE.ViewCount = 0;
                 cOFFEE.SLDABAN = 0;
+            //    cOFFEE.TRANGTHAI = true;
                 db.COFFEEs.Add(cOFFEE);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -82,7 +84,7 @@ namespace ChatCoffee.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MACF,TENCF,GIA,SOLUONG,ViewCount,SLDABAN,KHOILUONG,XUATXU,HSD,DANGCF,MOTA,MALOAI,MATH")] COFFEE cOFFEE)
+        public ActionResult Edit([Bind(Include = "MACF,TENCF,GIA,SOLUONG,ViewCount,SLDABAN,KHOILUONG,XUATXU,HSD,DANGCF,MOTA,MALOAI,MATH,TRANGTHAI")] COFFEE cOFFEE)
         {
             if (ModelState.IsValid)
             {

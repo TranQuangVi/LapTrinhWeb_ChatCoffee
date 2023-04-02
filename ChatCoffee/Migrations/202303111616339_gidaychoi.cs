@@ -2,7 +2,7 @@
 {
     using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class gidaychoi : DbMigration
     {
         public override void Up()
@@ -31,11 +31,12 @@
                     XUATXU = c.String(maxLength: 20),
                     HSD = c.Int(),
                     ViewCount = c.Int(),
-                    SLDABAN =  c.Int(),
+                    SLDABAN = c.Int(),
                     DANGCF = c.String(maxLength: 10),
                     MOTA = c.String(maxLength: 500),
                     MALOAI = c.Int(nullable: false),
                     MATH = c.Int(nullable: false),
+                    TRANGTHAI = c.Boolean(nullable: false),
                 })
                 .PrimaryKey(t => t.MACF)
                 .ForeignKey("dbo.LOAISANPHAM", t => t.MALOAI, cascadeDelete: true)
@@ -68,7 +69,10 @@
                     MAVT = c.Int(nullable: false),
                     MATT = c.Int(nullable: false),
                     NGAYDAT = c.DateTime(nullable: false),
-                    NGAYGIAO = c.DateTime(nullable: false)
+                    NGAYGIAO = c.DateTime(nullable: false),
+                    TRANGTHAI = c.String(maxLength: 50),
+                    SDTDAT = c.String(maxLength: 10),
+                    DIACHIGIAO = c.String(maxLength: 150),
                 })
                 .PrimaryKey(t => t.MAHD)
                 .ForeignKey("dbo.AspNetUsers", t => t.Id, cascadeDelete: true)
@@ -93,9 +97,12 @@
                 c => new
                 {
                     MADC = c.Int(nullable: false, identity: true),
-                    TENDC = c.String(maxLength: 20),
+                    Id = c.String(nullable: false, maxLength: 128),
+                    TENDC = c.String(maxLength: 150),
                 })
-                .PrimaryKey(t => t.MADC);
+                .PrimaryKey(t => t.MADC)
+                .ForeignKey("dbo.AspNetUsers", t => t.Id, cascadeDelete: true)
+                .Index(t => t.Id);
 
             CreateTable(
                 "dbo.GIOHANG",
@@ -153,6 +160,7 @@
                 {
                     MALOAI = c.Int(nullable: false, identity: true),
                     TENLOAI = c.String(maxLength: 20),
+                    ANH = c.String(maxLength: 100),
                 })
                 .PrimaryKey(t => t.MALOAI);
 
@@ -162,82 +170,86 @@
                 {
                     MATH = c.Int(nullable: false, identity: true),
                     TENTH = c.String(maxLength: 100),
+                    ANH = c.String(maxLength: 100),
                 })
                 .PrimaryKey(t => t.MATH);
 
             CreateTable(
                 "dbo.AspNetRoles",
                 c => new
-                    {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        Name = c.String(nullable: false, maxLength: 256),
-                    })
+                {
+                    Id = c.String(nullable: false, maxLength: 128),
+                    Name = c.String(nullable: false, maxLength: 256),
+                })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
-            
+
             CreateTable(
                 "dbo.AspNetUserRoles",
                 c => new
-                    {
-                        UserId = c.String(nullable: false, maxLength: 128),
-                        RoleId = c.String(nullable: false, maxLength: 128),
-                    })
+                {
+                    UserId = c.String(nullable: false, maxLength: 128),
+                    RoleId = c.String(nullable: false, maxLength: 128),
+                })
                 .PrimaryKey(t => new { t.UserId, t.RoleId })
                 .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId)
                 .Index(t => t.RoleId);
-            
+
             CreateTable(
                 "dbo.AspNetUsers",
                 c => new
-                    {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        FullName = c.String(),
-                        Phone = c.String(),
-                        Email = c.String(maxLength: 256),
-                        EmailConfirmed = c.Boolean(nullable: false),
-                        PasswordHash = c.String(),
-                        SecurityStamp = c.String(),
-                        PhoneNumber = c.String(),
-                        PhoneNumberConfirmed = c.Boolean(nullable: false),
-                        TwoFactorEnabled = c.Boolean(nullable: false),
-                        LockoutEndDateUtc = c.DateTime(),
-                        LockoutEnabled = c.Boolean(nullable: false),
-                        AccessFailedCount = c.Int(nullable: false),
-                        UserName = c.String(nullable: false, maxLength: 256),
-                        ANH = c.String(maxLength: 100),
+                {
+                    Id = c.String(nullable: false, maxLength: 128),
+                    FullName = c.String(),
+                    Phone = c.String(),
+                    Email = c.String(maxLength: 256),
+                    EmailConfirmed = c.Boolean(nullable: false),
+                    PasswordHash = c.String(),
+                    SecurityStamp = c.String(),
+                    PhoneNumber = c.String(),
+                    PhoneNumberConfirmed = c.Boolean(nullable: false),
+                    TwoFactorEnabled = c.Boolean(nullable: false),
+                    LockoutEndDateUtc = c.DateTime(),
+                    LockoutEnabled = c.Boolean(nullable: false),
+                    AccessFailedCount = c.Int(nullable: false),
+                    UserName = c.String(nullable: false, maxLength: 256),
+                    ANH = c.String(maxLength: 100),
+                    NGAYSINH = c.DateTime(nullable: true),
+                    GIOITINH = c.String(maxLength: 5, nullable: true),
+                    TRANGTHAI = c.Boolean(nullable: false),
                 })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.UserName, unique: true, name: "UserNameIndex");
-            
+
             CreateTable(
                 "dbo.AspNetUserClaims",
                 c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        UserId = c.String(nullable: false, maxLength: 128),
-                        ClaimType = c.String(),
-                        ClaimValue = c.String(),
-                    })
+                {
+                    Id = c.Int(nullable: false, identity: true),
+                    UserId = c.String(nullable: false, maxLength: 128),
+                    ClaimType = c.String(),
+                    ClaimValue = c.String(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
-            
+
             CreateTable(
                 "dbo.AspNetUserLogins",
                 c => new
-                    {
-                        LoginProvider = c.String(nullable: false, maxLength: 128),
-                        ProviderKey = c.String(nullable: false, maxLength: 128),
-                        UserId = c.String(nullable: false, maxLength: 128),
-                    })
+                {
+                    LoginProvider = c.String(nullable: false, maxLength: 128),
+                    ProviderKey = c.String(nullable: false, maxLength: 128),
+                    UserId = c.String(nullable: false, maxLength: 128),
+                })
                 .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
-            
+
         }
-        
+
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
@@ -252,7 +264,7 @@
             DropForeignKey("dbo.GIOHANG", "Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.CTGIOHANG", "MAGH", "dbo.GIOHANG");
             DropForeignKey("dbo.CTGIOHANG", "MACF", "dbo.COFFEE");
-            DropForeignKey("dbo.AspNetUsers", "MADC", "dbo.DIACHIs");
+            DropForeignKey("dbo.AspNetUsers", "Id", "dbo.DIACHIs");
             DropForeignKey("dbo.CTDONHANG", "MAHD", "dbo.HOADON");
             DropForeignKey("dbo.CTDONHANG", "MACF", "dbo.COFFEE");
             DropForeignKey("dbo.ANH", "MACF", "dbo.COFFEE");
@@ -265,7 +277,7 @@
             DropIndex("dbo.CTGIOHANG", new[] { "MAGH" });
             DropIndex("dbo.CTGIOHANG", new[] { "MACF" });
             DropIndex("dbo.GIOHANG", new[] { "Id" });
-            DropIndex("dbo.AspNetUsers", new[] { "MADC" });
+            DropIndex("dbo.AspNetUsers", new[] { "Id" });
             DropIndex("dbo.HOADON", new[] { "MATT" });
             DropIndex("dbo.HOADON", new[] { "MAVT" });
             DropIndex("dbo.HOADON", new[] { "Id" });

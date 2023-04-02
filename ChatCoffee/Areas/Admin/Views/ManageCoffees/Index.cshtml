@@ -35,25 +35,34 @@
                 @using (Html.BeginForm())
                 {
                     @Html.AntiForgeryToken()
-                    <thead>
+                    <thead style="text-align:center">
                         <tr>
                             <th>
 
                             </th>
                             <th>
-                                <h5>Tên loại</h5>
+                                Tên sản phẩm
                             </th>
                             <th>
-                                <h5>Thương hiệu</h5>
+                                Loại
                             </th>
                             <th>
-                                <h5>Tên cà phê</h5>
+                                Thương hiệu
                             </th>
                             <th>
-                                <h5>Tên giá</h5>
+                                Giá
                             </th>
                             <th>
-                                <h5>Số lượng</h5>
+                                Số lượng còn
+                            </th>
+                            <th>
+                                Lượt xem
+                            </th>
+                            <th>
+                                Lượt mua
+                            </th>
+                            <th>
+                                Trạng thái
                             </th>
                             @*<th>
                                     @Html.DisplayNameFor(model => model.ViewCount)
@@ -79,7 +88,7 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody style="text-align:center">
                         @if (Model != null && Model.Any())
                         {
                             var i = 1;
@@ -91,13 +100,13 @@
                                              style="width:50px;height:50px" />
                                     </td>
                                     <td>
+                                        @Html.DisplayFor(modelItem => item.TENCF)
+                                    </td>
+                                    <td>
                                         @Html.DisplayFor(modelItem => item.LOAISANPHAM.TENLOAI)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.THUONGHIEU.TENTH)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.TENCF)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.GIA)
@@ -105,32 +114,18 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.SOLUONG)
                                     </td>
-                                    @*<td>
-                                            @Html.DisplayFor(modelItem => item.ViewCount)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.SLDABAN)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.KHOILUONG)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.XUATXU)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.HSD)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.DANGCF)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.MOTA)
-                                        </td>*@
                                     <td>
-                                        <a href="/Admin/ManageCoffees/edit/@item.MACF" class="btn btn-success">Sửa</a>
-
-                                        <input type="submit" value="Xóa" class="btn btn-danger" />
-
+                                        @Html.DisplayFor(modelItem => item.ViewCount)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SLDABAN)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TRANGTHAI)
+                                    </td>
+                                    <td>
+                                        <a href="/Admin/ManageCoffees/edit/@item.MACF" class="btn btn-success">Chi tiết</a>
+                                        <a href="/Admin/ManageCoffees/Delete/@item.MACF" class="btn btn-danger">Xóa</a>
                                     </td>
                                 </tr>
                                 i++;

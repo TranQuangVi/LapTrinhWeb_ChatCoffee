@@ -1,0 +1,69 @@
+﻿@model IEnumerable<ChatCoffee.Models.ModelViews.CTDONHANG>
+@{
+    Layout = "~/Views/Shared/LayoutUser.cshtml";
+    ChatCoffee.Models.ModelViews.AspNetUser user = ViewBag.user;
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link href="~/css/profile.css" rel="stylesheet" />
+
+<section class="content">
+    <!-- Default box -->
+
+    <div style="text-align: -webkit-center">
+
+        <div style="width: 800px; background-color:white; border-radius: 10px">
+            <div>
+                <div>
+                    <hr />
+                    <dl class="dl-horizontal" style="text-align:center">
+                        <div class="pro_group row" style="margin-left: 85px; margin-right: 85px;">
+                            @if (Model != null)
+                                {
+                                    var u = Model.First();
+                                <div class="col-6" style="float:left; text-align:left">
+
+                                    <h4><b>Họ tên:</b>@u.HOADON.AspNetUser.FullName</h4>
+                                    <h4><b>Số điện thoại:</b> @u.HOADON.AspNetUser.Phone</h4>
+                                    <h4><b>Địa chỉ:</b> u.HOADON.dd</h4>
+                                </div>
+                                <div class="col-1">
+
+                                </div>
+                                <div class="col-5" style="float: left; text-align: left">
+                                    <h4><b>Người bán:</b> ChatCoffee</h4>
+                                    <h4><b>Ngày đặt:</b> ff/ff/ffff</h4>
+                                    <h4><b>Ngày giao:</b> ff/ff/ffff</h4>
+                                </div>
+                                <table style="width: 100%;">
+                                    <tr>
+                                        <td>STT</td>
+                                        <td>Tên sản phẩm</td>
+                                        <td>Giá</td>
+                                        <td>Số lượng</td>
+                                        <td>Thành tiền</td>
+                                    </tr>
+                                    @{int i = 1;
+                                        foreach (var ct in Model)
+                                        {
+                                            <tr>
+                                                <td>@i</td>
+                                                <td>@ct.COFFEE.TENCF</td>
+                                                <td>@ct.COFFEE.GIA VNĐ</td>
+                                                <td>@ct.SOLUONG</td>
+                                                <td>@ct.GIA VNĐ</td>
+                                            </tr>
+                                            i++;
+                                        }
+                                    }
+                                </table>
+                                }
+                            </div>
+                                        
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>

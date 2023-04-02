@@ -21,7 +21,7 @@ namespace ChatCoffee.Controllers
     public class ShoppingCardController : Controller
     {
         // lấy id khách hàng theo user name
-        public void GetIdUserByName(AspNetUser user, string name)
+        /*public void GetIdUserByName(AspNetUser user, string name)
         {
             user = model.AspNetUsers.Single(u => u.UserName.Equals(name));
 
@@ -30,11 +30,12 @@ namespace ChatCoffee.Controllers
         {
             AspNetUser user = new AspNetUser();
             GetIdUserByName(user, name);
+
             int MaGH = (int)model.GIOHANGs.Where(x => x.Id.Equals(user.Id)).FirstOrDefault().MAGH;
             // lưu id giỏ hàng vào Session
             Session["MaGH"] = MaGH;
         }
-
+*/
         public MyDataDataContext model = new MyDataDataContext();
         // GET: Default
         public List<CTGIOHANG> GetListProductInCard(int MaGH)
@@ -82,7 +83,7 @@ namespace ChatCoffee.Controllers
             Session["success"] = "success";
             List<CTGIOHANG> list = GetListProductInCard((int)Session["MaGH"]);
             CTGIOHANG sp = list.Find(b => b.MACF.Equals(maSP));
-            GIOHANG giohang = model.GIOHANGs.Single(g => g.MAGH.Equals((int)Session["MaGH"]));
+            GIOHANG gh = model.GIOHANGs.Single(g => g.MAGH.Equals((int)Session["MaGH"]));
             if (sp == null)
             {
                 sp = new CTGIOHANG();
@@ -94,19 +95,26 @@ namespace ChatCoffee.Controllers
                 sp.TONGGIA = (sp.GIA * sp.SOLUONG);
                 list.Add(sp);
                 model.CTGIOHANGs.InsertOnSubmit(sp);
-                model.SubmitChanges();
-                return Redirect(strURL);
+                //     model.SubmitChanges();
+                //    return Redirect(strURL);
             }
             else
             {
                 sp.SOLUONG += sl;
 
                 sp.TONGGIA = (sp.GIA * sp.SOLUONG);
-                model.SubmitChanges();
+                //     model.SubmitChanges();
                 // return RedirectToAction("View", "coffees");
-                return Redirect(strURL);
+
+                //    return Redirect(strURL);
 
             }
+
+            ViewBag.SumQuantity = SumQuantity(gh);
+            ViewBag.SumPrice = SumPrice(gh);
+            ViewBag.SumSP = SumSP(gh);
+            model.SubmitChanges();
+            return Redirect(strURL);
         }
 
         // tính tổng số lượng
@@ -118,7 +126,7 @@ namespace ChatCoffee.Controllers
             {
                 foreach (var item in list)
                 {
-                    if (item.SOLUONG <= item.COFFEE.SOLUONG)
+                    if (item.SOLUONG <= item.COFFEE.SOLUONG && item.COFFEE.TRANGTHAI == true)
                         sum += (int)item.SOLUONG;
                 }
             }
@@ -135,7 +143,7 @@ namespace ChatCoffee.Controllers
             {
                 foreach (var item in list)
                 {
-                    if (item.SOLUONG <= item.COFFEE.SOLUONG)
+                    if (item.SOLUONG <= item.COFFEE.SOLUONG && item.COFFEE.TRANGTHAI == true)
                         sum += 1;
                 }
             }
@@ -154,7 +162,7 @@ namespace ChatCoffee.Controllers
             {
                 foreach (var item in list)
                 {
-                    if (item.SOLUONG <= item.COFFEE.SOLUONG)
+                    if (item.SOLUONG <= item.COFFEE.SOLUONG && item.COFFEE.TRANGTHAI == true)
                         sum += (double)item.TONGGIA;
                 }
             }
@@ -229,7 +237,10 @@ namespace ChatCoffee.Controllers
             }
             HOADON hoadon = new HOADON();
             //   List<CTGIOHANG> lstGiohang = GetListProductInCard((int)Session["MaGH"]);
-            List<CTGIOHANG> lstGiohang = model.CTGIOHANGs.Where(c => c.MAGH == (int)Session["MaGH"] && c.SOLUONG <= c.COFFEE.SOLUONG).ToList();
+            List<CTGIOHANG> lstGiohang = model.CTGIOHANGs.
+                Where(c => c.MAGH == (int)Session["MaGH"]
+                && c.SOLUONG <= c.COFFEE.SOLUONG
+                && c.COFFEE.TRANGTHAI == true).ToList();
             GIOHANG giohang = model.GIOHANGs.Single(g => g.MAGH.Equals((int)Session["MaGH"]));
 
             ViewBag.SumQuantity = SumQuantity(giohang);
@@ -237,31 +248,47 @@ namespace ChatCoffee.Controllers
             ViewBag.SumSP = SumSP(giohang);
             ViewBag.listGH = lstGiohang;
             ViewBag.VanChuyen = GetListVanChuyen();
-            ViewBag.user = model.AspNetUsers.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault();
+             
+             var   user = model.AspNetUsers.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.user = user;
             ViewBag.MAVT = new SelectList(model.VANCHUYENs, "MAVT", "TENVT");
             ViewBag.MATT = new SelectList(model.THANHTOANs, "MATT", "PHUONGTHUC");
+            var diachi = model.DIACHIs.Where(d => d.Id.Equals(user.Id));
+            ViewBag.DIACHIGIAO = diachi;
+          //  ViewBag.DIACHIGIAO = new SelectList(diachi, "MADC", "DIACHIGIAO");
+
             return View(hoadon);
         }
 
-        public ActionResult Order([Bind(Include = "MAGH, Id,TONGSP,TONGSL,MAVT,MATT ,TONGTIEN,NGAYDAT, NGAYGIAO")] HOADON hoadon)
+        public ActionResult Order([Bind(Include = "MAGH, Id,TONGSP,TONGSL,MAVT,MATT ,TONGTIEN,NGAYDAT, NGAYGIAO,DIACHIGIAO,SDTDAT, TRANGTHAI")]
+                                    HOADON hoadon)
         {
             // lấy thông tin khách hàng từ 
             //MAHD
             GIOHANG gh = model.GIOHANGs.Single(n => n.MAGH == (int)Session["MaGH"]);
             List<CTGIOHANG> list = GetListProductInCard(gh.MAGH);
 
+            //vận chuyển
+            VANCHUYEN vc = model.VANCHUYENs.FirstOrDefault(c => c.MAVT == hoadon.MAVT);
             hoadon.Id = gh.Id;
-            hoadon.TONGDONGIA = gh.TONGTIEN;
+            hoadon.TONGDONGIA = gh.TONGTIEN + vc.GIA;
+            hoadon.TRANGTHAI = "Chờ";
+/*            hoadon.DIACHIGIAO = "abc";
+            hoadon.SDTDAT = "";*/
             //MAVT
             //MATT
-
-            hoadon.NGAYGIAO = DateTime.Now;
             hoadon.NGAYDAT = DateTime.Now;
+            if (hoadon.MAVT == 1)
+            {
+                hoadon.NGAYGIAO = DateTime.Now.AddDays(+5);
+            }
+            else if (hoadon.MAVT == 2)
+                hoadon.NGAYGIAO = DateTime.Now.AddDays(+2);
             model.HOADONs.InsertOnSubmit(hoadon);
             model.SubmitChanges();
             foreach (var item in list)
             {
-                if (item.SOLUONG < item.COFFEE.SOLUONG)
+                if (item.SOLUONG <= item.COFFEE.SOLUONG && item.COFFEE.TRANGTHAI == true)
                 {
                     CTDONHANG ctdh = new CTDONHANG();
                     COFFEE cf = model.COFFEEs.Where(c => c.MACF == item.MACF).FirstOrDefault();

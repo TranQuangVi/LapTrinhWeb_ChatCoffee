@@ -1,4 +1,14 @@
-﻿<!DOCTYPE html>
+﻿@using ChatCoffee.Models.ModelViews
+@using ChatCoffee.Repository
+@{
+    int sl = 0;
+    if (Session["Magh"] != null)
+    {
+         sl = SearchByOption.getSLinCard((int)Session["Magh"]);
+    }
+
+        }
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -22,11 +32,6 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link href="~/css/style.min.css" rel="stylesheet" />
     <link href="~/css/style.css" rel="stylesheet" />
-    @Scripts.Render("~/bundles/modernizr")
-    <script src="~/Content/assets/js/jquery-3.2.1.min.js"></script>
-    @Scripts.Render("~/bundles/jqueryval")
-
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.green.min.css" integrity="sha512-C8Movfk6DU/H5PzarG0+Dv9MA9IZzvmQpO/3cIlGIflmtY3vIud07myMu4M/NTPJl8jmZtt/4mC9bAioMZBBdA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -46,7 +51,7 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav ml-auto p-4">
-                    <a href="@Url.Action("Index", "Home")" class="nav-item nav-link active">Trang chủ</a>
+                    <a href="@Url.Action("Index", "Home")" class="nav-item nav-link active"><i class="fa fa-home" style='font-size:26px'></i></a>
                     <a href="@Url.Action("About", "Home")" class="nav-item nav-link">Giới thiệu</a>
                     @*<a href="@Url.Action("Service", "Home")" class="nav-item nav-link">Service</a>*@
                     <a href="@Url.Action("Index", "Coffees")" class="nav-item nav-link">Sản phẩm</a>
@@ -54,7 +59,7 @@
 
                         @if (!Request.IsAuthenticated)
                         {
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tài khoản</a>
+                            <a href="#" class="nav-link dropdown-toggle " data-toggle="dropdown"><i class="fa fa-user"style='font-size:26px'></i></a>
                             <div class="dropdown-menu text-capitalize">
                                 <a href="@Url.Action("Login", "Account")" class="dropdown-item">Đăng nhập</a>
                                 <a href="@Url.Action("Register","Account")" class="dropdown-item">Đăng kí</a>
@@ -72,7 +77,11 @@
 
                     </div>
                     @*<a href="@Url.Action("Contact", "Home")" class="nav-item nav-link">Contact</a>*@
-                    <a href="@Url.Action("Index", "ShoppingCard")" class="nav-item nav-link">Giỏ hàng</a>
+                    <a href="@Url.Action("Index", "ShoppingCard")" class="nav-item nav-link"><i class='fas fa-cart-arrow-down' style='font-size:26px'></i></a>
+                    @if (Session["MaGH"] != null)
+                    {
+                        <span class="cart-count" style="color: #DA9F5B; margin-left: -9px; margin-top: -5px; font-size: 20px "> <strong> @sl</strong></span>
+                    }
                 </div>
             </div>
 
@@ -190,6 +199,5 @@
         })
     </script>
 
-    @RenderSection("scripts", required: false)
 </body>
 </html>
