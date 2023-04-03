@@ -1,4 +1,5 @@
 ﻿@using System.Linq;
+@using ChatCoffee.Models.ModelViews;
 @{
     ViewBag.Title = "Order";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,6 +10,14 @@
     int gia = (int)listVC.FirstOrDefault().GIA;
 
     var diachi = ViewBag.DIACHIGIAO;
+
+    List<ANH> listAnh = new List<ANH>();
+    if (ViewBag.ANH != null)
+    {
+        listAnh = ViewBag.ANH;
+    }
+
+
 }
 <div class="container">
     <h2 style="text-align:center"> Thông tin đặt hàng </h2>
@@ -164,7 +173,14 @@
                     <td> @item.COFFEE.TENCF</td>
                     <td>
                         <a href="@Url.Action("Details", "Coffees", new {@id=item.MACF})">
-                            <img src="@*/@item.COFFEE.LINKANH*@" width="90" />
+                            @if (listAnh.Count != 0)
+                            {
+                                <img src="@listAnh.FirstOrDefault(c=>c.MACF==item.MACF).LINKANH" width="60" />
+                            }
+                            else
+                            {
+                                <img src="" width="60" />
+                            }
                         </a>
                     </td>
                     <td>@item.GIA <sup>VNĐ</sup></td>

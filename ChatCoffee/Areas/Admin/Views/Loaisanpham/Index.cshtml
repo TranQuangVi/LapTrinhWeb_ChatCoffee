@@ -48,7 +48,7 @@
                             <th></th>
                         </tr>
                     </thead>
-                    @using (Html.BeginForm("Delete", "Loaisanpham", FormMethod.Post))
+                    using (Html.BeginForm("Delete", "Loaisanpham", FormMethod.Post))
                     {
                         @Html.AntiForgeryToken()
                         <tbody>
@@ -66,9 +66,9 @@
                                         <td> @item.TENLOAI </td>
                                         <td> <img src="@item.ANH" alt="hinh thumbnail" style=" width:131px;height:117px; border-radius: 6px; " /> </td>
                                         <td>
-                                            <a href="/admin/Loaisanpham/edit/@item.MALOAI" class="btn btn-success">Sửa</a>
                                             @*<a href="/admin/Loaisanpham/delete/@item.MALOAI" class="btn btn-danger">Xóa</a>*@
                                             <div class="form-group">
+                                                <a href="/admin/Loaisanpham/edit/@item.MALOAI" class="btn btn-success">Sửa</a>
                                                 @*<button type="submit" class="btn btn-success">Delete</button>*@
                                                 <input type="submit" value="Delete" class="btn btn-danger" />
                                             </div>

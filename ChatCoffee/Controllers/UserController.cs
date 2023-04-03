@@ -21,6 +21,10 @@ namespace ChatCoffee.Controllers
         {
             //var user = data.AspNetUsers.Single(u => u.UserName.Equals(User.Identity.Name));
             var user = GetUserByUserName();
+            if(user == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             return View(user);
         }
 

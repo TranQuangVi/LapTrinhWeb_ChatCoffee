@@ -10,7 +10,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link href="~/css/profile.css" rel="stylesheet" />
 <section class="content">
-
     <div class="card">
         <div class="card-header">
             <h3 class="card-title"> Quản lý đơn hàng </h3>
@@ -60,18 +59,15 @@
                                         }
                                     </td>
                                     <td>
-                                        @*@Html.DisplayName(item.NGAYDAT.ToString())*@
                                         @Html.DisplayName(item.NGAYDAT.ToString())
                                     </td>
-                                    <td>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+                                    <td>
                                         @Html.DisplayName(item.NGAYGIAO.ToShortDateString())
                                     </td>
                                     <td>
                                         @Html.DisplayName(item.TRANGTHAI)
                                     <td>
                                         <a class="btn btn-success" href="@Url.Action("DetailHoaDon", "User", new { @MAHD = item.MAHD})">Chi tiết</a>
-
-
                                     </td>
                                 </tr>
                             }
@@ -79,9 +75,6 @@
                     </tbody>
                 }
             </table>
-        </div>
-        <div class="card-footer">
-
         </div>
     </div>
 

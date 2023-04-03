@@ -75,7 +75,7 @@ namespace ChatCoffee.Areas.Admin.Controllers
             {
                 foreach(var r in CTrole)
                 {
-                    if (r.RoleId.Equals("90ecb062-774f-4464-adf5-09a1cfc52e1d") && r.UserId.Equals(u.Id))
+                    if (r.AspNetRole.Name.Equals("User") && r.UserId.Equals(u.Id))
                     {
                         users.Add(u);
                     }
@@ -105,7 +105,7 @@ namespace ChatCoffee.Areas.Admin.Controllers
             {
                 foreach (var r in CTrole)
                 {
-                    if (r.RoleId.Equals("bb6d30ed-89b2-47ad-9ec0-6b4c24bfdcc2") && r.UserId.Equals(u.Id))
+                    if (r.AspNetRole.Name.Equals("Admin") && r.UserId.Equals(u.Id))
                     {
                         users.Add(u);
                     }

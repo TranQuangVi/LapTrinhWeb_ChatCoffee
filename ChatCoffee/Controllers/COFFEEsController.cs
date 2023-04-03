@@ -119,7 +119,7 @@ namespace ChatCoffee.Controllers
                     .Include(c => c.LOAISANPHAM)
                     .Include(c => c.THUONGHIEU)
                     .Include(c => c.ANHs)
-                    .Where(x => x.MALOAI == id).ToList();
+                    .Where(x => x.MALOAI == id && x.TRANGTHAI.Equals(true)).ToList();
                 // đây là model view
                 ViewBag.MaLoai = id;
 
@@ -127,16 +127,7 @@ namespace ChatCoffee.Controllers
             }
             else
             {
-                // câu truy vấn
-                var cOFFEEs = db.COFFEEs
-                   .Include(c => c.LOAISANPHAM)
-                   .Include(c => c.THUONGHIEU)
-                   .Include(c => c.ANHs)
-                   .Where(c => c.TENCF.Contains(search));
-                
-                // trả về list sp loại a
-                
-                return View(cOFFEEs.ToList());
+                return RedirectToAction("Index", "coffees", new { @search = search });
             }
         }
 
@@ -148,7 +139,7 @@ namespace ChatCoffee.Controllers
                     .Include(c => c.LOAISANPHAM)
                     .Include(c => c.THUONGHIEU)
                     .Include(c => c.ANHs)
-                    .Where(x => x.MATH == id).ToList();
+                    .Where(x => x.MATH == id && x.TRANGTHAI.Equals(true)).ToList();
                 // đây là model view
                 ViewBag.MaTH = id;
 
@@ -156,16 +147,7 @@ namespace ChatCoffee.Controllers
             }
             else
             {
-                // câu truy vấn
-                var cOFFEEs = db.COFFEEs
-                   .Include(c => c.LOAISANPHAM)
-                   .Include(c => c.THUONGHIEU)
-                   .Include(c => c.ANHs)
-                   .Where(c => c.TENCF.Contains(search));
-
-                // trả về list sp loại a
-
-                return View(cOFFEEs.ToList());
+                return RedirectToAction("Index", "coffees", new { @search = search });
             }
         }
         
@@ -179,9 +161,9 @@ namespace ChatCoffee.Controllers
         }
         public ActionResult Partial_ItemsByCateId()
         {
-            
+            //Where(c => c.TRANGTHAI.Equals(true))
             //var item = db.COFFEEs.ToList();
-            var ketqua = db.COFFEEs.Where(x => x.SLDABAN <= int.MaxValue).OrderByDescending(x => x.SLDABAN).Take(10).ToList();
+            var ketqua = db.COFFEEs.Where(x => x.SLDABAN <= int.MaxValue && x.TRANGTHAI.Equals(true)).OrderByDescending(x => x.SLDABAN).Take(10).ToList();
             return PartialView(ketqua);
 
         }
