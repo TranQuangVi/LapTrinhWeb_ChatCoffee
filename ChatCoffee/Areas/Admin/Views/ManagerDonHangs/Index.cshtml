@@ -1,0 +1,112 @@
+﻿@model IEnumerable<ChatCoffee.Models.ModelViews.HOADON>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    List<ChatCoffee.Models.ModelViews.CTDONHANG> CTHD = ViewBag.CTHD;
+}
+
+<section class="content">
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"> Quản lý đơn hàng </h3>
+
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <thead style="text-align:center">
+                    <tr>
+                        <th>
+                            Mã hóa đơn
+                        </th>
+                        <th>
+                            Tên khách hàng
+                        </th>
+                        <th>
+                            Tên sản phẩm
+                        </th>
+                        <th>
+                            Ngày đặt
+                        </th>
+                        <th>
+                            Ngày giao
+                        </th>
+                        <th>
+                            Trạng thái
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody style="text-align:center">
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var item in Model)
+                        {
+                            using (Html.BeginForm("CapNhatTrangThai", "ManagerDonHangs", new { @MAHD = item.MAHD }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <tr>
+                                    <td>
+                                        @item.MAHD
+                                    </td>
+                                    <td>
+                                        @item.AspNetUser.FullName
+                                    </td>
+                                    <td>
+                                        @foreach (var ct in CTHD)
+                                        {
+                                            if (ct.MAHD == item.MAHD)
+                                            {
+                                                @Html.DisplayName(ct.COFFEE.TENCF)<br />
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayName(item.NGAYDAT.ToString())
+                                    </td>
+                                    <td>
+                                        @Html.DisplayName(item.NGAYGIAO.ToShortDateString())
+                                    </td>
+                                    <td>
+                                        <select class="form-control" id="TRANGTHAI" name="TRANGTHAI">
+                                            <option value="@item.TRANGTHAI">
+                                                @item.TRANGTHAI
+                                            </option>
+                                            <option value="Chờ xác nhận">
+                                                Chờ xác nhận
+                                            </option>
+                                            <option value="Chờ lấy hàng">
+                                                Chờ lấy hàng
+                                            </option>
+                                            <option value="Đang giao">
+                                                Đang giao
+                                            </option>
+                                            <option value="Hoàn thành">
+                                                Hoàn thành
+                                            </option>
+                                            <option value="Hủy đơn hàng">
+                                                Hủy đơn hàng
+                                            </option>
+                                        </select>
+
+
+
+                                    <td>
+                                        <a class="btn btn-success" href="@Url.Action("DetailHoaDon", "ManagerDonHangs", new { @MAHD = item.MAHD })">Chi tiết</a>
+                                        <input class="btn btn-success" type="submit" value="Cập nhật" onclick="alert('Đã cập nhật trạng thái')">
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
+                </tbody>
+
+            </table>
+        </div>
+        <div class="card-footer">
+
+        </div>
+    </div>
+
+</section>

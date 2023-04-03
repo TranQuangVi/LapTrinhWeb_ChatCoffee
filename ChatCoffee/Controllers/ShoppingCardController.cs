@@ -304,7 +304,7 @@ namespace ChatCoffee.Controllers
             }
             model.CTGIOHANGs.DeleteAllOnSubmit(list);
             model.SubmitChanges();
-            return RedirectToAction("XacnhanDonhang", "ShoppingCard");
+            return RedirectToAction("DetailHoaDon", "User", new { @MAHD = hoadon.MAHD });
         }
 
         public List<VANCHUYEN> GetListVanChuyen()

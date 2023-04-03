@@ -76,6 +76,10 @@ namespace ChatCoffee.Areas.Admin.Controllers
             }
             ViewBag.MALOAI = new SelectList(db.LOAISANPHAMs, "MALOAI", "TENLOAI", cOFFEE.MALOAI);
             ViewBag.MATH = new SelectList(db.THUONGHIEUs, "MATH", "TENTH", cOFFEE.MATH);
+
+            // danh sách ảnh của sp
+            ViewBag.DSAnh = db.ANHs.Where(c => c.MACF == cOFFEE.MACF).ToList();
+
             return View(cOFFEE);
         }
 
@@ -131,6 +135,34 @@ namespace ChatCoffee.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult AddImage(int MACF, FormCollection collection)
+        {
+            var anh = new ANH();
+            anh.MACF = MACF;
+            anh.LINKANH = "/Content/images/coffees_imgs/"+ collection["fileUpload"];
+            db.ANHs.Add(anh);
+            db.SaveChanges();
+            return RedirectToAction("edit", "ManageCoffees", new { @id = MACF } );
+        }
+        
+        public ActionResult DeleteImage(int id)
+        {
+            var anh = db.ANHs.First(c => c.MAANH == id);
+            db.ANHs.Remove(anh);
+            db.SaveChanges();
+            return RedirectToAction("edit", "ManageCoffees", new { @id = anh.MACF } );
+        }
+
+        public string ProcessUpload(HttpPostedFileBase file)
+        {
+            if (file == null)
+            {
+                return "";
+            }
+            file.SaveAs(Server.MapPath("~/Content/images/coffees_imgs/" + file.FileName));
+            return "/Content/images/coffees_imgs/" + file.FileName;
         }
     }
 }
