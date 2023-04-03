@@ -190,6 +190,7 @@
     <Compile Include="Areas\Admin\Controllers\ManageCoffeesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManageDeliveriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManagePaymentController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManagerDonHangsController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Common\Common.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -3501,6 +3502,8 @@
     </Content>
     <Content Include="Areas\Admin\Views\Home\Profile.cshtml" />
     <Content Include="Areas\Admin\Views\Role\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerDonHangs\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerDonHangs\DetailHoaDon.cshtml" />
     <None Include="Models\ModelViews\MyData.dbml.layout">
       <DependentUpon>MyData.dbml</DependentUpon>
     </None>
@@ -3669,6 +3672,7 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Content\ckfinder\userfiles\" />
+    <Folder Include="Content\images\coffees_imgs\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

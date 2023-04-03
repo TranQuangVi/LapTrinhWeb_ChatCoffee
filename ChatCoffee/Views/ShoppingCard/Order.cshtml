@@ -95,13 +95,13 @@
                                 if (x == '1') {
                                     var day = new Date(d.setDate(d.getDate() + 5));
                                     div.innerHTML = @listVC.FirstOrDefault(c => c.MAVT==1).GIA + @ViewBag.SumPrice + " VNĐ";
-                                    document.getElementById('ngaygiao').innerHTML = day.getDate() + "/" + day.getMonth() + "/" + day.getFullYear();
+                                    document.getElementById('ngaygiao').innerHTML = day.getDate() + "/" + (day.getMonth() + 1) + "/" + day.getFullYear();
                                 }
                                 else if (x == '2') {
                                     var day = new Date(d.setDate(d.getDate() + 2));
                                     div.innerHTML = @listVC.FirstOrDefault(c => c.MAVT==2).GIA + @ViewBag.SumPrice+ " VNĐ";
                                     @*document.getElementById('ngaygiao').innerHTML = @DateTime.Now.AddDays(+2).ToShortDateString();*@
-                                    document.getElementById('ngaygiao').innerHTML = day.getDate() + "/" + day.getMonth() + "/" + day.getFullYear();
+                                    document.getElementById('ngaygiao').innerHTML = day.getDate() + "/" + (day.getMonth() + 1) + "/" + day.getFullYear();
                                 }
                             }
                         </script>

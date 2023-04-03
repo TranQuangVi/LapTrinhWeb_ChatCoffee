@@ -363,7 +363,7 @@ namespace ChatCoffee.Controllers
             contentAdmin = contentAdmin.Replace("{{TongTien}}", ChatCoffee.Common.Common.FormatNumber(TongTien, 0));
             contentAdmin = contentAdmin.Replace("{{NgayGiao}}", hoadon.NGAYGIAO.ToString("dd/MM/yyyy"));
             ChatCoffee.Common.Common.SendMail("ChatCoffee", "Đơn hàng mới #" + hoadon.MAHD.ToString(), contentAdmin.ToString(), ConfigurationManager.AppSettings["EmailAdmin"]);
-            return RedirectToAction("XacnhanDonhang", "ShoppingCard");
+            return RedirectToAction("DetailHoaDon", "User", new { @MAHD = hoadon.MAHD });
         }
 
         public List<VANCHUYEN> GetListVanChuyen()

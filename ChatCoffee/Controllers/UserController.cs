@@ -20,10 +20,7 @@ namespace ChatCoffee.Controllers
         public ActionResult Index()
         {
             //var user = data.AspNetUsers.Single(u => u.UserName.Equals(User.Identity.Name));
-            var user = data.AspNetUsers.
-                Where(u => u.UserName.Equals(User.Identity.Name)).
-                FirstOrDefault();
-            Session["acc"] = data.AspNetUsers.FirstOrDefault(c => c.UserName.Equals(User.Identity.Name));
+            var user = GetUserByUserName();
             return View(user);
         }
 
@@ -65,9 +62,7 @@ namespace ChatCoffee.Controllers
 
         public ActionResult QuanLyHoaDon()
         {
-            var user = data.AspNetUsers.
-                Where(u => u.UserName.Equals(User.Identity.Name)).
-                FirstOrDefault();
+            var user = GetUserByUserName();
             List<HOADON> hd = new List<HOADON>();
             ViewBag.listHD = GetHDByKH(user.Id);
             hd = GetHDByKH(user.Id);
@@ -89,17 +84,32 @@ namespace ChatCoffee.Controllers
 
         public ActionResult IndexDiaChi()
         {
-            var user = data.AspNetUsers.
-                Where(u => u.UserName.Equals(User.Identity.Name)).
-                FirstOrDefault();
+            var user = GetUserByUserName();
             List<DIACHI> listDC = new List<DIACHI>();
             listDC = data.DIACHIs.Where(c => c.Id.Equals(user.Id)).ToList();
-
             ViewBag.dc = listDC;
             return View(listDC);
         }
 
+        public AspNetUser GetUserByUserName()
+        {
+            var user =  data.AspNetUsers.
+                Where(u => u.UserName.Equals(User.Identity.Name)).
+                FirstOrDefault();
+            return user;
+        }
 
+        public ActionResult CreateDiaChi(FormCollection collection)
+        {
+            var diachi = new DIACHI();
+            var user = GetUserByUserName();
+            diachi.Id = user.Id;
+            diachi.TENDC = collection["NewNameDC"];
+            diachi.AspNetUser = user;
+            data.DIACHIs.InsertOnSubmit(diachi);
+            data.SubmitChanges();
+            return RedirectToAction("IndexDiaChi");
+        }
 
         public ActionResult EditDiaChi(int? MADC, FormCollection collection)
         {

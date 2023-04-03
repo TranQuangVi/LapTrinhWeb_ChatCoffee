@@ -1,7 +1,6 @@
 ﻿@model IEnumerable<ChatCoffee.Models.ModelViews.CTDONHANG>
 @{
     Layout = "~/Views/Shared/LayoutUser.cshtml";
-    ChatCoffee.Models.ModelViews.AspNetUser user = ViewBag.user;
 }
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
@@ -19,12 +18,13 @@
 </style>
 <section class="content">
     <!-- Default box -->
-
+    <br />
     <div style="text-align: -webkit-center; ">
 
         <div style="width: 800px; background-color:white; border-radius: 10px">
             <div>
                 <div style="padding-top: 15px">
+                    
                     <h2>HÓA ĐƠN MUA HÀNG</h2>
                     <hr />
                     <dl class="dl-horizontal" style="text-align:center">
@@ -75,6 +75,9 @@
                                 </table>
                                 <table>
                                     <tr>
+                                        <td style="width:100%;"> Phí vận chuyển: <strong>@u.HOADON.VANCHUYEN.GIA VNĐ</strong> </td>
+                                    </tr>
+                                    <tr>
                                         <td style="width:100%"> Tổng tiền: <strong>@u.HOADON.TONGDONGIA VNĐ</strong> </td>
                                     </tr>
                                 </table>
@@ -84,10 +87,11 @@
                         <hr />
 
                     </dl>
+
                     <i>ChatCoffee cảm ơn quý khách đã mua hàng.</i>
-                    <p>***</p>
                 </div>
             </div>
         </div>
     </div>
-    </section>
+</section>
+

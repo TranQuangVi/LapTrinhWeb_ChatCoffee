@@ -41,14 +41,14 @@
 
                         foreach (var item in Model)
                         {
-                            using (Html.BeginForm("EditDiaChi", "user",  new { @MADC = item.MADC }))
+                            using (Html.BeginForm("EditDiaChi", "user", new { @MADC = item.MADC }))
                             {
                                 <tr>
                                     <th>
                                         @i
                                     </th>
                                     <th>
-                                        <input class = "form-control" type="text" name="TENDC" value="@item.TENDC"><br><br>
+                                        <input class="form-control" type="text" name="TENDC" value="@item.TENDC">
 
                                     </th>
                                     <th>
@@ -61,19 +61,41 @@
                                         </div>
                                     </th>
 
-                </tr>
-                i++;
-            }
-        }
-    }
-                    </tbody>
-                    </table>
-                    </div>
-                    <div class="card-footer">
+                                </tr>
+                                i++;
+                            }
+                        }
+                    }
+                    @using (Html.BeginForm("CreateDiaChi", "user"))
+                    {
+                        <tr>
+                            <th>
+                                
+                            </th>
+                            <th>
+                                <input class="form-control" type="text" name="NewNameDC" placeholder="Nhập địa chỉ">
 
-                    </div>
-                    </div>
+                            </th>
+                            <th>
+                                <div class="pull-right">
+                                    <div class="DatMua">
+                                        <input class="btn btn-success" type="submit" value="Thêm">
 
-                </section>
+                                    </div>
+                                </div>
+                            </th>
+
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer">
+
+        </div>
+    </div>
+
+</section>
 
 
