@@ -59,7 +59,7 @@ namespace ChatCoffee.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MALOAI,TENLOAI")] Models.ModelsDefault.LOAISANPHAM lOAISANPHAM)
+        public ActionResult Create([Bind(Include = "MALOAI,TENLOAI,ANH")] Models.ModelsDefault.LOAISANPHAM lOAISANPHAM)
         {
             if (ModelState.IsValid)
             {
@@ -146,6 +146,15 @@ namespace ChatCoffee.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public string ProcessUpload(HttpPostedFileBase file)
+        {
+            if (file == null)
+            {
+                return "";
+            }
+            file.SaveAs(Server.MapPath("~/Content/images/" + file.FileName));
+            return "/Content/images/" + file.FileName;
         }
     }
 }

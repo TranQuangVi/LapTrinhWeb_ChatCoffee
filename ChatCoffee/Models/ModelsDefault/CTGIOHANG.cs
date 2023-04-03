@@ -14,7 +14,7 @@ namespace ChatCoffee.Models.ModelsDefault
 
         public int? GIA { get; set; }
 
-        [Key]
+        [Key]   
         [Column(Order = 0)]
         public int MACF { get; set; }
 

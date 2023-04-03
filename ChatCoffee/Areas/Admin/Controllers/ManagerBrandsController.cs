@@ -40,7 +40,7 @@ namespace ChatCoffee.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MATH,TENTH")] THUONGHIEU tHUONGHIEU)
+        public ActionResult Create([Bind(Include = "MATH,TENTH,ANH")] THUONGHIEU tHUONGHIEU)
         {
             if (ModelState.IsValid)
             {
@@ -116,6 +116,15 @@ namespace ChatCoffee.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public string ProcessUpload(HttpPostedFileBase file)
+        {
+            if (file == null)
+            {
+                return "";
+            }
+            file.SaveAs(Server.MapPath("~/Content/images/" + file.FileName));
+            return "/Content/images/" + file.FileName;
         }
     }
 }

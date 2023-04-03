@@ -1,6 +1,4 @@
-﻿@{
-    var user = ViewBag.acc;
-}
+﻿
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -164,9 +162,9 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="~/Content/clients/index3.html" class="brand-link">
+            <a href="~/Content/clients/index3.html" class="brand-link" style="padding: 1.2125rem 0.5rem;">
                 <img src="~/Content/images/Chat Coffee.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">Chat Coffee</span>
+                <span class="brand-text font-weight-light" style="font-size: 20px; font-family: Source Sans Pro">Chat Coffee</span>
             </a>
 
             @Html.Partial("_PartiaSideBar")
@@ -179,7 +177,7 @@
         <!-- /.content-wrapper -->
         <footer class="main-footer">
             <div class="float-right d-none d-sm-block">
-                
+
             </div>
             <strong>CHAT COFFEE XIN CHÀO</strong>
         </footer>
@@ -351,7 +349,7 @@
         document.querySelector("#actions .cancel").onclick = function () {
             myDropzone.removeAllFiles(true)
         }
-                              // DropzoneJS Demo Code End</script>
+                                  // DropzoneJS Demo Code End</script>
 
     @RenderSection("upload", required: false)
 </body>

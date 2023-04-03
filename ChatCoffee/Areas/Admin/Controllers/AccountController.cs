@@ -197,7 +197,7 @@ namespace ChatCoffee.Areas.Admin.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Account");
+                    return RedirectToAction("Profile", "Account");
                 }
                 AddErrors(result);
             }
@@ -215,38 +215,7 @@ namespace ChatCoffee.Areas.Admin.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        //public ActionResult Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    ApplicationUser = db.Users.Find(id);
-        //    if (user == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-
-        //    return View(user);
-        //}
-
-        //// POST: Admin/ManageCoffees/Edit/5
-        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit(AspNetUser uSer)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(uSer).State = EntityState.Modified;
-        //        UpdateModel(uSer);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    return View(uSer);
-        //}
+       
 
         public ActionResult Delete(string id)
         {

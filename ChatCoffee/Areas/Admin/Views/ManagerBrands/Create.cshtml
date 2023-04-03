@@ -37,24 +37,66 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-horizontal" style="margin-left: 20px">
-            <h4>Thương hiệu</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                <label>Tên thương hiệu:</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.TENTH, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.TENTH, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="form-group">
-                    <button type="submit" class="btn btn-success">Thêm mới</button>
-                </div>
+    <div class="form-horizontal" style="margin-left: 20px">
+        <h4>Thương hiệu</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label>Tên thương hiệu:</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TENTH, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TENTH, "", new { @class = "text-danger" })
             </div>
         </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <strong>Hình</strong>
+                @Html.EditorFor(x => x.ANH, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(x => x.ANH, "", new { @class = "text-danger" })
+                <input type="file" name="fileUpload" id="fileUpload" accept="image/*" style="display:none;" />
+                <input type="button" id="btnUpload" value="Chọn" class="btn btn-success" />
+                <br />
+                <img src="" id="pictureUpload" style="width:131px;height:117px; border-radius: 6px; " />
+            </div>
+        </div>
+        @section upload
+{
+            <script>
+                        $(function () {
+                            $('#btnUpload').click(function () {
+                                $('#fileUpload').trigger('click');
+                            });
+                        });
+                        $('#fileUpload').change(function () {
+                            if (window.FormData !== undefined) {
+                                var fileUpload = $('#fileUpload').get(0);
+                                var files = fileUpload.files;
+                                var formData = new FormData();
+                                formData.append('file', files[0]);
+                                $.ajax(
+                                    {
+                                        type: 'POST',
+                                        url: '/ManagerBrands/ProcessUpload',
+                                        contentType: false,
+                                        processData: false,
+                                        data: formData,
+                                        success: function (urlImage) {
+                                            $('#pictureUpload').attr('src', urlImage);
+                                            $('#ANH').val(urlImage);
+                                        },
+                                        error: function (err) {
+                                            alert('Error ', err.statusText);
+                                        }
+                                    });
+                            }
+                        });
+            </script>
+        }
+        <div class="form-group">
+                <button type="submit" class="btn btn-success">Thêm mới</button>
+
+        </div>
+    </div>
     }
 
 </body>

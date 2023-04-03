@@ -1,15 +1,20 @@
 ﻿@model ChatCoffee.Models.ModelViews.AspNetUser
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/LayoutUser.cshtml";
-    var dc = ViewBag.dc;
+    ViewBag.Title = "Profile";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link href="~/css/profile.css" rel="stylesheet" />
+
+
 @section naviheader{
     <ul class="navbar-nav" style="flex-direction: row; padding-left: 1rem;">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"> <i class="fas fa-bars"></i> </a>
+        </li>
         <li class="nav-item d-none d-sm-inline-block">
             <a href="/home/index" class="nav-link">Trang chủ</a>
         </li>
@@ -110,6 +115,7 @@
         </div>
     </div>
 
+
     <div class="modal" id="myModal" role="dialog">
         @*<div class="modal-header">
 
@@ -117,7 +123,7 @@
         <div class="modal-content" style="width: 50%; margin-left: 400px; height: auto;">
             <h3 class="card-title">Thông tin tài khoản</h3>
             <div class="modal-body">
-                @using (Html.BeginForm("edit", "user", new { @id = Model.Id }, FormMethod.Post))
+                @using (Html.BeginForm("edit", "home", new { @id = Model.Id }, FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })

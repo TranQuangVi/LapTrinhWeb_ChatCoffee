@@ -21,7 +21,7 @@ namespace ChatCoffee.Models.ModelsDefault
 
         [StringLength(100)]
         public string TENTH { get; set; }
-
+        public string ANH { get; set; }
         public virtual ICollection<COFFEE> COFFEEs { get; set; }
     }
 }

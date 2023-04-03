@@ -36,12 +36,6 @@
                 @Html.ValidationSummary(false)
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                @*@Html.HiddenFor(x => x.MALOAI)
-                    @Html.HiddenFor(x => x.TENLOAI)*@
-
-
-
-
 
                 <div class="form-group">
                     <label> Mã Loại sản phẩm</label>
@@ -51,15 +45,56 @@
                 </div>
                 <div class="form-group">
                     <label>Tên Loại sản phẩm</label>
-                    @Html.EditorFor(model => model.TENLOAI, new
-                    {
-                        htmlAttributes = new { @class = "form-control" }
-                })
+                    @Html.EditorFor(model => model.TENLOAI, new { htmlAttributes = new { @class = "form-control" }})
                     @Html.ValidationMessageFor(model => model.TENLOAI, "", new { @class = "text-danger" })
                 </div>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <strong>Hình</strong>
+                        @Html.EditorFor(x => x.ANH, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(x => x.ANH, "", new { @class = "text-danger" })
+                        <input type="file" name="fileUpload" id="fileUpload" accept="image/*" style="display:none;" />
+                        <input type="button" id="btnUpload" value="Tải lên" class="btn btn-success" />
+                        <br />
+                        <img src="@Model.ANH" id="pictureUpload" style="width:131px;height:117px; border-radius: 6px; " />
+                    </div>
+                </div>
+                @section upload
+                {
+                    <script>
+                        $(function () {
+                            $('#btnUpload').click(function () {
+                                $('#fileUpload').trigger('click');
+                            });
+                        });
+                        $('#fileUpload').change(function () {
+                            if (window.FormData !== undefined) {
+                                var fileUpload = $('#fileUpload').get(0);
+                                var files = fileUpload.files;
+                                var formData = new FormData();
+                                formData.append('file', files[0]);
+                                $.ajax(
+                                    {
+                                        type: 'POST',
+                                        url: '/Loaisanpham/ProcessUpload',
+                                        contentType: false,
+                                        processData: false,
+                                        data: formData,
+                                        success: function (urlImage) {
+                                            $('#pictureUpload').attr('src', urlImage);
+                                            $('#ANH').val(urlImage);
+                                        },
+                                        error: function (err) {
+                                            alert('Error ', err.statusText);
+                                        }
+                                    });
+                            }
+                        });
+                    </script>
+                }
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-success"> Save </button>
+                    <button type="submit" class="btn btn-success"> Lưu</button>
                 </div>
             }
 

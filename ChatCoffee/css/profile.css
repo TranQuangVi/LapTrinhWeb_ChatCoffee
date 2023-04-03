@@ -1,7 +1,10 @@
 ﻿body {
 }
-
-.pro_group{
+.btn-success{
+    margin-top: 40px;
+    margin-left:30px;
+}
+.pro_group {
     margin-left: 100px;
     margin-right: 100px;
 }
@@ -70,5 +73,8 @@
 }
 .modal-body img {
     height: 600px;
+}
+#btnUpload{
+    margin-top: 50px;
 }
 

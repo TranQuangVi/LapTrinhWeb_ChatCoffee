@@ -23,6 +23,7 @@ namespace ChatCoffee.Controllers
             var user = data.AspNetUsers.
                 Where(u => u.UserName.Equals(User.Identity.Name)).
                 FirstOrDefault();
+            Session["acc"] = data.AspNetUsers.FirstOrDefault(c => c.UserName.Equals(User.Identity.Name));
             return View(user);
         }
 

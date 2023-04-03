@@ -63,20 +63,22 @@ namespace ChatCoffee.Areas.Admin.Controllers
         public ActionResult Delete(string id)
         {
             var item = db.Roles.Find(id);
-            return View(item);
+            db.Roles.Remove(item);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(IdentityRole model)
-        {
-            if (ModelState.IsValid)
-            {
-                var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
-                roleManager.Delete(model);
-                return RedirectToAction("Index");
-            }
-            return View(model);
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Delete(IdentityRole model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
+        //        roleManager.Delete(model);
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(model);
+        //}
     }
 }

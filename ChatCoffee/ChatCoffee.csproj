@@ -191,6 +191,7 @@
     <Compile Include="Areas\Admin\Controllers\ManageDeliveriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManagePaymentController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
+    <Compile Include="Common\Common.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\COFFEEsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -3253,6 +3254,8 @@
     <Content Include="Content\styles\responsive.css" />
     <Content Include="Content\styles\single_responsive.css" />
     <Content Include="Content\styles\single_styles.css" />
+    <Content Include="Content\template\send1.html" />
+    <Content Include="Content\template\send2.html" />
     <Content Include="css\CHITIET.css" />
     <Content Include="css\menu.css" />
     <Content Include="css\profile.css" />
@@ -3496,6 +3499,8 @@
       <LastGenOutput>MyData.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Areas\Admin\Views\Home\Profile.cshtml" />
+    <Content Include="Areas\Admin\Views\Role\Delete.cshtml" />
     <None Include="Models\ModelViews\MyData.dbml.layout">
       <DependentUpon>MyData.dbml</DependentUpon>
     </None>

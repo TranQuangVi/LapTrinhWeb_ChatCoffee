@@ -41,37 +41,50 @@
                         <tr>
 
                             <th> Mã loại </th>
+                            <th> Ảnh </th>
                             <th> Tên loại </th>
 
 
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @if (Model != null && Model.Any())
-                        {
-                            var i = 1;
-                            foreach (var item in Model)
+                    @using (Html.BeginForm("Delete", "Loaisanpham", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <tbody>
+
+                            @if (Model != null && Model.Any())
                             {
-                                <tr>
+                                var i = 1;
+                                foreach (var item in Model)
+                                {
 
-                                    <td> @item.MALOAI </td>
+                                    <tr>
 
-                                    <td> @item.TENLOAI </td>
-                                    <td>
-                                        <a href="/admin/Loaisanpham/edit/@item.MALOAI" class="btn btn-success">Sửa</a>
-                                        <a href="/admin/Loaisanpham/delete/@item.MALOAI" class="btn btn-danger">Xóa</a>
+                                        <td> @item.MALOAI </td>
+
+                                        <td> @item.TENLOAI </td>
+                                        <td> <img src="@item.ANH" alt="hinh thumbnail" style=" width:131px;height:117px; border-radius: 6px; " /> </td>
+                                        <td>
+                                            <a href="/admin/Loaisanpham/edit/@item.MALOAI" class="btn btn-success">Sửa</a>
+                                            @*<a href="/admin/Loaisanpham/delete/@item.MALOAI" class="btn btn-danger">Xóa</a>*@
+                                            <div class="form-group">
+                                                @*<button type="submit" class="btn btn-success">Delete</button>*@
+                                                <input type="submit" value="Delete" class="btn btn-danger" />
+                                            </div>
 
 
-                                    </td>
-                                </tr>
-                                i++;
+                                        </td>
+                                    </tr>
+                                    i++;
+                                }
                             }
-                        }
-                    </tbody>
+                            
+                        </tbody>
+                    }
                 }
 
-            </table>
+                </table>
 
         </div>
         <div class="card-footer">
@@ -80,61 +93,59 @@
         </div>
 
     </div>
+</section>
+
+<div>
     <div>
-        <div>
-            Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) /
-            @Model.PageCount
-        </div>
-        <div class="MenuTrang">
-            @Html.PagedListPager(Model, page => Url.Action("Index", new
-            {
-                page = page
-            }))
-        </div>
+        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) /
+        @Model.PageCount
     </div>
-    <style>
-        .MenuTrang li {
-            display: inline;
-        }
-    </style>
-    <style type="text/css">
-        #mau-nut a {
-            clear: both;
-            background-color: orange;
+    <div class="MenuTrang">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new
+        {
+            page = page
+        }))
+    </div>
+</div>
+<style>
+    .MenuTrang li {
+        display: inline;
+    }
+</style>
+<style type="text/css">
+    #mau-nut a {
+        clear: both;
+        background-color: orange;
+        color: snow;
+    }
+
+        #mau-nut a:hover {
+            background-color: darkcyan;
             color: snow;
         }
-
-            #mau-nut a:hover {
-                background-color: darkcyan;
-                color: snow;
+</style>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var maxLength = 100;
+        $(".show-read-more").each(function () {
+            var myStr = $(this).text();
+            if ($.trim(myStr).length > maxLength) {
+                var newStr = myStr.substring(0, maxLength);
+                var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
+                $(this).empty().html(newStr);
+                $(this).append(' <a href="javascript:void(0);" class="read-more">đọc tiếp...</a>');
+                $(this).append('<span class="more-text">' + removedStr + '</span>');
             }
-    </style>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            var maxLength = 100;
-            $(".show-read-more").each(function () {
-                var myStr = $(this).text();
-                if ($.trim(myStr).length > maxLength) {
-                    var newStr = myStr.substring(0, maxLength);
-                    var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
-                    $(this).empty().html(newStr);
-
-                    $(this).append(' <a href="javascript:void(0);" class="read-more">đọc tiếp...</a>');
-
-                    $(this).append('<span class="more-text">' + removedStr + '</span>');
-                }
-            });
-            $(".read-more").click(function () {
-                $(this).siblings(".more-text").contents().unwrap();
-                $(this).remove();
-            });
         });
-    </script>
-    <style>
-        .show-read-more .more-text {
-            display: none;
-        }
-    </style>
-
-</section>
+        $(".read-more").click(function () {
+            $(this).siblings(".more-text").contents().unwrap();
+            $(this).remove();
+        });
+    });
+</script>
+<style>
+    .show-read-more .more-text {
+        display: none;
+    }
+</style>

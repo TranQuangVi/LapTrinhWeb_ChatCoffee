@@ -11,18 +11,13 @@
     <b style="display: block; margin-top: 15px; -webkit-box-flex: 1; -ms-flex: 1; flex: 1; height: 2px;  background-color: #DA9F5B; "></b>
     </h3>
     <div class="row align-items-center">
-        @*<div class="col text-center">
-            <div class="row" style="padding-top:10px">
-                <div class="new_arrivals_sorting">
-                    <ul class="arrivals_grid_sorting clearfix button-group filters-button-group">*@
-        @*<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked" data-filter="*">Tất cả</li>*@
         @foreach (var item in Model)
         {
             <div class="col-lg-3">
                 <a href="/COFFEEs/CFCategory/@item.MALOAI">
                     <figure>
                         <span>
-                            <img src="https://th.bing.com/th/id/OIP.Ay7BK6NBJfSo4D9e-fcsaQHaHa?pid=ImgDet&rs=1" style="width:131px;height:117px; border-radius: 6px; " />
+                            <img src="@item.ANH" style="width:131px;height:117px; border-radius: 6px; " />
                         </span>
                     </figure>
                     <h3>@item.TENLOAI</h3><!-- End .cat-block-title -->

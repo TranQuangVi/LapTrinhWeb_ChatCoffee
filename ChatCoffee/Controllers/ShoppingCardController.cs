@@ -15,6 +15,8 @@ using VANCHUYEN = ChatCoffee.Models.ModelViews.VANCHUYEN;
 using System.Net.Http;
 using System.Web.UI;
 using Microsoft.Ajax.Utilities;
+using System.ComponentModel;
+using System.Configuration;
 
 namespace ChatCoffee.Controllers
 {
@@ -260,7 +262,7 @@ namespace ChatCoffee.Controllers
             return View(hoadon);
         }
 
-        public ActionResult Order([Bind(Include = "MAGH, Id,TONGSP,TONGSL,MAVT,MATT ,TONGTIEN,NGAYDAT, NGAYGIAO,DIACHIGIAO,SDTDAT, TRANGTHAI")]
+        public ActionResult Order([Bind(Include = "MAGH, Id,TONGSP,TONGSL,MAVT,MATT ,TONGTIEN,NGAYDAT, NGAYGIAO,DIACHIGIAO,SDTDAT, TRANGTHAI, TENCF")]
                                     HOADON hoadon)
         {
             // lấy thông tin khách hàng từ 
@@ -286,6 +288,8 @@ namespace ChatCoffee.Controllers
                 hoadon.NGAYGIAO = DateTime.Now.AddDays(+2);
             model.HOADONs.InsertOnSubmit(hoadon);
             model.SubmitChanges();
+            var listHD = new List<CTDONHANG>();
+
             foreach (var item in list)
             {
                 if (item.SOLUONG <= item.COFFEE.SOLUONG && item.COFFEE.TRANGTHAI == true)
@@ -298,12 +302,67 @@ namespace ChatCoffee.Controllers
                     ctdh.SOLUONG = item.SOLUONG;
                     cf.SOLUONG -= item.SOLUONG;
                     cf.SLDABAN += item.SOLUONG;
+                    cf.TENCF = item.COFFEE.TENCF;
+
+                    listHD.Add(ctdh);
                     model.CTDONHANGs.InsertOnSubmit(ctdh);
                     model.SubmitChanges();
                 }
             }
             model.CTGIOHANGs.DeleteAllOnSubmit(list);
             model.SubmitChanges();
+            //send mail cho khachs hang
+            var strSanPham = "";   
+            
+            var thanhtien = decimal.Zero;
+            var TongTien = decimal.Zero;
+            var VanChuyen = decimal.Zero;
+           
+            foreach (var sp in listHD)
+            {
+                strSanPham += "<tr>";
+                strSanPham += "<td>" + sp.COFFEE.TENCF + "</td>";
+                strSanPham += "<td>" + sp.SOLUONG + "</td>";
+                strSanPham += "<td>" + ChatCoffee.Common.Common.FormatNumber(sp.COFFEE.GIA, 0) + "</td>";
+                strSanPham += "<td>" + ChatCoffee.Common.Common.FormatNumber(sp.SOLUONG*sp.COFFEE.GIA, 0) + "</td>";
+                strSanPham += "</tr>";
+                //thanhtien += (decimal)sp.GIA * (decimal)sp.SOLUONG;
+                thanhtien += (decimal)sp.GIA;
+            }
+            VanChuyen = (decimal)hoadon.VANCHUYEN.GIA;
+           // TongTien = thanhtien + (decimal)vc.GIA;
+            TongTien = (decimal)hoadon.TONGDONGIA;
+            string contentCustomer = System.IO.File.ReadAllText(Server.MapPath("~/Content/template/send2.html"));
+            contentCustomer = contentCustomer.Replace("{{MADON}}", hoadon.MAHD.ToString() );
+            contentCustomer = contentCustomer.Replace("{{SanPham}}", strSanPham);
+            contentCustomer = contentCustomer.Replace("{{NgayDat}}", DateTime.Now.ToString("dd/MM/yyyy") );
+            contentCustomer = contentCustomer.Replace("{{TenKhachHang}}", hoadon.AspNetUser.FullName);
+            contentCustomer = contentCustomer.Replace("{{Phone}}", hoadon.AspNetUser.Phone);
+            contentCustomer = contentCustomer.Replace("{{Email}}", hoadon.AspNetUser.Email);
+            contentCustomer = contentCustomer.Replace("{{ThanhToan}}", hoadon.THANHTOAN.PHUONGTHUC);
+            contentCustomer = contentCustomer.Replace("{{TenVanChuyen}}", hoadon.VANCHUYEN.TENVT);
+            contentCustomer = contentCustomer.Replace("{{DiaChiNhanHang}}", hoadon.DIACHIGIAO);
+            contentCustomer = contentCustomer.Replace("{{VanChuyen}}", ChatCoffee.Common.Common.FormatNumber(VanChuyen, 0));
+            contentCustomer = contentCustomer.Replace("{{ThanhTien}}", ChatCoffee.Common.Common.FormatNumber(thanhtien, 0));
+            contentCustomer = contentCustomer.Replace("{{TongTien}}", ChatCoffee.Common.Common.FormatNumber(TongTien, 0));
+            contentCustomer = contentCustomer.Replace("{{NgayGiao}}", hoadon.NGAYGIAO.ToString("dd/MM/yyyy"));
+            ChatCoffee.Common.Common.SendMail("ChatCoffee", "Đơn hàng #" + hoadon.MAHD.ToString(), contentCustomer.ToString(), hoadon.AspNetUser.Email);
+
+            string contentAdmin = System.IO.File.ReadAllText(Server.MapPath("~/Content/template/send1.html"));
+            contentAdmin = contentAdmin.Replace("{{MADON}}", hoadon.MAHD.ToString());
+            contentAdmin = contentAdmin.Replace("{{SanPham}}", strSanPham);
+            contentAdmin = contentAdmin.Replace("{{NgayDat}}", DateTime.Now.ToString("dd/MM/yyyy"));
+            contentAdmin = contentAdmin.Replace("{{TenKhachHang}}", hoadon.AspNetUser.FullName);
+            contentAdmin = contentAdmin.Replace("{{Phone}}", hoadon.AspNetUser.Phone);
+            contentAdmin = contentAdmin.Replace("{{Email}}", hoadon.AspNetUser.Email);
+            contentAdmin = contentAdmin.Replace("{{ThanhToan}}", hoadon.THANHTOAN.PHUONGTHUC);
+            contentAdmin = contentAdmin.Replace("{{TenVanChuyen}}", hoadon.VANCHUYEN.TENVT);
+            contentAdmin = contentAdmin.Replace("{{DiaChiNhanHang}}", hoadon.DIACHIGIAO);
+            contentAdmin = contentAdmin.Replace("{{VanChuyen}}", ChatCoffee.Common.Common.FormatNumber(VanChuyen, 0));
+            contentAdmin = contentAdmin.Replace("{{ThanhTien}}", ChatCoffee.Common.Common.FormatNumber(thanhtien, 0));
+            contentAdmin = contentAdmin.Replace("{{TongTien}}", ChatCoffee.Common.Common.FormatNumber(TongTien, 0));
+            contentAdmin = contentAdmin.Replace("{{NgayGiao}}", hoadon.NGAYGIAO.ToString("dd/MM/yyyy"));
+            ChatCoffee.Common.Common.SendMail("ChatCoffee", "Đơn hàng mới #" + hoadon.MAHD.ToString(), contentAdmin.ToString(), ConfigurationManager.AppSettings["EmailAdmin"]);
             return RedirectToAction("XacnhanDonhang", "ShoppingCard");
         }
 

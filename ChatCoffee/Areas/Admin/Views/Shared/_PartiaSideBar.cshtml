@@ -7,7 +7,7 @@
     }
 }
 
-<div class="sidebar">
+<div class="sidebar" style="font-size:16px">
     <!-- Sidebar user (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
@@ -24,7 +24,7 @@
 
         </div>
         <div class="info">
-            <a href="#" class="d-block">@User.Identity.Name</a>
+            <a href="/admin/home/profile" class="d-block">@User.Identity.Name</a>
         </div>
     </div>
 
@@ -45,13 +45,7 @@
             <!-- Add icons to the links using the .nav-icon class
             with font-awesome or any other icon font library -->
             <li class="nav-item">
-                <a href="/Category" class="nav-link">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                    <p>
-                        Danh mục
-                        @*<i class="right fas fa-angle-left"></i>*@
-                    </p>
-                </a>
+                
                 @*<ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="~/Content/clients/index.html" class="nav-link">
@@ -81,33 +75,9 @@
                     </p>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="/news" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
-                    <p>
-                        Tin tức
-                        @*<span class="right badge badge-danger">New</span>*@
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="/post" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
-                    <p>
-                        Bài viết
-                        @*<span class="right badge badge-danger">New</span>*@
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="/news" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
-                    <p>
-                        Quảng cáo
-                        @*<span class="right badge badge-danger">New</span>*@
-                    </p>
-                </a>
-            </li>
+            
+            
+            
             <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -149,15 +119,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item">
-                <a href="/news" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
-                    <p>
-                        Cấu hình hệ thống
-                        @*<span class="right badge badge-danger">New</span>*@
-                    </p>
-                </a>
-            </li>
+            
             <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-th"></i>
@@ -184,7 +146,6 @@
 
 
             </li>
-
             <li class="nav-item">
                 <a href="javascript:document.getElementById('logOffForm').submit()" class="nav-link">
                     <i class="nav-icon fas fa-th"></i>
@@ -199,7 +160,6 @@
     <!-- /.sidebar-menu -->
 </div>
 <!-- /.sidebar -->
-
 
 @if (Request.IsAuthenticated)
 {
