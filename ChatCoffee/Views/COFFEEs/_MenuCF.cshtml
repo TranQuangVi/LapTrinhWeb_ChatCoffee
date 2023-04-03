@@ -1,0 +1,14 @@
+﻿@model IEnumerable<ChatCoffee.Models.ModelsDefault.ANH>
+@if (Model != null && Model.Any())
+{
+    foreach (var item in Model)
+    {
+        <div class="col-lg-3 pro-item ">
+            <div class="pro  " style="width: 200px;">
+                <img src="@item.LINKANH" alt="null" class="pro_image" style="margin-left:0; margin-top:0;">
+
+                
+            </div>
+        </div>
+    }
+}

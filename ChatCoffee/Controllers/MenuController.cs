@@ -36,5 +36,6 @@ namespace ChatCoffee.Controllers
             var items = data.THUONGHIEUs.ToList();
             return PartialView("_MenuLocal", items);
         }
+        
     }
 }

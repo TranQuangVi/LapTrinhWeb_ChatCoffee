@@ -13,6 +13,7 @@ using PagedList;
 
 namespace ChatCoffee.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ManagerBrandsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -72,7 +73,7 @@ namespace ChatCoffee.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MATH,TENTH")] THUONGHIEU tHUONGHIEU)
+        public ActionResult Edit([Bind(Include = "MATH,TENTH,ANH")] THUONGHIEU tHUONGHIEU)
         {
             if (ModelState.IsValid)
             {

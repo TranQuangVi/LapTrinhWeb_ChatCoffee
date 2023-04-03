@@ -58,6 +58,7 @@ namespace ChatCoffee.Repository
             return (int)gh.TONGSP;
         }
 
+
         // tìm theo thương hiệu
         // tìm theo loại
     }

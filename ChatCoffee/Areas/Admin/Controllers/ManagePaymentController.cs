@@ -11,7 +11,7 @@ using ChatCoffee.Models.ModelsDefault;
 
 namespace ChatCoffee.Areas.Admin.Controllers
 {
-    
+    [Authorize(Roles = "Admin")]
     public class ManagePaymentController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

@@ -13,7 +13,7 @@ using PagedList;
 
 namespace ChatCoffee.Areas.Admin.Controllers
 {
-    
+    [Authorize(Roles = "Admin")]
     public class ManageCoffeesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

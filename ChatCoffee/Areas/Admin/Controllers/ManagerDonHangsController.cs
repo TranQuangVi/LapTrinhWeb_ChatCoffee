@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace ChatCoffee.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ManagerDonHangsController : Controller
     {
         public MyDataDataContext data = new MyDataDataContext();

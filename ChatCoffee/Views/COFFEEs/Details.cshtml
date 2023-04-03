@@ -1,5 +1,5 @@
 ﻿@model ChatCoffee.Models.ModelsDefault.COFFEE
-
+﻿
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -73,11 +73,25 @@
         </div>
     </div>
     <br />
+
+    <div class="panel-body" style="margin-bottom: 40px" >
+        <div class="owl-carousel owl-theme">
+            @Html.Action("MenuCF", "COFFEEs")
+
+
+        </div>
+
+
+
+    </div>
+
+
+
     <div class="product-details-tab ">
 
         <ul class="row nav nav-pills  " style="font-size:24px; background-color:aliceblue" role="tablist">
             <li class="nav-item col-lg-6 ">
-                <a class="nav-link active " style="text-align: center; font-family:  sans-serif;" id="product-desc-link" data-toggle="tab" href="#product-desc-tab" role="tab" aria-controls="product-desc-tab" aria-selected="true"><strong>Chi tiết</strong></a>
+                <a class="nav-link active " style="text-align: center; font-family:  sans-serif;" id="product-desc-link" data-toggle="tab" href="#product-desc-tab" role="tab" aria-controls="product-desc-tab" aria-selected="true"><strong >Chi tiết</strong></a>
             </li>
             <li class="nav-item col-lg-6">
                 <a class="nav-link" style="text-align: center; font-family:  sans-serif;" id="product-info-link" data-toggle="tab" href="#product-info-tab" role="tab" aria-controls="product-info-tab" aria-selected="false"><strong>Mô tả</strong></a>

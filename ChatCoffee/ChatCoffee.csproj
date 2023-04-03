@@ -3495,15 +3495,15 @@
     <Content Include="Areas\Admin\Views\ManagerBrands\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Users.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Profile.cshtml" />
+    <Content Include="Areas\Admin\Views\Role\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerDonHangs\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerDonHangs\DetailHoaDon.cshtml" />
     <Content Include="Models\ModelViews\MyData.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>MyData.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Areas\Admin\Views\Home\Profile.cshtml" />
-    <Content Include="Areas\Admin\Views\Role\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\ManagerDonHangs\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\ManagerDonHangs\DetailHoaDon.cshtml" />
     <None Include="Models\ModelViews\MyData.dbml.layout">
       <DependentUpon>MyData.dbml</DependentUpon>
     </None>
@@ -3668,6 +3668,7 @@
     <Content Include="Views\User\DetailHoaDon.cshtml" />
     <Content Include="Views\User\IndexDiaChi.cshtml" />
     <Content Include="Views\User\EditDiaChi.cshtml" />
+    <Content Include="Views\COFFEEs\_MenuCF.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
