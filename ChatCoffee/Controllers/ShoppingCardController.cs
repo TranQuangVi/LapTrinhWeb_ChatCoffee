@@ -55,7 +55,7 @@ namespace ChatCoffee.Controllers
                 return RedirectToAction("Login", "Account");
             List<CTGIOHANG> list = GetListProductInCard((int)Session["MaGH"]);
             GIOHANG gh = model.GIOHANGs.Single(n => n.MAGH == (int)Session["MaGH"]);
-
+            
             // lấy session[soluongcon] 
             // check session[soluongcon] != 0
             // if(session[soluongcon] ==0)
@@ -64,6 +64,7 @@ namespace ChatCoffee.Controllers
             ViewBag.SumPrice = SumPrice(gh);
             ViewBag.SumSP = SumSP(gh);
             ViewBag.listGH = list;
+            ViewBag.ANH = model.ANHs.ToList();
             ViewBag.result = "";
             return View();
             // lấy danh sách sản phẩm có trong giỏ hàng của khách hàng
@@ -237,6 +238,7 @@ namespace ChatCoffee.Controllers
             {
                 return RedirectToAction("Index", "Coffees");
             }
+
             HOADON hoadon = new HOADON();
             //   List<CTGIOHANG> lstGiohang = GetListProductInCard((int)Session["MaGH"]);
             List<CTGIOHANG> lstGiohang = model.CTGIOHANGs.
@@ -250,8 +252,8 @@ namespace ChatCoffee.Controllers
             ViewBag.SumSP = SumSP(giohang);
             ViewBag.listGH = lstGiohang;
             ViewBag.VanChuyen = GetListVanChuyen();
-             
-             var   user = model.AspNetUsers.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault();
+            ViewBag.ANH = model.ANHs.ToList();
+            var   user = model.AspNetUsers.Where(u => u.UserName.Equals(User.Identity.Name)).FirstOrDefault();
             ViewBag.user = user;
             ViewBag.MAVT = new SelectList(model.VANCHUYENs, "MAVT", "TENVT");
             ViewBag.MATT = new SelectList(model.THANHTOANs, "MATT", "PHUONGTHUC");
@@ -262,8 +264,7 @@ namespace ChatCoffee.Controllers
             return View(hoadon);
         }
 
-        public ActionResult Order([Bind(Include = "MAGH, Id,TONGSP,TONGSL,MAVT,MATT ,TONGTIEN,NGAYDAT, NGAYGIAO,DIACHIGIAO,SDTDAT, TRANGTHAI, TENCF")]
-                                    HOADON hoadon)
+        public ActionResult Order([Bind(Include = "MAGH, Id,TONGSP,TONGSL,MAVT,MATT ,TONGTIEN,NGAYDAT, NGAYGIAO,DIACHIGIAO,SDTDAT, TRANGTHAI, TENCF")]HOADON hoadon)
         {
             // lấy thông tin khách hàng từ 
             //MAHD

@@ -184,8 +184,8 @@
                                 <ul class="product_sorting">
 
                                     @Html.Action("MenuLocal", "Menu")
-
-                                    <li>
+                                    
+                                     <li>
                                         <span>Lọc Sản Phẩm</span>
                                         @*<span class="num_sorting_text">6</span>*@
                                         <i class="fa fa-angle-down"></i>
@@ -236,8 +236,11 @@
                                         }
                                         <div class="col-lg-3 pro-item">
                                             <div class="pro  ">
-                                                <img src="@strImge" alt="@item.TENCF" class="pro_image">
+                                                <a href="@Url.Action("details","coffees",new { @id = item.MACF })">
 
+                                                    <img src="@strImge" alt="@item.TENCF" class="pro_image">
+                                                    
+                                                </a>
                                                 <div class="pro_info">
                                                     <h6 style="margin-top: 25px;">
                                                         <a href="@Url.Action("details","coffees",new { @id = item.MACF })">@item.TENCF</a>
@@ -255,14 +258,12 @@
                                                 {
                                                     <div class="pull-right">
                                                         <div class="DatMua">
-                                                            @*<a class="btn btn-success btn_Buy " style="display: block; margin-top: 55px; padding-top: 7px; background-color: #271010; " href="@Url.Action("AddSP", "ShoppingCard",
-                                                                new {  @maSP = item.MACF,@maGH=1 , @strURL = Request.Url.ToString() })">Thêm vào giỏ hàng</a>*@
                                                             @if (Session["MaGH"] == null)
                                                             {
                                                                 <div onclick="alert('Xin lỗi quý khách, quý khách chưa đăng nhập')">
                                                                     <a style=" text-align: -webkit-center">
                                                                         <button class="btn btn-success"
-                                                                                style="display: block; margin-top: 55px; padding-top: 7px;">
+                                                                                style="display: block; margin-top: 35px; padding-top: 7px;">
                                                                             <span>Thêm giỏ hàng</span>
                                                                         </button>
                                                                     </a>
@@ -274,37 +275,13 @@
                                                                     <a href="@Url.Action("AddSP", "ShoppingCard",  new {  @maSP = item.MACF,@strURL = Request.Url.ToString() })"
                                                                        style=" text-align: -webkit-center">
                                                                         <button class="btn btn-success"
-                                                                                style="display: block; margin-top: 55px; padding-top: 7px;">
+                                                                                style="display: block; margin-top: 35px; padding-top: 7px;">
                                                                             <span>Thêm giỏ hàng</span>
                                                                         </button>
                                                                     </a>
 
                                                                 </div>
                                                             }
-
-                                                            @*<span style="float:left"> Số lượng: @item.SOLUONG</span>*@
-
-
-                                                            <div class="modal " id="myModal">
-                                                                <!--<div class="modal-dialog modal-sm">
-                                                                <div class="modal-content">-->
-                                                                <!-- Modal Header -->
-                                                                <!--<div class="modal-header">
-                                                                    <h4 class="modal-title">Chat Coffee</h4>
-                                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                </div>-->
-                                                                <!-- Modal body -->
-                                                                <!--<div class="modal-body">
-                                                                    Đã thêm sản phẩm vào giỏ hàng
-                                                                </div>-->
-                                                                <!-- Modal footer -->
-                                                                <!--<div class="modal-footer">
-                                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>-->
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 }

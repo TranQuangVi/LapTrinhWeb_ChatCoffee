@@ -1,13 +1,18 @@
-﻿
+﻿@using ChatCoffee.Models.ModelViews
 @{
     ViewBag.Title = "View";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var listGH = ViewBag.listGH;
+
+    List<ANH> listAnh = new List<ANH>();
+    if(ViewBag.ANH != null)
+    {
+        listAnh = ViewBag.ANH;
+    }
+
 }
 
 <div class="container">
-
-
     <table class="table">
         <tr style="text-align:center">
             <th>
@@ -40,7 +45,14 @@
                         <td> @item.COFFEE.TENCF</td>
                         <td>
                             <a href="@Url.Action("Details", "Coffees", new { @id = item.MACF })">
-                                <img src="@*@item.COOFFEE.*@" width="90" />
+                                @if (listAnh.Count != 0)
+                                {
+                                    <img src="@listAnh.FirstOrDefault(c=>c.MACF==item.MACF).LINKANH" width="60" />
+                                }
+                                else
+                                {
+                                    <img src="" width="60" />
+                                }
                             </a>
                         </td>
                         <td>@String.Format("{0:0,0}", item.GIA) <sup>VNĐ</sup></td>
@@ -100,7 +112,7 @@
                         {
                             <td>
 
-                                <p> <strong> Sản phẩm hiện ngừng bán</strong>  </p>
+                                <p > <strong style="color: red"> Sản phẩm hiện ngừng bán</strong>  </p>
                             </td>
                             <td>
                                 <div class="pull-right">
@@ -113,7 +125,7 @@
                         else if (item.COFFEE.SOLUONG == 0)
                         {
                             <td>
-                                <strong>Sản phẩm đã hết hàng</strong>
+                                <strong style="color: red">Sản phẩm đã hết hàng</strong>
                             </td>
                             <td>
                                 <div class="pull-right">
@@ -126,7 +138,7 @@
                         else
                         {
                             <td>
-                                <strong>Số lượng không đủ</strong>
+                                <strong style="color: red">Số lượng không đủ</strong>
                                 
                             </td>
                             <td>
@@ -146,16 +158,17 @@
             <td colspan="2"> Tổng sản phẩm:  @String.Format("{0:0,0}", ViewBag.SumSP)</td>
             <td colspan="2"> Số lượng sản phẩm:  @String.Format("{0:0,0}", @ViewBag.SumQuantity)</td>
             <td colspan="4"> Tổng tiền:  @String.Format("{0:0,00}", @ViewBag.SumPrice) VNĐ</td>
+            <td colspan="4">  </td>
         </tr>
         @if (@ViewBag.SumSP != 0)
         {
             <tr style="font-weight:bold; color:blue; text-align:right">
-                <td colspan="5">
+                <td colspan="7">
                     @Html.ActionLink("Xoá giỏ hảng", "DeleteAll")
                 </td>
             </tr>
             <tr style="font-weight:bold; color:yellow; text-align:right">
-                <td colspan="5">
+                <td colspan="7">
                     @Html.ActionLink("Đặt hàng", "Order", "ShoppingCard")
                 </td>
             </tr>

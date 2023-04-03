@@ -56,6 +56,7 @@ namespace ChatCoffee.Controllers
                     case "1trieu-2trieu":
                         query = repository.locgia3();
                         return View(query);
+
                     default:
                         var cOFFEEs = db.COFFEEs
                      .Include(c => c.LOAISANPHAM)
@@ -118,7 +119,7 @@ namespace ChatCoffee.Controllers
                     .Include(c => c.LOAISANPHAM)
                     .Include(c => c.THUONGHIEU)
                     .Include(c => c.ANHs)
-                    .Where(x => x.MALOAI == id).ToList();
+                    .Where(x => x.MALOAI == id && x.TRANGTHAI.Equals(true)).ToList();
                 // đây là model view
                 ViewBag.MaLoai = id;
 
@@ -126,49 +127,7 @@ namespace ChatCoffee.Controllers
             }
             else
             {
-                List<COFFEE> query = new List<COFFEE>();
-                switch (search)
-                {
-                    case "Lọc giá giảm":
-                        query = repository.LocGiaGiam();
-                        return View(query);
-
-                    case "Lọc giá tăng":
-                        query = repository.LocGiaTang();
-                        return View(query);
-                    case "A-Z":
-                        query = repository.TuAZ();
-                        return View(query);
-                    case "Z-A":
-                        query = repository.TuZA();
-                        return View(query);
-                    case "0-500":
-                        query = repository.locgia1();
-                        return View(query);
-                    case "500-1trieu":
-                        query = repository.locgia2();
-                        return View(query);
-                    case "1trieu-2trieu":
-                        query = repository.locgia3();
-                        return View(query);
-
-                    default:
-                        var cOFFEEs = db.COFFEEs
-                     .Include(c => c.LOAISANPHAM)
-                     .Include(c => c.THUONGHIEU)
-                     .Include(c => c.ANHs)
-                     .Where(c => c.TENCF.Contains(search) ||
-                     c.LOAISANPHAM.TENLOAI.Contains(search) ||
-                     c.XUATXU.Contains(search) ||
-                     c.DANGCF.Contains(search) ||
-                     (c.KHOILUONG.ToString() + "kg").Contains(search) ||
-                     (c.KHOILUONG.ToString() + "g").Contains(search) ||
-                     c.THUONGHIEU.TENTH.Contains(search) &&
-                     c.TRANGTHAI.Equals(true));
-                        return View(cOFFEEs);
-
-                }
-
+                return RedirectToAction("Index", "coffees", new { @search = search });
             }
         }
 
@@ -180,7 +139,7 @@ namespace ChatCoffee.Controllers
                     .Include(c => c.LOAISANPHAM)
                     .Include(c => c.THUONGHIEU)
                     .Include(c => c.ANHs)
-                    .Where(x => x.MATH == id).ToList();
+                    .Where(x => x.MATH == id && x.TRANGTHAI.Equals(true)).ToList();
                 // đây là model view
                 ViewBag.MaTH = id;
 
@@ -188,55 +147,10 @@ namespace ChatCoffee.Controllers
             }
             else
             {
-                List<COFFEE> query = new List<COFFEE>();
-                switch (search)
-                {
-                    case "Lọc giá giảm":
-                        query = repository.LocGiaGiam();
-                        return View(query);
-
-                    case "Lọc giá tăng":
-                        query = repository.LocGiaTang();
-                        return View(query);
-                    case "A-Z":
-                        query = repository.TuAZ();
-                        return View(query);
-                    case "Z-A":
-                        query = repository.TuZA();
-                        return View(query);
-                    case "0-500":
-                        query = repository.locgia1();
-                        return View(query);
-                    case "500-1trieu":
-                        query = repository.locgia2();
-                        return View(query);
-                    case "1trieu-2trieu":
-                        query = repository.locgia3();
-                        return View(query);
-
-                    default:
-                        var cOFFEEs = db.COFFEEs
-                     .Include(c => c.LOAISANPHAM)
-                     .Include(c => c.THUONGHIEU)
-                     .Include(c => c.ANHs)
-                     .Where(c => c.TENCF.Contains(search) ||
-                     c.LOAISANPHAM.TENLOAI.Contains(search) ||
-                     c.XUATXU.Contains(search) ||
-                     c.DANGCF.Contains(search) ||
-                     (c.KHOILUONG.ToString() + "kg").Contains(search) ||
-                     (c.KHOILUONG.ToString() + "g").Contains(search) ||
-                     c.THUONGHIEU.TENTH.Contains(search) &&
-                     c.TRANGTHAI.Equals(true));
-                        return View(cOFFEEs);
-                }
+                return RedirectToAction("Index", "coffees", new { @search = search });
             }
         }
-        public ActionResult MenuCF(int id)
-        {
-
-            var items = db.ANHs.Where(x => x.MACF == id).ToList();
-            return PartialView("_MenuCF", items);
-        }
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -247,9 +161,9 @@ namespace ChatCoffee.Controllers
         }
         public ActionResult Partial_ItemsByCateId()
         {
-            
+            //Where(c => c.TRANGTHAI.Equals(true))
             //var item = db.COFFEEs.ToList();
-            var ketqua = db.COFFEEs.Where(x => x.SLDABAN <= int.MaxValue).OrderByDescending(x => x.SLDABAN).Take(10).ToList();
+            var ketqua = db.COFFEEs.Where(x => x.SLDABAN <= int.MaxValue && x.TRANGTHAI.Equals(true)).OrderByDescending(x => x.SLDABAN).Take(10).ToList();
             return PartialView(ketqua);
 
         }

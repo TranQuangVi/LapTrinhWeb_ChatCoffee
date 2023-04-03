@@ -18,7 +18,7 @@ using System.Web.UI;
 
 namespace ChatCoffee.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    
     public class AccountController : Controller
     {
 
@@ -75,7 +75,7 @@ namespace ChatCoffee.Areas.Admin.Controllers
             {
                 foreach(var r in CTrole)
                 {
-                    if (r.RoleId.Equals("8d90cf8c-2a58-41ef-acc9-93a7db13b982") && r.UserId.Equals(u.Id))
+                    if (r.AspNetRole.Name.Equals("User") && r.UserId.Equals(u.Id))
                     {
                         users.Add(u);
                     }
@@ -105,7 +105,7 @@ namespace ChatCoffee.Areas.Admin.Controllers
             {
                 foreach (var r in CTrole)
                 {
-                    if (r.RoleId.Equals("833e7a29-2e72-4e5d-a073-1e377541f4d3") && r.UserId.Equals(u.Id))
+                    if (r.AspNetRole.Name.Equals("Admin") && r.UserId.Equals(u.Id))
                     {
                         users.Add(u);
                     }
@@ -197,7 +197,7 @@ namespace ChatCoffee.Areas.Admin.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("index", "Account");
+                    return RedirectToAction("Profile", "Account");
                 }
                 AddErrors(result);
             }
