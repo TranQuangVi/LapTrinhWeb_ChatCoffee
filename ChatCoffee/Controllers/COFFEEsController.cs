@@ -150,7 +150,13 @@ namespace ChatCoffee.Controllers
                 return RedirectToAction("Index", "coffees", new { @search = search });
             }
         }
-        
+        public ActionResult MenuCF(int id)
+        {
+
+            var items = db.ANHs.Where(x => x.MACF == id ).ToList();
+            return PartialView("_MenuCF", items);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
