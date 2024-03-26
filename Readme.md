@@ -10,7 +10,7 @@ Instructions to set up and use your project.
 ## Installation
 1. Clone the repository:
 ```
-git clone https://github.com/username/CafeShop.git
+git clone https://github.com/TranQuangVi/LapTrinhWeb_ChatCoffee.git
 ```
 2. Open the solution in Visual Studio and restore necessary NuGet packages.
 3. Ensure you have configured the connection to the SQL Server database in the appsettings.json file.
